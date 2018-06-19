@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "headers/graphics.h"
-#include <GLFW/glfw3.h>
 
 int main() {
-    saySomethingImGivingUpOnYou();
+    initWindow();
 
-    sleep(5);
+    while(true) {
+        printf("Entering sleep mode...\n");
+        sleep(1);
+    }
     return 0;
 }

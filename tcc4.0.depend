@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1529383090 source:e:\projetos\tcc4.0\main.c
+1529383829 source:e:\projetos\tcc4.0\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
@@ -21,10 +21,33 @@
 	<process.h>
 	<sys/timeb.h>
 
-1529382858 e:\projetos\tcc4.0\headers\graphics.h
+1529383526 e:\projetos\tcc4.0\headers\graphics.h
+	<GLFW/glfw3.h>
 	"tinycthread.h"
 
-1529383074 source:e:\projetos\tcc4.0\src\graphics.c
+1529383765 source:e:\projetos\tcc4.0\src\graphics.c
 	"../headers/graphics.h"
 	<stdio.h>
+	<stdlib.h>
+
+1471521159 e:\projetos\tcc4.0\include\glfw\glfw3.h
+	<stddef.h>
+	<stdint.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl3ext.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	<GLES3/gl3.h>
+	<GLES2/gl2ext.h>
+	<GLES3/gl31.h>
+	<GLES2/gl2ext.h>
+	<vulkan/vulkan.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	<GL/glu.h>
 
