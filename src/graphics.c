@@ -19,33 +19,16 @@ void error_callback(int error, const char* description) {
     fprintf(stderr, "Error: %s\n", description);
 }
 
+void controls(GLFWwindow *window, int key, int scancode, int action, int mods) {
+    if (action == GLFW_PRESS)
+        if (key == GLFW_KEY_ESCAPE)
+            glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
 int hiddenMainLoop(void* args);
 void drawBuffer();
 
 void initWindow() {
-    glfwSetErrorCallback(error_callback);
-    /* Initialize the library */
-    if (!glfwInit()) {
-        fprintf(stderr, "Failed to init GLFW\n");
-        exit(-1);
-    } else {
-        fprintf(stdout, "GLFW initialized\n");
-    }
-
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-
-    /* Create a windowed mode window and its OpenGL context */
-    fprintf(stdout, "Attempting to create window\n");
-    hiddenWindow = glfwCreateWindow(640, 480, "Window", NULL, NULL);
-    if (!hiddenWindow) {
-        fprintf(stderr, "Failed to create GLFW window\n");
-        glfwTerminate();
-        exit(-1);
-    } else {
-        fprintf(stdout, "Window created\n");
-    }
-
     if (thrd_create(&hiddenThread, hiddenMainLoop, (void*)0) != thrd_success) {
         fprintf(stderr, "Failed to init hiddenMainLoop\n");
         exit(-1);
@@ -61,22 +44,20 @@ int isWindowInitialized() {
 }
 
 void point(Point2D position, int size) {
-    if (isWindowInitialized()) {
-        Shape shape;
+    Shape shape;
 
-        shape.drawType = GL_POINTS;
-        shape.shapeSize = size;
+    shape.drawType = GL_POINTS;
+    shape.shapeSize = size;
 
-        shape.vertices = malloc(2 * sizeof(GLfloat));
-        shape.vertices[0] = position.x;
-        shape.vertices[1] = position.y;
-        shape.numOfPoints = 2;
+    shape.vertices = malloc(2 * sizeof(GLfloat));
+    shape.vertices[0] = position.x;
+    shape.vertices[1] = position.y;
+    shape.numOfPoints = 2;
 
-        shape.glSize = 1;
+    shape.glSize = 1;
 
-        shapes[numOfShapes++] = shape;
-        printf("Shape added\n");
-    }
+    shapes[numOfShapes++] = shape;
+    printf("Point added\n");
 }
 
 void square(Point2D start, Point2D end) {
@@ -87,7 +68,7 @@ void square(Point2D start, Point2D end) {
 
 void sleep_cp(int time) {
     #ifdef WIN32
-    Sleep(time);
+    Sleep(time * 1000);
     #else
     sleep(time);
     #endif
@@ -96,8 +77,29 @@ void sleep_cp(int time) {
 int hiddenMainLoop(void* args) {
     fprintf(stdout, "hiddenMainLoop started\n");
 
+    glfwSetErrorCallback(error_callback);
+    /* Initialize the library */
+    if (!glfwInit()) {
+        fprintf(stderr, "Failed to init GLFW\n");
+        exit(-1);
+    } else {
+        fprintf(stdout, "GLFW initialized\n");
+    }
+
+    /* Create a windowed mode window and its OpenGL context */
+    fprintf(stdout, "Attempting to create window\n");
+    hiddenWindow = glfwCreateWindow(640, 480, "Window", NULL, NULL);
+    if (!hiddenWindow) {
+        fprintf(stderr, "Failed to create GLFW window\n");
+        glfwTerminate();
+        exit(-1);
+    } else {
+        fprintf(stdout, "Window created\n");
+    }
+
     /* Make the window's context current */
     glfwMakeContextCurrent(hiddenWindow);
+    glfwSetKeyCallback(hiddenWindow, controls);
 
     glViewport(0.0f, 0.0f, 640, 480);
     glMatrixMode(GL_PROJECTION);
@@ -105,6 +107,9 @@ int hiddenMainLoop(void* args) {
     glOrtho(0, 640, 0, 480, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+    glfwSwapInterval(2); // Lock FPS at 30
+    
+    GLfloat pointVertex[] = { 300, 300 };
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(hiddenWindow)) {
