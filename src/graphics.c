@@ -87,7 +87,7 @@ void square(Point2D start, Point2D end) {
 
 void sleep_cp(int time) {
     #ifdef WIN32
-    sleep(time);
+    Sleep(time);
     #else
     sleep(time);
     #endif

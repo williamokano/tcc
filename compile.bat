@@ -1,0 +1,1 @@
+gcc -o bin/main.exe main.c src/graphics.c src/point.c src/tinycthread.c -I include -L lib-mingw-w64 -lglfw3 -lopengl32 -lgdi32 -lkernel32
