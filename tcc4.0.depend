@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1529383090 source:e:\projetos\tcc4.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"headers/graphics.h"
+
+1529382243 e:\projetos\tcc4.0\headers\tinycthread.h
+	<time.h>
+	<pthread.h>
+	<windows.h>
+
+1529382270 source:e:\projetos\tcc4.0\src\tinycthread.c
+	"../headers/tinycthread.h"
+	<stdlib.h>
+	<signal.h>
+	<sched.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<process.h>
+	<sys/timeb.h>
+
+1529382858 e:\projetos\tcc4.0\headers\graphics.h
+	"tinycthread.h"
+
+1529383074 source:e:\projetos\tcc4.0\src\graphics.c
+	"../headers/graphics.h"
+	<stdio.h>
+
