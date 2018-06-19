@@ -8,6 +8,12 @@
 
 void initWindow();
 int isWindowInitialized();
+void clear();
+
+// Color stuff
+void setColor(Point3D color);
+Point3D getColor();
+
 void point(Point2D position, int size);
 void square(Point2D start, Point2D end);
 void sleep_cp(int time);

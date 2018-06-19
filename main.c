@@ -5,14 +5,15 @@
 
 int main() {
     initWindow();
-
-    point(point2d(100, 200), 50);
-
-    point(point2d(350, 400), 25);
+    int columnOffset = 0;
+    
+    setColor(point3d(0xFF, 0x00, 0x00));
 
     while(true) {
-        printf("Entering sleep mode...\n");
-        sleep_cp(1);
+        clear();
+        point(point2d(columnOffset, columnOffset), 50);
+        columnOffset += 20;
+        sleep_cp(2);
     }
     return 0;
 }

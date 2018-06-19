@@ -7,7 +7,8 @@ typedef struct Shape {
     int shapeSize;
     int numOfPoints;
     unsigned char drawType;
-    int glSize;
+    int numOfVertices;
+    GLfloat *color;
 } Shape;
 
 #endif // SHAPE_H_INCLUDED
