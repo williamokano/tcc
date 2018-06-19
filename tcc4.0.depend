@@ -1,14 +1,18 @@
 # depslib dependency file v1.0
-1529383829 source:e:\projetos\tcc4.0\main.c
+1529418837 source:e:\projetos\tcc4.0\main.c
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	"headers/graphics.h"
 
+1529418837 raphics.h"
+
 1529382243 e:\projetos\tcc4.0\headers\tinycthread.h
 	<time.h>
 	<pthread.h>
 	<windows.h>
+
+1529382243 >
 
 1529382270 source:e:\projetos\tcc4.0\src\tinycthread.c
 	"../headers/tinycthread.h"
@@ -21,14 +25,22 @@
 	<process.h>
 	<sys/timeb.h>
 
-1529383526 e:\projetos\tcc4.0\headers\graphics.h
+1529382270 .h>
+
+1529419564 e:\projetos\tcc4.0\headers\graphics.h
 	<GLFW/glfw3.h>
 	"tinycthread.h"
+	"point.h"
+	"shape.h"
 
-1529383765 source:e:\projetos\tcc4.0\src\graphics.c
+1529419564 
+
+1529420014 source:e:\projetos\tcc4.0\src\graphics.c
 	"../headers/graphics.h"
 	<stdio.h>
 	<stdlib.h>
+
+1471521159 
 
 1471521159 e:\projetos\tcc4.0\include\glfw\glfw3.h
 	<stddef.h>
@@ -50,4 +62,78 @@
 	<GL/gl.h>
 	<GL/glext.h>
 	<GL/glu.h>
+
+1529384361 source:e:\projetos\tcc4.0\src\point.c
+	"../headers/point.h"
+
+1529384361 s/point.h"
+
+1529384282 e:\projetos\tcc4.0\headers\point.h
+
+1529417259 e:\projetos\tcc4.0\headers\shape.h
+	<GLFW/glfw3.h>
+
+1529417259 3.h>
+
+1529418837 source:/media/william/DADOS/Projetos/tcc4.0/main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	"headers/graphics.h"
+
+1529419564 /media/william/DADOS/Projetos/tcc4.0/headers/graphics.h
+	<GLFW/glfw3.h>
+	"tinycthread.h"
+	"point.h"
+	"shape.h"
+
+1471521159 /media/william/DADOS/Projetos/tcc4.0/include/GLFW/glfw3.h
+	<stddef.h>
+	<stdint.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl3ext.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES/glext.h>
+	<GLES2/gl2.h>
+	<GLES2/gl2ext.h>
+	<GLES3/gl3.h>
+	<GLES2/gl2ext.h>
+	<GLES3/gl31.h>
+	<GLES2/gl2ext.h>
+	<vulkan/vulkan.h>
+	<GL/gl.h>
+	<GL/glext.h>
+	<GL/glu.h>
+
+1529382243 /media/william/DADOS/Projetos/tcc4.0/headers/tinycthread.h
+	<time.h>
+	<pthread.h>
+	<windows.h>
+
+1529384282 /media/william/DADOS/Projetos/tcc4.0/headers/point.h
+
+1529417259 /media/william/DADOS/Projetos/tcc4.0/headers/shape.h
+	<GLFW/glfw3.h>
+
+1529420014 source:/media/william/DADOS/Projetos/tcc4.0/src/graphics.c
+	"../headers/graphics.h"
+	<stdio.h>
+	<stdlib.h>
+
+1529384361 source:/media/william/DADOS/Projetos/tcc4.0/src/point.c
+	"../headers/point.h"
+
+1529382270 source:/media/william/DADOS/Projetos/tcc4.0/src/tinycthread.c
+	"../headers/tinycthread.h"
+	<stdlib.h>
+	<signal.h>
+	<sched.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<process.h>
+	<sys/timeb.h>
 
