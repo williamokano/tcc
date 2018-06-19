@@ -72,19 +72,49 @@ void point(Point2D position, int size) {
     shape.vertices[0] = position.x;
     shape.vertices[1] = position.y;
     shape.numOfPoints = 2;
+    shape.numOfVertices = 1;
 
     shape.color = malloc(6 * sizeof(GLfloat));
 
+    for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
-    shape.color[0] = getColor().x;
-    shape.color[1] = getColor().y;
-    shape.color[2] = getColor().z;
+        shape.color[3 * i + 0] = getColor().x;
+        shape.color[3 * i + 1] = getColor().y;
+        shape.color[3 * i + 2] = getColor().z;
+    }
 
-    shape.color[3] = getColor().x;
-    shape.color[4] = getColor().y;
-    shape.color[5] = getColor().z;
+    // Ensure no data race condition when adding new shapes because numOfShapes can be lost
+    mtx_lock(&shapesMutex);
+    shapes[numOfShapes++] = shape;
+    mtx_unlock(&shapesMutex);
+}
 
-    shape.numOfVertices = 1;
+void triangle(Point2D p1, Point2D p2, Point2D p3) {
+    Shape shape;
+
+    shape.drawType = GL_TRIANGLES;
+
+    shape.vertices = malloc(6 * sizeof(GLfloat));
+    shape.vertices[0] = p1.x;
+    shape.vertices[1] = p1.y;
+
+    shape.vertices[2] = p2.x;
+    shape.vertices[3] = p2.y;
+
+    shape.vertices[4] = p3.x;
+    shape.vertices[5] = p3.y;
+
+    shape.numOfPoints = 2;
+    shape.numOfVertices = 3;
+
+    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat));
+
+    for (int i = 0; i < shape.numOfVertices; i++) {
+    // TODO add color mutex here
+        shape.color[3 * i + 0] = getColor().x;
+        shape.color[3 * i + 1] = getColor().y;
+        shape.color[3 * i + 2] = getColor().z;
+    }
 
     // Ensure no data race condition when adding new shapes because numOfShapes can be lost
     mtx_lock(&shapesMutex);
