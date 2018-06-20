@@ -24,6 +24,12 @@ void controls(GLFWwindow *window, int key, int scancode, int action, int mods);
 int hiddenMainLoop(void* args);
 void drawBuffer();
 
+void addShape(Shape shape) {
+    mtx_lock(&shapesMutex);
+    shapes[numOfShapes++] = shape;
+    mtx_unlock(&shapesMutex);
+}
+
 void initWindow() {
     if (thrd_create(&hiddenThread, hiddenMainLoop, (void*)0) != thrd_success) {
         fprintf(stderr, "Failed to init hiddenMainLoop\n");
@@ -86,10 +92,7 @@ void point(Point2D position, int size) {
         shape.color[3 * i + 2] = getColor().z;
     }
 
-    // Ensure no data race condition when adding new shapes because numOfShapes can be lost
-    mtx_lock(&shapesMutex);
-    shapes[numOfShapes++] = shape;
-    mtx_unlock(&shapesMutex);
+    addShape(shape);
 }
 
 void triangle(Point2D p1, Point2D p2, Point2D p3) {
@@ -118,16 +121,43 @@ void triangle(Point2D p1, Point2D p2, Point2D p3) {
         shape.color[3 * i + 2] = getColor().z;
     }
 
-    // Ensure no data race condition when adding new shapes because numOfShapes can be lost
-    mtx_lock(&shapesMutex);
-    shapes[numOfShapes++] = shape;
-    mtx_unlock(&shapesMutex);
+    addShape(shape);
 }
 
-void square(Point2D start, Point2D end) {
-    if (isWindowInitialized()) {
+void rectangle(Point2D position, int width, int height) {
+    Shape shape;
 
+    shape.drawType = GL_QUADS;
+    shape.numOfPoints = 2;
+    shape.numOfVertices = 4;
+
+    shape.vertices = malloc(2 * shape.numOfVertices * sizeof(GLfloat));
+    shape.vertices[0] = position.x;
+    shape.vertices[1] = position.y;
+    
+    shape.vertices[2] = position.x + width;
+    shape.vertices[3] = position.y;
+
+    shape.vertices[4] = position.x + width;
+    shape.vertices[5] = position.y + height;
+
+    shape.vertices[6] = position.x;
+    shape.vertices[7] = position.y + height;
+
+    shape.color = malloc(3 * shape.numOfVertices * sizeof(GLfloat));
+
+    for (int i = 0; i < shape.numOfVertices; i++) {
+    // TODO add color mutex here
+        shape.color[3 * i + 0] = getColor().x;
+        shape.color[3 * i + 1] = getColor().y;
+        shape.color[3 * i + 2] = getColor().z;
     }
+
+    addShape(shape);
+}
+
+void square(Point2D position, int side) {
+    rectangle(position, side, side);
 }
 
 void sleep_cp(int time) {
