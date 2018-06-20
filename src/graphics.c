@@ -28,9 +28,12 @@ void initWindow() {
     if (thrd_create(&hiddenThread, hiddenMainLoop, (void*)0) != thrd_success) {
         fprintf(stderr, "Failed to init hiddenMainLoop\n");
         exit(-1);
-    } else {
+    }
+    #ifdef DEBUG
+    else {
         fprintf(stdout, "Window reported initalized\n");
     }
+    #endif
 
     globalColor = point3d(0xFF, 0xFF, 0xFF);
 
@@ -93,8 +96,10 @@ void triangle(Point2D p1, Point2D p2, Point2D p3) {
     Shape shape;
 
     shape.drawType = GL_TRIANGLES;
+    shape.numOfPoints = 2;
+    shape.numOfVertices = 3;
 
-    shape.vertices = malloc(6 * sizeof(GLfloat));
+    shape.vertices = malloc(shape.numOfVertices * sizeof(GLfloat) * 2);
     shape.vertices[0] = p1.x;
     shape.vertices[1] = p1.y;
 
@@ -103,9 +108,6 @@ void triangle(Point2D p1, Point2D p2, Point2D p3) {
 
     shape.vertices[4] = p3.x;
     shape.vertices[5] = p3.y;
-
-    shape.numOfPoints = 2;
-    shape.numOfVertices = 3;
 
     shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
 
@@ -137,27 +139,38 @@ void sleep_cp(int time) {
 }
 
 int hiddenMainLoop(void* args) {
+    #ifdef DEBUG
     fprintf(stdout, "hiddenMainLoop started\n");
+    #endif
 
     glfwSetErrorCallback(error_callback);
     /* Initialize the library */
     if (!glfwInit()) {
         fprintf(stderr, "Failed to init GLFW\n");
         exit(-1);
-    } else {
+    }
+    #ifdef DEBUG
+    else {
         fprintf(stdout, "GLFW initialized\n");
     }
+    #endif
 
     /* Create a windowed mode window and its OpenGL context */
+    #ifdef DEBUG
     fprintf(stdout, "Attempting to create window\n");
+    #endif
+
     hiddenWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Window", NULL, NULL);
     if (!hiddenWindow) {
         fprintf(stderr, "Failed to create GLFW window\n");
         glfwTerminate();
         exit(-1);
-    } else {
+    }
+    #ifdef DEBUG
+    else {
         fprintf(stdout, "Window created\n");
     }
+    #endif
 
     /* Make the window's context current */
     glfwMakeContextCurrent(hiddenWindow);
