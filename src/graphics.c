@@ -74,7 +74,7 @@ void point(Point2D position, int size) {
     shape.numOfPoints = 2;
     shape.numOfVertices = 1;
 
-    shape.color = malloc(6 * sizeof(GLfloat));
+    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
 
     for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
@@ -107,9 +107,9 @@ void triangle(Point2D p1, Point2D p2, Point2D p3) {
     shape.numOfPoints = 2;
     shape.numOfVertices = 3;
 
-    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat));
+    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
 
-    for (int i = 0; i < shape.numOfVertices; i++) {
+    for (int i = 0; i <= shape.numOfVertices; i++) {
     // TODO add color mutex here
         shape.color[3 * i + 0] = getColor().x;
         shape.color[3 * i + 1] = getColor().y;
