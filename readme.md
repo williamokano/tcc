@@ -13,7 +13,7 @@ On windows you need to install mingw-w64 due the need to work with threads with 
 just run `compile.bat`  
 
 **Running on linux**:  
-just run `compile.sh`  
+just run `./compile.sh`  
 
 ## References
 BGI Lib - https://www.cs.colorado.edu/~main/bgi/doc/  
