@@ -6,9 +6,9 @@
 #include "point.h"
 #include "shape.h"
 
-void initWindow();
-int isWindowInitialized();
-void clear();
+void inicializarBiblioteca();
+int bibliotecaInicializada();
+void limparTela();
 
 // Color stuff
 void setColor(Point3D color);

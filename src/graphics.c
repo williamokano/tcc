@@ -30,7 +30,7 @@ void addShape(Shape shape) {
     mtx_unlock(&shapesMutex);
 }
 
-void initWindow() {
+void inicializarBiblioteca() {
     if (thrd_create(&hiddenThread, hiddenMainLoop, (void*)0) != thrd_success) {
         fprintf(stderr, "Failed to init hiddenMainLoop\n");
         exit(-1);
@@ -53,11 +53,11 @@ void initWindow() {
     mtx_unlock(&shapesMutex);
 }
 
-int isWindowInitialized() {
+int bibliotecaInicializada() {
     return hiddenWindow != NULL;
 }
 
-void clear() {
+void limparTela() {
     mtx_lock(&shapesMutex);
     numOfShapes = 0;
     mtx_unlock(&shapesMutex);

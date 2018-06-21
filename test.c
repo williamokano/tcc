@@ -3,15 +3,13 @@
 #include "headers/graphics.h"
 
 void showMenu();
-void inserirPonto();
-void inserirTriangulo();
-void trocarCor();
 
 int main() {
-    initWindow();
+    inicializarBiblioteca();
 
     rectangle(point2d(0, 0), 200, 100);
-
+    limparTela();
+    
     setColor(point3d(255, 0, 0));
     square(point2d(40, 40), 50);
 
