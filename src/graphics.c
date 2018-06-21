@@ -90,8 +90,14 @@ void definirCor(int vermelho, int verde, int azul) {
     azulGlobal = azul;
 }
 
-Point3D obterCor() {
-    /*return NULL;*/
+int* obterCor() {
+    int* coresGlobais = (int*) malloc(3 * sizeof(int));
+    
+    coresGlobais[0] = vermelhoGlobal;
+    coresGlobais[1] = verdeGlobal;
+    coresGlobais[2] = azulGlobal;
+
+    return coresGlobais;
 }
 
 void ponto(Point2D position, int size) {
