@@ -25,6 +25,10 @@ void retangulo(int posX, int posY, int width, int height);
 void quadrado(int posX, int posY, int tamanhoLado);
 void poligonoRegular(int posX, int posY, int raio, int faces);
 void circulo(int posX, int posY, int raio);
+void pentagono(int posX, int posY, int raio);
+void hexagono(int posX, int posY, int raio);
+void decagono(int posX, int posY, int raio);
+void dodecagono(int posX, int posY, int raio);
 
 // Common stuff
 void pausar(int time);

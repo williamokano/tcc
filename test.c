@@ -1,10 +1,15 @@
+#define DEBUG
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <math.h>
 #include "headers/graphics.h"
 
 void showMenu();
 
 int main() {
+    srand(time(NULL));
     inicializarBiblioteca();
 
     definirCor(255, 0, 255);
@@ -50,6 +55,12 @@ int main() {
     }
 
     circulo(100, 500, 100);
+
+    definirCor(0, 140, 230);
+    pentagono(300, 500, 25);
+    hexagono(360, 500, 25);
+    decagono(420, 500, 25);
+    dodecagono(480, 500, 25);
 
     getchar();
     return 0;

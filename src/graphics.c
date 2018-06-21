@@ -243,11 +243,18 @@ void quadrado(int posX, int posY, int tamanhoLado) {
 }
 
 void poligonoRegular(int posX, int posY, int raio, int faces) {
+    #ifdef DEBUG
+    fprintf(stdout, "Desenhando um poligono regular de %d faces e raio %d\n", faces, raio);
+    #endif
     GLfloat* vertices = malloc(2 * faces * sizeof(GLfloat));
-
+    float passo = 360.0f / (float) faces;
     for (int i = 0; i < faces; i++) {
-        vertices[(i * 2) + 0] = posX + (cos(M_RAD * i) * raio); // Ponto X do vértice = ponto fixo X + cos(angulo) * raio
-        vertices[(i * 2) + 1] = posY + (sin(M_RAD * i) * raio); // Ponto Y do vértice = ponto fixo Y + sin(angulo) * raio
+        vertices[(i * 2) + 0] = posX + (cos(M_RAD * i * passo) * raio); // Ponto X do vértice = ponto fixo X + cos(angulo) * raio
+        vertices[(i * 2) + 1] = posY + (sin(M_RAD * i * passo) * raio); // Ponto Y do vértice = ponto fixo Y + sin(angulo) * raio
+
+        #ifdef DEBUG
+        fprintf(stdout, "Ponto %d: X: %f, Y: %f\n", i, vertices[(i * 2) + 0], vertices[(i * 2) + 1]);
+        #endif
     }
 
     poligono(faces, vertices);
@@ -258,6 +265,22 @@ void poligonoRegular(int posX, int posY, int raio, int faces) {
 // Optei por utilizar o polígono regular com 360 por achar mais fácil calcular os angulos dos pontos
 void circulo(int posX, int posY, int raio) {
     poligonoRegular(posX, posY, raio, 360);
+}
+
+void pentagono(int posX, int posY, int raio) {
+    poligonoRegular(posX, posY, raio, 5);
+}
+
+void hexagono(int posX, int posY, int raio) {
+    poligonoRegular(posX, posY, raio, 6);
+}
+
+void decagono(int posX, int posY, int raio) {
+    poligonoRegular(posX, posY, raio, 10);
+}
+
+void dodecagono(int posX, int posY, int raio) {
+    poligonoRegular(posX, posY, raio, 12);
 }
 
 void pausar(int time) {
