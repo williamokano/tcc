@@ -95,7 +95,7 @@ void ponto(Point2D position, int size) {
     addShape(shape);
 }
 
-void triangle(Point2D p1, Point2D p2, Point2D p3) {
+void triangulo(Point2D p1, Point2D p2, Point2D p3) {
     Shape shape;
 
     shape.drawType = GL_TRIANGLES;

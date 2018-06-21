@@ -15,7 +15,7 @@ void setColor(Point3D color);
 Point3D getColor();
 
 void ponto(Point2D position, int size);
-void triangle(Point2D p1, Point2D p2, Point2D p3);
+void triangulo(Point2D p1, Point2D p2, Point2D p3);
 void rectangle(Point2D position, int width, int height);
 void square(Point2D position, int side);
 void sleep_cp(int time);
