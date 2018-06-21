@@ -55,13 +55,23 @@ int main() {
     }
 
     circulo(100, 500, 100);
-
+    int mustUndo = 0;
     definirCor(0, 140, 230);
+
     pentagono(300, 500, 25);
     hexagono(360, 500, 25);
     decagono(420, 500, 25);
     dodecagono(480, 500, 25);
 
+    getchar();
+    desfazerUltimaForma();
+
+    ponto(0, 0);
+
+    getchar();
+    refazerUltimaForma();
+
+    fprintf(stdout, "Press enter to exit...\n");
     getchar();
     return 0;
 }

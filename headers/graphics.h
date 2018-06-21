@@ -5,9 +5,12 @@
 #include "tinycthread.h"
 #include "shape.h"
 
+// Screen stuff
 void inicializarBiblioteca();
 int bibliotecaInicializada();
 void limparTela();
+void desfazerUltimaForma();
+void refazerUltimaForma();
 
 // Color stuff
 void definirCor(int vermelho, int verde, int azul);

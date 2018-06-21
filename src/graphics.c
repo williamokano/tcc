@@ -38,6 +38,7 @@ int verdeGlobal = 255;
 int azulGlobal = 255;
 
 int tamanhoGlobal = 1;
+int shapeAfterUndo = 0;
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
 void error_callback(int error, const char* description);
@@ -54,11 +55,13 @@ void inicializarFormas() {
 void addShape(Shape shape) {
     mtx_lock(&shapesMutex);
     shapes[numOfShapes++] = shape;
+    shapeAfterUndo = 1;
     mtx_unlock(&shapesMutex);
 }
 
 void limparFormas() {
     mtx_lock(&shapesMutex);
+    // TODO: free memory
     numOfShapes = 0;
     mtx_unlock(&shapesMutex);
 }
@@ -95,6 +98,23 @@ int bibliotecaInicializada() {
 
 void limparTela() {
     limparFormas();
+}
+
+void desfazerUltimaForma() {
+    mtx_lock(&shapesMutex);
+    if (numOfShapes > 0) {
+        numOfShapes--;
+        shapeAfterUndo = 0; // Reset undo counter. useful when trying to redo things
+    }
+    mtx_unlock(&shapesMutex);
+}
+
+void refazerUltimaForma() {
+    mtx_lock(&shapesMutex);
+    if (shapeAfterUndo == 0) {
+        numOfShapes++;
+    }
+    mtx_unlock(&shapesMutex);
 }
 
 void definirCor(int vermelho, int verde, int azul) {
