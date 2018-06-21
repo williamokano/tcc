@@ -41,7 +41,7 @@ void inicializarBiblioteca() {
     }
     #endif
 
-    globalColor = point3d(0xFF, 0xFF, 0xFF);
+    definirCor(point3d(0xFF, 0xFF, 0xFF));
 
     if (mtx_init(&shapesMutex, mtx_plain) != thrd_success) {
         fprintf(stderr, "Failed to create mutex\n");
@@ -63,7 +63,7 @@ void limparTela() {
     mtx_unlock(&shapesMutex);
 }
 
-void setColor(Point3D color) {
+void definirCor(Point3D color) {
     globalColor = color;
 }
 
