@@ -160,7 +160,7 @@ void quadrado(Point2D position, int side) {
     retangulo(position, side, side);
 }
 
-void sleep_cp(int time) {
+void pausar(int time) {
     #ifdef WIN32
     Sleep(time * 1000);
     #else

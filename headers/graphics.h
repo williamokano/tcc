@@ -18,6 +18,6 @@ void ponto(Point2D position, int size);
 void triangulo(Point2D p1, Point2D p2, Point2D p3);
 void retangulo(Point2D position, int width, int height);
 void quadrado(Point2D position, int side);
-void sleep_cp(int time);
+void pausar(int time);
 
 #endif // GRAPHICS_H_INCLUDED
