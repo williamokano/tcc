@@ -18,7 +18,7 @@ int main() {
     ponto(100, 100);
 
     definirCor(corOriginal[0], corOriginal[1], corOriginal[2]);
-    quadrado(point2d(40, 40), 50);
+    quadrado(40, 40, 50);
 
     getchar();
     return 0;

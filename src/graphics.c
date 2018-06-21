@@ -215,8 +215,8 @@ void retangulo(Point2D position, int width, int height) {
     addShape(shape);
 }
 
-void quadrado(Point2D position, int side) {
-    retangulo(position, side, side);
+void quadrado(int posX, int posY, int tamanhoLado) {
+    retangulo(point2d(posX, posY), tamanhoLado, tamanhoLado);
 }
 
 void pausar(int time) {
