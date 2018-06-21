@@ -33,6 +33,22 @@ int main() {
     definirCor(255, 255, 255);
     ponto(200, 175);
 
+    definirCor(175, 175, 0);
+    GLfloat vertices[] = {
+        320, 100,
+        400, 300,
+        800, 50,
+        520, 10,
+        340, 40
+    };
+    poligono(5, vertices);
+
+    // Desenha um ponto em cada vertice do polígono
+    definirCor(255, 0, 0);
+    for (int i = 0; i < 5; i++) {
+        ponto(vertices[(i * 2) + 0], vertices[(i * 2) + 1]);
+    }
+
     getchar();
     return 0;
 }

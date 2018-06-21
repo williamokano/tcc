@@ -127,7 +127,25 @@ int obterTamanho() {
 
 // Drawing stuff
 void poligono(int numeroDeVertices, GLfloat* posicoes) {
+    Shape shape;
 
+    shape.drawType = GL_POLYGON;
+    shape.shapeSize = 1;
+
+    shape.vertices = posicoes;
+    shape.numOfPoints = 2;
+    shape.numOfVertices = numeroDeVertices;
+
+    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
+
+    for (int i = 0; i < shape.numOfVertices; i++) {
+    // TODO add color mutex here
+        shape.color[3 * i + 0] = vermelhoGlobal;
+        shape.color[3 * i + 1] = verdeGlobal;
+        shape.color[3 * i + 2] = azulGlobal;
+    }
+
+    addShape(shape);
 }
 
 void ponto(int posX, int posY) {
