@@ -154,7 +154,7 @@ void ponto(int posX, int posY) {
     addShape(shape);
 }
 
-void triangulo(Point2D p1, Point2D p2, Point2D p3) {
+void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3) {
     Shape shape;
 
     shape.drawType = GL_TRIANGLES;
@@ -162,18 +162,18 @@ void triangulo(Point2D p1, Point2D p2, Point2D p3) {
     shape.numOfVertices = 3;
 
     shape.vertices = malloc(shape.numOfVertices * sizeof(GLfloat) * 2);
-    shape.vertices[0] = p1.x;
-    shape.vertices[1] = p1.y;
+    shape.vertices[0] = posX1;
+    shape.vertices[1] = posY1;
 
-    shape.vertices[2] = p2.x;
-    shape.vertices[3] = p2.y;
+    shape.vertices[2] = posX2;
+    shape.vertices[3] = posY2;
 
-    shape.vertices[4] = p3.x;
-    shape.vertices[5] = p3.y;
+    shape.vertices[4] = posX3;
+    shape.vertices[5] = posY3;
 
     shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
 
-    for (int i = 0; i <= shape.numOfVertices; i++) {
+    for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
         shape.color[3 * i + 0] = vermelhoGlobal;
         shape.color[3 * i + 1] = verdeGlobal;
