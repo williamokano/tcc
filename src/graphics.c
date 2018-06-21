@@ -156,7 +156,7 @@ void retangulo(Point2D position, int width, int height) {
     addShape(shape);
 }
 
-void square(Point2D position, int side) {
+void quadrado(Point2D position, int side) {
     retangulo(position, side, side);
 }
 

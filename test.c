@@ -13,7 +13,7 @@ int main() {
     ponto(point2d(100, 100), 20);
 
     setColor(point3d(255, 0, 0));
-    square(point2d(40, 40), 50);
+    quadrado(point2d(40, 40), 50);
 
     getchar();
     return 0;
