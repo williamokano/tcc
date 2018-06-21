@@ -15,9 +15,8 @@ fi
 
 gcc -o "$OUTPUT_FILE" "$ENTRYPOINT.c" \
     src/graphics.c \
-    src/point.c \
     src/tinycthread.c \
-    -lGL -lX11 -lpthread -lglfw
+    -lGL -lX11 -lpthread -lglfw -lm
 
 if [ $? -gt 0 ];then
     echo "Failed to compile"
