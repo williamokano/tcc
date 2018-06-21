@@ -124,7 +124,7 @@ void triangulo(Point2D p1, Point2D p2, Point2D p3) {
     addShape(shape);
 }
 
-void rectangle(Point2D position, int width, int height) {
+void retangulo(Point2D position, int width, int height) {
     Shape shape;
 
     shape.drawType = GL_QUADS;
@@ -157,7 +157,7 @@ void rectangle(Point2D position, int width, int height) {
 }
 
 void square(Point2D position, int side) {
-    rectangle(position, side, side);
+    retangulo(position, side, side);
 }
 
 void sleep_cp(int time) {

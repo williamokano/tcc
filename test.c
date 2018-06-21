@@ -7,7 +7,7 @@ void showMenu();
 int main() {
     inicializarBiblioteca();
 
-    rectangle(point2d(0, 0), 200, 100);
+    retangulo(point2d(0, 0), 200, 100);
     limparTela();
 
     ponto(point2d(100, 100), 20);
