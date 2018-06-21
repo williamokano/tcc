@@ -14,7 +14,8 @@ int main() {
     int* corOriginal = obterCor();
 
     definirCor(255, 122, 0);
-    ponto(point2d(100, 100), 20);
+    definirTamanho(50);
+    ponto(100, 100);
 
     definirCor(corOriginal[0], corOriginal[1], corOriginal[2]);
     quadrado(point2d(40, 40), 50);

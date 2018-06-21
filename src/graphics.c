@@ -21,6 +21,7 @@
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 thrd_t hiddenThread;
 mtx_t shapesMutex;
+mtx_t globalsMutex;
 
 GLFWwindow* hiddenWindow = NULL;
 
@@ -30,6 +31,8 @@ int numOfShapes = 0;
 int vermelhoGlobal = 255;
 int verdeGlobal = 255;
 int azulGlobal = 255;
+
+int tamanhoGlobal = 1;
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
 void error_callback(int error, const char* description);
@@ -69,7 +72,12 @@ void inicializarBiblioteca() {
     definirCor(255, 255, 255); // RGB(255, 255, 255) = Branco
 
     if (mtx_init(&shapesMutex, mtx_plain) != thrd_success) {
-        fprintf(stderr, "Falha ao criar mutex\n");
+        fprintf(stderr, "Falha ao criar mutex de formas\n");
+        exit(-1);
+    }
+
+    if (mtx_init(&globalsMutex, mtx_plain) != thrd_success) {
+        fprintf(stderr, "Falha ao criar mutex de globais\n");
         exit(-1);
     }
 
@@ -100,15 +108,37 @@ int* obterCor() {
     return coresGlobais;
 }
 
-void ponto(Point2D position, int size) {
+// Size stuff
+void definirTamanho(int tamanho) {
+    mtx_lock(&globalsMutex);
+    tamanhoGlobal = tamanho;
+    mtx_unlock(&globalsMutex);
+}
+
+int obterTamanho() {
+    int tamanhoNoMomentoDaLeitura;
+    mtx_lock(&globalsMutex);
+    tamanhoNoMomentoDaLeitura = tamanhoGlobal;
+    mtx_unlock(&globalsMutex);
+
+    return tamanhoNoMomentoDaLeitura;
+}
+
+
+// Drawing stuff
+void poligono(int numeroDeVertices, GLfloat* posicoes) {
+
+}
+
+void ponto(int x, int y) {
     Shape shape;
 
     shape.drawType = GL_POINTS;
-    shape.shapeSize = size;
+    shape.shapeSize = obterTamanho();
 
     shape.vertices = malloc(2 * sizeof(GLfloat));
-    shape.vertices[0] = position.x;
-    shape.vertices[1] = position.y;
+    shape.vertices[0] = x;
+    shape.vertices[1] = y;
     shape.numOfPoints = 2;
     shape.numOfVertices = 1;
 

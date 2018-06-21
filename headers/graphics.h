@@ -14,7 +14,13 @@ void limparTela();
 void definirCor(int vermelho, int verde, int azul);
 int* obterCor();
 
-void ponto(Point2D position, int size);
+// Size stuff
+void definirTamanho(int tamanho);
+int obterTamanho();
+
+// Drawing stuff
+void poligono(int numeroDeVertices, GLfloat* posicoes);
+void ponto(int x, int y);
 void triangulo(Point2D p1, Point2D p2, Point2D p3);
 void retangulo(Point2D position, int width, int height);
 void quadrado(Point2D position, int side);
