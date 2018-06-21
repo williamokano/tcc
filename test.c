@@ -49,6 +49,8 @@ int main() {
         ponto(vertices[(i * 2) + 0], vertices[(i * 2) + 1]);
     }
 
+    circulo(100, 500, 100);
+
     getchar();
     return 0;
 }

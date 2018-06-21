@@ -23,6 +23,10 @@ void ponto(int posX, int posY);
 void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3);
 void retangulo(int posX, int posY, int width, int height);
 void quadrado(int posX, int posY, int tamanhoLado);
+void poligonoRegular(int posX, int posY, int raio, int faces);
+void circulo(int posX, int posY, int raio);
+
+// Common stuff
 void pausar(int time);
 
 #endif // GRAPHICS_H_INCLUDED

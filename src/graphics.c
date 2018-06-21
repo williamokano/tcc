@@ -1,10 +1,15 @@
-#include "../headers/graphics.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include "../headers/graphics.h"
 
 #define SHAPES_MAX_SIZE 100
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
+
+// Por questões de compabilidade interoperacional defino meu próprio PI com precisão de 64 bits
+#define CUSTOM_PI 3.1415926535897932384626433832795028841971693993751058209749445
+#define M_RAD CUSTOM_PI / 180.0f
 
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 /*                       SLEEP HACK                       */
@@ -235,6 +240,24 @@ void retangulo(int posX, int posY, int width, int height) {
 
 void quadrado(int posX, int posY, int tamanhoLado) {
     retangulo(posX, posY, tamanhoLado, tamanhoLado);
+}
+
+void poligonoRegular(int posX, int posY, int raio, int faces) {
+    GLfloat* vertices = malloc(2 * faces * sizeof(GLfloat));
+
+    for (int i = 0; i < faces; i++) {
+        vertices[(i * 2) + 0] = posX + (cos(M_RAD * i) * raio); // Ponto X do vértice = ponto fixo X + cos(angulo) * raio
+        vertices[(i * 2) + 1] = posY + (sin(M_RAD * i) * raio); // Ponto Y do vértice = ponto fixo Y + sin(angulo) * raio
+    }
+
+    poligono(faces, vertices);
+}
+
+// Existem 2 meios de desenhar um círculo em OPEN_GL, usando o próprio polígono
+// Ou utilizando GL_TRIANGLE_STRIPES, que são triangulos colados uns aos outros
+// Optei por utilizar o polígono regular com 360 por achar mais fácil calcular os angulos dos pontos
+void circulo(int posX, int posY, int raio) {
+    poligonoRegular(posX, posY, raio, 360);
 }
 
 void pausar(int time) {

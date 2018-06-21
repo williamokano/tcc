@@ -18,3 +18,5 @@ just run `./compile.sh`
 ## References
 BGI Lib - https://www.cs.colorado.edu/~main/bgi/doc/  
 OpenGL Tutorials - https://www.youtube.com/watch?v=BrKIWYylv3Q&t=272s  
+Trigonometria - Radiano - https://www.youtube.com/watch?v=DxzYHLCmsN4  
+How to draw a circle using cos and sin (Radian) - https://www.youtube.com/watch?v=G4D_EhPi7Qk  
