@@ -3,7 +3,6 @@
 
 #include <GLFW/glfw3.h>
 #include "tinycthread.h"
-#include "point.h"
 #include "shape.h"
 
 void inicializarBiblioteca();
