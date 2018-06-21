@@ -2,27 +2,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define SHAPES_MAX_SIZE 100
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+/*                       SLEEP HACK                       */
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 #ifdef WIN32
 #include <windows.h>
 #else
 #include <unistd.h> // for usleep
 #endif
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
-#define SHAPES_MAX_SIZE 30
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
+/*                    GLOBAL VARIABLES                    */
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 thrd_t hiddenThread;
 mtx_t shapesMutex;
-Point3D globalColor;
+
 GLFWwindow* hiddenWindow = NULL;
+
 Shape* shapes = NULL;
 int numOfShapes = 0;
+
+int vermelhoGlobal = 255;
+int verdeGlobal = 255;
+int azulGlobal = 255;
+/*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
 void error_callback(int error, const char* description);
 void controls(GLFWwindow *window, int key, int scancode, int action, int mods);
 int hiddenMainLoop(void* args);
 void drawBuffer();
+
+void inicializarFormas() {
+    mtx_lock(&shapesMutex);
+    shapes = malloc(SHAPES_MAX_SIZE * sizeof(Shape));
+    mtx_unlock(&shapesMutex);
+}
 
 void addShape(Shape shape) {
     mtx_lock(&shapesMutex);
@@ -30,9 +49,15 @@ void addShape(Shape shape) {
     mtx_unlock(&shapesMutex);
 }
 
+void limparFormas() {
+    mtx_lock(&shapesMutex);
+    numOfShapes = 0;
+    mtx_unlock(&shapesMutex);
+}
+
 void inicializarBiblioteca() {
     if (thrd_create(&hiddenThread, hiddenMainLoop, (void*)0) != thrd_success) {
-        fprintf(stderr, "Failed to init hiddenMainLoop\n");
+        fprintf(stderr, "Falha ao inicializar hiddenMainLoop\n");
         exit(-1);
     }
     #ifdef DEBUG
@@ -41,16 +66,14 @@ void inicializarBiblioteca() {
     }
     #endif
 
-    definirCor(point3d(0xFF, 0xFF, 0xFF));
+    definirCor(255, 255, 255); // RGB(255, 255, 255) = Branco
 
     if (mtx_init(&shapesMutex, mtx_plain) != thrd_success) {
-        fprintf(stderr, "Failed to create mutex\n");
+        fprintf(stderr, "Falha ao criar mutex\n");
         exit(-1);
     }
 
-    mtx_lock(&shapesMutex);
-    shapes = malloc(SHAPES_MAX_SIZE * sizeof(Shape));
-    mtx_unlock(&shapesMutex);
+    inicializarFormas();
 }
 
 int bibliotecaInicializada() {
@@ -58,17 +81,17 @@ int bibliotecaInicializada() {
 }
 
 void limparTela() {
-    mtx_lock(&shapesMutex);
-    numOfShapes = 0;
-    mtx_unlock(&shapesMutex);
+    limparFormas();
 }
 
-void definirCor(Point3D color) {
-    globalColor = color;
+void definirCor(int vermelho, int verde, int azul) {
+    vermelhoGlobal = vermelho;
+    verdeGlobal = verde;
+    azulGlobal = azul;
 }
 
 Point3D obterCor() {
-    return globalColor;
+    /*return NULL;*/
 }
 
 void ponto(Point2D position, int size) {
@@ -87,9 +110,9 @@ void ponto(Point2D position, int size) {
 
     for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
-        shape.color[3 * i + 0] = obterCor().x;
-        shape.color[3 * i + 1] = obterCor().y;
-        shape.color[3 * i + 2] = obterCor().z;
+        shape.color[3 * i + 0] = vermelhoGlobal;
+        shape.color[3 * i + 1] = verdeGlobal;
+        shape.color[3 * i + 2] = azulGlobal;
     }
 
     addShape(shape);
@@ -116,9 +139,9 @@ void triangulo(Point2D p1, Point2D p2, Point2D p3) {
 
     for (int i = 0; i <= shape.numOfVertices; i++) {
     // TODO add color mutex here
-        shape.color[3 * i + 0] = obterCor().x;
-        shape.color[3 * i + 1] = obterCor().y;
-        shape.color[3 * i + 2] = obterCor().z;
+        shape.color[3 * i + 0] = vermelhoGlobal;
+        shape.color[3 * i + 1] = verdeGlobal;
+        shape.color[3 * i + 2] = azulGlobal;
     }
 
     addShape(shape);
@@ -148,9 +171,9 @@ void retangulo(Point2D position, int width, int height) {
 
     for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
-        shape.color[3 * i + 0] = obterCor().x;
-        shape.color[3 * i + 1] = obterCor().y;
-        shape.color[3 * i + 2] = obterCor().z;
+        shape.color[3 * i + 0] = vermelhoGlobal;
+        shape.color[3 * i + 1] = verdeGlobal;
+        shape.color[3 * i + 2] = azulGlobal;
     }
 
     addShape(shape);

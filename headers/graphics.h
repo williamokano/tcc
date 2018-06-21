@@ -11,7 +11,7 @@ int bibliotecaInicializada();
 void limparTela();
 
 // Color stuff
-void definirCor(Point3D color);
+void definirCor(int vermelho, int verde, int azul);
 Point3D obterCor();
 
 void ponto(Point2D position, int size);
