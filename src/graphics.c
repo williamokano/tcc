@@ -130,15 +130,15 @@ void poligono(int numeroDeVertices, GLfloat* posicoes) {
 
 }
 
-void ponto(int x, int y) {
+void ponto(int posX, int posY) {
     Shape shape;
 
     shape.drawType = GL_POINTS;
     shape.shapeSize = obterTamanho();
 
     shape.vertices = malloc(2 * sizeof(GLfloat));
-    shape.vertices[0] = x;
-    shape.vertices[1] = y;
+    shape.vertices[0] = posX;
+    shape.vertices[1] = posY;
     shape.numOfPoints = 2;
     shape.numOfVertices = 1;
 

@@ -20,7 +20,7 @@ int obterTamanho();
 
 // Drawing stuff
 void poligono(int numeroDeVertices, GLfloat* posicoes);
-void ponto(int x, int y);
+void ponto(int posX, int posY);
 void triangulo(Point2D p1, Point2D p2, Point2D p3);
 void retangulo(Point2D position, int width, int height);
 void quadrado(Point2D position, int side);
