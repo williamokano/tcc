@@ -71,7 +71,7 @@ Point3D getColor() {
     return globalColor;
 }
 
-void point(Point2D position, int size) {
+void ponto(Point2D position, int size) {
     Shape shape;
 
     shape.drawType = GL_POINTS;
