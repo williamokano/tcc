@@ -67,7 +67,7 @@ void definirCor(Point3D color) {
     globalColor = color;
 }
 
-Point3D getColor() {
+Point3D obterCor() {
     return globalColor;
 }
 
@@ -87,9 +87,9 @@ void ponto(Point2D position, int size) {
 
     for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
-        shape.color[3 * i + 0] = getColor().x;
-        shape.color[3 * i + 1] = getColor().y;
-        shape.color[3 * i + 2] = getColor().z;
+        shape.color[3 * i + 0] = obterCor().x;
+        shape.color[3 * i + 1] = obterCor().y;
+        shape.color[3 * i + 2] = obterCor().z;
     }
 
     addShape(shape);
@@ -116,9 +116,9 @@ void triangulo(Point2D p1, Point2D p2, Point2D p3) {
 
     for (int i = 0; i <= shape.numOfVertices; i++) {
     // TODO add color mutex here
-        shape.color[3 * i + 0] = getColor().x;
-        shape.color[3 * i + 1] = getColor().y;
-        shape.color[3 * i + 2] = getColor().z;
+        shape.color[3 * i + 0] = obterCor().x;
+        shape.color[3 * i + 1] = obterCor().y;
+        shape.color[3 * i + 2] = obterCor().z;
     }
 
     addShape(shape);
@@ -148,9 +148,9 @@ void retangulo(Point2D position, int width, int height) {
 
     for (int i = 0; i < shape.numOfVertices; i++) {
     // TODO add color mutex here
-        shape.color[3 * i + 0] = getColor().x;
-        shape.color[3 * i + 1] = getColor().y;
-        shape.color[3 * i + 2] = getColor().z;
+        shape.color[3 * i + 0] = obterCor().x;
+        shape.color[3 * i + 1] = obterCor().y;
+        shape.color[3 * i + 2] = obterCor().z;
     }
 
     addShape(shape);

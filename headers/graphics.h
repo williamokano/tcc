@@ -12,7 +12,7 @@ void limparTela();
 
 // Color stuff
 void definirCor(Point3D color);
-Point3D getColor();
+Point3D obterCor();
 
 void ponto(Point2D position, int size);
 void triangulo(Point2D p1, Point2D p2, Point2D p3);

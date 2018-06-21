@@ -12,7 +12,7 @@ int main() {
 
     ponto(point2d(100, 100), 20);
 
-    definirCor(point3d(255, 0, 255));
+    definirCor(point3d(255, 122, 0));
     quadrado(point2d(40, 40), 50);
 
     getchar();
