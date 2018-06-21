@@ -183,7 +183,7 @@ void triangulo(Point2D p1, Point2D p2, Point2D p3) {
     addShape(shape);
 }
 
-void retangulo(Point2D position, int width, int height) {
+void retangulo(int posX, int posY, int width, int height) {
     Shape shape;
 
     shape.drawType = GL_QUADS;
@@ -191,17 +191,17 @@ void retangulo(Point2D position, int width, int height) {
     shape.numOfVertices = 4;
 
     shape.vertices = malloc(2 * shape.numOfVertices * sizeof(GLfloat));
-    shape.vertices[0] = position.x;
-    shape.vertices[1] = position.y;
+    shape.vertices[0] = posX;
+    shape.vertices[1] = posY;
     
-    shape.vertices[2] = position.x + width;
-    shape.vertices[3] = position.y;
+    shape.vertices[2] = posX + width;
+    shape.vertices[3] = posY;
 
-    shape.vertices[4] = position.x + width;
-    shape.vertices[5] = position.y + height;
+    shape.vertices[4] = posX + width;
+    shape.vertices[5] = posY + height;
 
-    shape.vertices[6] = position.x;
-    shape.vertices[7] = position.y + height;
+    shape.vertices[6] = posX;
+    shape.vertices[7] = posY + height;
 
     shape.color = malloc(3 * shape.numOfVertices * sizeof(GLfloat));
 
@@ -216,7 +216,7 @@ void retangulo(Point2D position, int width, int height) {
 }
 
 void quadrado(int posX, int posY, int tamanhoLado) {
-    retangulo(point2d(posX, posY), tamanhoLado, tamanhoLado);
+    retangulo(posX, posY, tamanhoLado, tamanhoLado);
 }
 
 void pausar(int time) {

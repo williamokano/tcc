@@ -22,7 +22,7 @@ int obterTamanho();
 void poligono(int numeroDeVertices, GLfloat* posicoes);
 void ponto(int posX, int posY);
 void triangulo(Point2D p1, Point2D p2, Point2D p3);
-void retangulo(Point2D position, int width, int height);
+void retangulo(int posX, int posY, int width, int height);
 void quadrado(int posX, int posY, int tamanhoLado);
 void pausar(int time);
 

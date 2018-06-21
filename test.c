@@ -8,7 +8,7 @@ int main() {
     inicializarBiblioteca();
 
     definirCor(255, 0, 255);
-    retangulo(point2d(0, 0), 200, 100);
+    retangulo(0, 0, 200, 100);
     limparTela();
 
     int* corOriginal = obterCor();
