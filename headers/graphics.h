@@ -20,6 +20,10 @@ int* obterCor();
 void definirTamanho(int tamanho);
 int obterTamanho();
 
+/* NO TCC AINDA SEM SEM DEFINIR LARGURA. DOCUMENTAR. APÓS CORRIGIR A LINHA */
+void definirLargura(int largura);
+int obterLargura();
+
 // Drawing stuff
 void poligono(int numeroDeVertices, GLfloat* posicoes);
 void ponto(int posX, int posY);
@@ -32,6 +36,7 @@ void pentagono(int posX, int posY, int raio);
 void hexagono(int posX, int posY, int raio);
 void decagono(int posX, int posY, int raio);
 void dodecagono(int posX, int posY, int raio);
+void linha(int posX1, int posY1, int posX2, int posY2);
 
 // Common stuff
 void pausar(int time);

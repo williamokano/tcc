@@ -6,6 +6,8 @@
 #define SHAPES_MAX_SIZE 100
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
+#define TIPO_FORMA_2D 2
+#define VERTICES(QTD) QTD
 
 // Por questões de compabilidade interoperacional defino meu próprio PI com precisão de 64 bits
 #define CUSTOM_PI 3.1415926535897932384626433832795028841971693993751058209749445
@@ -38,6 +40,7 @@ int verdeGlobal = 255;
 int azulGlobal = 255;
 
 int tamanhoGlobal = 1;
+int larguraGlobal = 1;
 int shapeAfterUndo = 0;
 /*-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=*/
 
@@ -64,6 +67,24 @@ void limparFormas() {
     // TODO: free memory
     numOfShapes = 0;
     mtx_unlock(&shapesMutex);
+}
+
+GLfloat* colorHelper(int numOfVertices) {
+    return shapeColor(numOfVertices, vermelhoGlobal, verdeGlobal, azulGlobal);
+}
+
+Shape createShapeHelper(
+    const char drawType,
+    int numeroDeVertices,
+    GLfloat* vertices
+) {
+    return createShape(
+        drawType,
+        numeroDeVertices,
+        vertices,
+        obterTamanho(),
+        TIPO_FORMA_2D,
+        colorHelper(numeroDeVertices));
 }
 
 void inicializarBiblioteca() {
@@ -149,113 +170,75 @@ int obterTamanho() {
     return tamanhoNoMomentoDaLeitura;
 }
 
+void definirLargura(int largura) {
+    mtx_lock(&globalsMutex);
+    larguraGlobal = largura;
+    mtx_unlock(&globalsMutex);
+}
+
+int obterLargura() {
+    int larguraNoMomentoDaLeitura;
+    mtx_lock(&globalsMutex);
+    larguraNoMomentoDaLeitura = larguraGlobal;
+    mtx_unlock(&globalsMutex);
+
+    return larguraNoMomentoDaLeitura;
+}
 
 // Drawing stuff
 void poligono(int numeroDeVertices, GLfloat* posicoes) {
-    Shape shape;
-
-    shape.drawType = GL_POLYGON;
-    shape.shapeSize = 1;
-
-    shape.vertices = posicoes;
-    shape.numOfPoints = 2;
-    shape.numOfVertices = numeroDeVertices;
-
-    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
-
-    for (int i = 0; i < shape.numOfVertices; i++) {
-    // TODO add color mutex here
-        shape.color[3 * i + 0] = vermelhoGlobal;
-        shape.color[3 * i + 1] = verdeGlobal;
-        shape.color[3 * i + 2] = azulGlobal;
-    }
-
-    addShape(shape);
+    addShape(createShapeHelper(
+        GL_POLYGON,
+        numeroDeVertices,
+        posicoes
+    ));
 }
 
 void ponto(int posX, int posY) {
-    Shape shape;
+    GLfloat* vertices = malloc(2 * sizeof(GLfloat));
+    vertices[0] = posX;
+    vertices[1] = posY;
+    const int UM_VERTICE = 1;
 
-    shape.drawType = GL_POINTS;
-    shape.shapeSize = obterTamanho();
-
-    shape.vertices = malloc(2 * sizeof(GLfloat));
-    shape.vertices[0] = posX;
-    shape.vertices[1] = posY;
-    shape.numOfPoints = 2;
-    shape.numOfVertices = 1;
-
-    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
-
-    for (int i = 0; i < shape.numOfVertices; i++) {
-    // TODO add color mutex here
-        shape.color[3 * i + 0] = vermelhoGlobal;
-        shape.color[3 * i + 1] = verdeGlobal;
-        shape.color[3 * i + 2] = azulGlobal;
-    }
-
-    addShape(shape);
+    addShape(createShapeHelper(
+        GL_POINTS,
+        VERTICES(1),
+        vertices
+    ));
 }
 
 void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3) {
-    Shape shape;
+    GLfloat* vertices = malloc(VERTICES(3) * sizeof(GLfloat) * 2);
+    vertices[0] = posX1;
+    vertices[1] = posY1;
+    vertices[2] = posX2;
+    vertices[3] = posY2;
+    vertices[4] = posX3;
+    vertices[5] = posY3;
 
-    shape.drawType = GL_TRIANGLES;
-    shape.numOfPoints = 2;
-    shape.numOfVertices = 3;
-
-    shape.vertices = malloc(shape.numOfVertices * sizeof(GLfloat) * 2);
-    shape.vertices[0] = posX1;
-    shape.vertices[1] = posY1;
-
-    shape.vertices[2] = posX2;
-    shape.vertices[3] = posY2;
-
-    shape.vertices[4] = posX3;
-    shape.vertices[5] = posY3;
-
-    shape.color = malloc(shape.numOfVertices * sizeof(GLfloat) * 3);
-
-    for (int i = 0; i < shape.numOfVertices; i++) {
-    // TODO add color mutex here
-        shape.color[3 * i + 0] = vermelhoGlobal;
-        shape.color[3 * i + 1] = verdeGlobal;
-        shape.color[3 * i + 2] = azulGlobal;
-    }
-
-    addShape(shape);
+    addShape(createShapeHelper(
+        GL_TRIANGLES,
+        VERTICES(3),
+        vertices
+    ));
 }
 
 void retangulo(int posX, int posY, int width, int height) {
-    Shape shape;
+    GLfloat* vertices = malloc(VERTICES(4) * 2 * sizeof(GLfloat));
+    vertices[0] = posX;
+    vertices[1] = posY;
+    vertices[2] = posX + width;
+    vertices[3] = posY;
+    vertices[4] = posX + width;
+    vertices[5] = posY + height;
+    vertices[6] = posX;
+    vertices[7] = posY + height;
 
-    shape.drawType = GL_QUADS;
-    shape.numOfPoints = 2;
-    shape.numOfVertices = 4;
-
-    shape.vertices = malloc(2 * shape.numOfVertices * sizeof(GLfloat));
-    shape.vertices[0] = posX;
-    shape.vertices[1] = posY;
-    
-    shape.vertices[2] = posX + width;
-    shape.vertices[3] = posY;
-
-    shape.vertices[4] = posX + width;
-    shape.vertices[5] = posY + height;
-
-    shape.vertices[6] = posX;
-    shape.vertices[7] = posY + height;
-
-    shape.color = malloc(3 * shape.numOfVertices * sizeof(GLfloat));
-
-    for (int i = 0; i < shape.numOfVertices; i++) {
-    // TODO add color mutex here
-        shape.color[3 * i + 0] = vermelhoGlobal;
-        shape.color[3 * i + 1] = verdeGlobal;
-        shape.color[3 * i + 2] = azulGlobal;
-    }
-
-    addShape(shape);
+    addShape(createShapeHelper(
+        GL_QUADS,
+        VERTICES(4),
+        vertices
+    ));
 }
 
 void quadrado(int posX, int posY, int tamanhoLado) {
@@ -301,6 +284,20 @@ void decagono(int posX, int posY, int raio) {
 
 void dodecagono(int posX, int posY, int raio) {
     poligonoRegular(posX, posY, raio, 12);
+}
+
+void linha(int posX1, int posY1, int posX2, int posY2) {
+    GLfloat* vertices = malloc(VERTICES(2) * 2 * sizeof(GLfloat));
+    vertices[0] = posX1;
+    vertices[1] = posY1;
+    vertices[2] = posX2;
+    vertices[3] = posY2;
+
+    addShape(createShapeHelper(
+        GL_LINES,
+        VERTICES(2),
+        vertices
+    ));
 }
 
 void pausar(int time) {
@@ -387,7 +384,15 @@ void drawBuffer() {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_COLOR_ARRAY);
 
-        glPointSize(shape.shapeSize);
+        switch(shape.drawType) {
+            case GL_POINTS:
+                glPointSize(shape.shapeSize);
+            break;
+            case GL_LINES:
+                glLineWidth(shape.shapeSize);
+            break;
+        }
+
         glVertexPointer(shape.numOfPoints, GL_FLOAT, 0, shape.vertices);
         glColorPointer(3, GL_FLOAT, 0, shape.color);
         glDrawArrays(shape.drawType, 0, shape.numOfVertices);

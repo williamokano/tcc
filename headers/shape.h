@@ -11,4 +11,15 @@ typedef struct Shape {
     GLfloat *color;
 } Shape;
 
+Shape createShape(
+    unsigned char drawType,
+    int numOfVertices,
+    GLfloat *vertices,
+    int shapeSize,
+    int numOfPoints,
+    GLfloat *color
+);
+
+GLfloat* shapeColor(int numOfVertices, int red, int green, int blue);
+
 #endif // SHAPE_H_INCLUDED

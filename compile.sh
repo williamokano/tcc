@@ -16,6 +16,7 @@ fi
 gcc -o "$OUTPUT_FILE" "$ENTRYPOINT.c" \
     src/graphics.c \
     src/tinycthread.c \
+    src/shape.c \
     -lGL -lX11 -lpthread -lglfw -lm
 
 if [ $? -gt 0 ];then
