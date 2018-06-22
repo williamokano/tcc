@@ -223,16 +223,16 @@ void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3)
     ));
 }
 
-void retangulo(int posX, int posY, int width, int height) {
+void retangulo(int posX, int posY, int largura, int altura) {
     GLfloat* vertices = malloc(VERTICES(4) * 2 * sizeof(GLfloat));
     vertices[0] = posX;
     vertices[1] = posY;
-    vertices[2] = posX + width;
+    vertices[2] = posX + largura;
     vertices[3] = posY;
-    vertices[4] = posX + width;
-    vertices[5] = posY + height;
+    vertices[4] = posX + largura;
+    vertices[5] = posY + altura;
     vertices[6] = posX;
-    vertices[7] = posY + height;
+    vertices[7] = posY + altura;
 
     addShape(createShapeHelper(
         GL_QUADS,
