@@ -273,7 +273,7 @@ A biblioteca gráfica dispõe da API abaixo:
     \item void poligono(int numeroDeVertices, GLfloat* posicoes)
     \item void ponto(int posX, int posY)
     \item void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3)
-    \item void retangulo(int posX, int posY, int width, int height)
+    \item void retangulo(int posX, int posY, int largura, int altura)
     \item void quadrado(int posX, int posY, int tamanhoLado)
     \item void poligonoRegular(int posX, int posY, int raio, int faces)
     \item void circulo(int posX, int posY, int raio)
@@ -310,7 +310,6 @@ int main(void) {
 \begin{figure}[!htbp]
   \centering
   \includegraphics[scale=0.7]{images/exemplo_initWindow.JPG}
-  % \includegraphics[width=0.5\textwidth]{gull}
   \caption{Exemplo inicialização da biblioteca}
   \label{fig:exemplo_initWindow}
 \end{figure}
@@ -558,114 +557,187 @@ int main() {
 }
 \end{lstlisting}
 
-\subsubsection{void ponto(int posX, int posY)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+\subsubsection{Desenhando um ponto}
+A biblioteca permite que seja desenhado um ponto. O ponto pode ter seu tamanho alterado mediante da função \textit{void definirTamanho(int tamanho);} e por padrão possui o tamanho de 1 pixel.
+
+A função que desenha um pixel tem a seguinte assinatura:
 
 \begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void ponto(int posX, int posY);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX - A posição X onde o ponto será desenhado.
+    \item int posY - A posição Y onde o ponto será desenhado.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+O exemplo abaixo mostra como desenhar um ponto com tamanho 20 em uma aplicação C:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
+#include <stdio.h>
+#include <stdlib.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirTamanho(20);
+    poligono(10, 10);
+
+    getchar();
+    return 0;
+}
 \end{lstlisting}
 
-\subsubsection{void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+\subsubsection{Desenhando um triângulo}
+Em uma biblioteca gráfica, triângulos são uma das formas mais básicas e utilizadas, pois todos os polígonos convexo pode ser decomposto em vários triângulos.
+
+A função que desenha um triângulo tem a seguinte assinatura:
 
 \begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX1 - Posição X da vértice 1 de onde o triângulo será desenhado.
+    \item int posY1 - Posição Y da vértice 1 de onde o triângulo será desenhado.
+
+    \item int posX2 - Posição X da vértice 2 de onde o triângulo será desenhado.
+    \item int posY2 - Posição Y da vértice 2 de onde o triângulo será desenhado.
+
+    \item int posX3 - Posição X da vértice 3 de onde o triângulo será desenhado.
+    \item int posY3 - Posição Y da vértice 3 de onde o triângulo será desenhado.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+O exemplo abaixo mostra como desenhar um triângulo em uma aplicação C:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
+#include <stdio.h>
+#include <stdlib.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    triangulo(
+        100, 100,
+        300, 100,
+        200, 300
+    );
+
+    getchar();
+    return 0;
+}
 \end{lstlisting}
 
-\subsubsection{void retangulo(int posX, int posY, int width, int height)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+\subsubsection{Desenhando um retângulo}
+Retângulos são formas que possuem 4 ângulos retos e também são bastante utilizados para desenhos além de ser uma das formas mais básicas.
+
+A função que desenha um retângulo tem a seguinte assinatura:
 
 \begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void retangulo(int posX, int posY, int largura, int altura);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX - Posição X onde o retângulo será desenhado. Representa o vértice inferior esquerdo do retângulo.
+    \item int posY - Posição y onde o retângulo será desenhado. Representa o vértice inferior esquerdo do retângulo.
+    \item int altura - Altura do triângulo.
+    \item int largura - Largura do triângulo.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+O exemplo abaixo mostra como criar um triângulo em uma aplicação C:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
+#include <stdio.h>
+#include <stdlib.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    retangulo(100, 100, 200, 300);
+
+    getchar();
+    return 0;
+}
 \end{lstlisting}
 
-\subsubsection{void quadrado(int posX, int posY, int tamanhoLado)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+\subsubsection{Desenhando um quadrado}
+Um quadrado é um polígono considerado especial, pois ele é um retângulo onde tanto a altura quanto a largura são iguais.
+
+A função que desenha um quadrado tem a seguinte assinatura:
 
 \begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void quadrado(int posX, int posY, int tamanhoLado);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX - Posição X onde o quadrado será desenhado. Representa o vértice inferior esquerdo do quadrado.
+    \item int posY - Posição Y onde o quadrado será desenhado. Representa o vértice inferior esquerdo do quadrado.
+    \item int tamanhoLado - Representa o valor do lado do quadrado. Será tanto a altura quanto a largura desta forma.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+O exemplo abaixo mostra como desenhar um quadrado verde em uma aplicação C:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
+#include <stdio.h>
+#include <stdlib.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirCor(0, 255, 0);
+    quadrado(100, 100, 200);
+
+    getchar();
+    return 0;
+}
 \end{lstlisting}
 
-\subsubsection{void poligonoRegular(int posX, int posY, int raio, int faces)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+\subsubsection{Desenhando um polígono regular}
+Um polígono regular é um polígono convexo com \textit{n} faces onde cada face possui o mesmo tamanho e todos os ângulos internos são iguais.
+
+A função que desenha um polígono regular tem a seguinte assinatura:
 
 \begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void poligonoRegular(int posX, int posY, int raio, int faces);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX - Posição X onde o polígono será desenhado. Representa o centro de onde será desenhado o polígono regular.
+    \item int posY - Posição Y onde o polígono será desenhado. Representa o centro de onde será desenhado o polígono regular.
+    \item int raio - Tamanho do raio que o polígono regular possuirá.
+    \item int faces - O número de faces que o polígono regular possuirá.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+O exemplo abaixo mostra como desenhar um polígono regular azul em uma aplicação C:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
+#include <stdio.h>
+#include <stdlib.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirCor(0, 0, 255);
+    poligonoRegular(300, 300, 100, 7);
+
+    getchar();
+    return 0;
+}
 \end{lstlisting}
 
 \subsubsection{void circulo(int posX, int posY, int raio)}
