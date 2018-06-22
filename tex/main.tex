@@ -1,0 +1,938 @@
+\documentclass[12pt, %
+openright,
+oneside, %
+%twoside, %TCC: Se seu texto tem mais de 100 páginas, descomente esta linha e comente a anterior
+a4paper,    %
+%english,   %
+brazil]{facom-ufu-abntex2}
+
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{multirow}
+\usepackage{listings}
+
+\autor{William Johnson dos Santos Okano} %TCC
+\data{2018}
+\orientador{Prof. Dr. André Ricardo Backes} %TCC
+%\coorientador{Algum?} %TCC
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+
+\titulo{Implementação de uma biblioteca gráfica cross-platform utilizando OpenGL e GLFW} %TCC
+
+\hypersetup{pdfkeywords={biblioteca}{opengl}{cross-plaftorm}{glfw}} %TCC
+
+\begin{document}
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+%\pretextual
+\imprimircapa
+\imprimirfolhaderosto
+
+
+% ---
+% Inserir folha de aprovação
+% ---
+%
+% \includepdf{folhadeaprovacao_final.pdf} %TCC: depois de aprovado o trabalho, descomente esta linha e comente o próximo bloco para incluir scan da folha de aprovação.
+%
+
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\ABNTEXchapterfont\large\imprimirautor}
+
+    \vspace*{\fill}\vspace*{\fill}
+    {\ABNTEXchapterfont\bfseries\Large\imprimirtitulo}
+    \vspace*{\fill}
+
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+
+   Trabalho aprovado. \imprimirlocal, 22 de Junho de 2018: %TCC:
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador}
+   \assinatura{\textbf{Prof. João da Silva}}% \\ Convidado 1} %TCC:
+   \assinatura{\textbf{Prof. Maria dos Santos}}% \\ Convidado 2} %TCC:
+   %\assinatura{\textbf{Professor} \\ Convidado 3}
+   %\assinatura{\textbf{Professor} \\ Convidado 4}
+
+   \begin{center}
+    \vspace*{0.5cm}
+    {\large\imprimirlocal}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+
+\end{folhadeaprovacao}
+
+% ---
+
+
+%%As seções dedicatória, agradecimento e epígrafe não são obrigatórias.
+%%Só as mantenha se achar pertinente.
+
+% ---
+% Dedicatória
+% ---
+%\begin{dedicatoria}
+%   \vspace*{\fill}
+%   \centering
+%   \noindent
+%   \textit{Dedico a \lipsum[10]}  %TCC:
+%   \vspace*{\fill}
+%\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+%\begin{agradecimentos}
+%Agradeço a \lipsum[30]. %TCC:
+%\end{agradecimentos}
+% ---
+
+% ---
+% Epígrafe
+% ---
+%\begin{epigrafe}
+%    \vspace*{\fill}
+%	\begin{flushright}
+%		\textit{``Alguma citação que ache conveniente? \lipsum[10]''} %TCC:
+%	\end{flushright}
+%\end{epigrafe}
+% ---
+
+
+%\iffalse % Descomentar Resumo no final
+\begin{resumo} %TCC:
+ Segundo a , o resumo deve ressaltar o
+ objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
+ destes itens dependem do tipo de resumo (informativo ou indicativo) e do
+ tratamento que cada item recebe no documento original. O resumo deve ser
+ precedido da referência do documento, com exceção do resumo inserido no
+ próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
+ resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
+ ponto e finalizadas também por ponto.
+
+ \vspace{\onelineskip}
+
+ \noindent
+ \textbf{Palavras-chave}:Biblioteca de funções, elementos gráficos, OpenGL. %TCC:
+\end{resumo}
+%\fi
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+\iffalse
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+\fi
+
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\begin{siglas} %TCC:
+  \item[GLFW] \textit{OpenGL FrameWork}
+  \item[API] \textit{Application Programming Interface}
+  \item[RGB] \textit{Red, Green and Blue}
+  %\item[456] Isto é um número
+  %\item[123] Isto é outro número
+  %\item[Zézão] este é o meu nome
+\end{siglas}
+% ---
+
+%% ---
+%% inserir lista de símbolos, se for adequado ao trabalho. %TCC:
+%% ---
+%\begin{simbolos}
+%  \item[$ \Gamma $] Letra grega Gama
+%  \item[$ \Lambda $] Lambda
+%  \item[$ \zeta $] Letra grega minúscula zeta
+%  \item[$ \in $] Pertence
+%\end{simbolos}
+%% ---
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+\textual
+
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+
+\chapter[Introdução]{Introdução}
+
+Introdução
+
+\section{Objetivos}
+Objetivos
+
+\section{Funcionalidades previstas}
+
+
+\chapter{Trabalhos Correlatos}
+
+\textbf{Falar sobre a lista abaixo. Não definitivo. Falta construir}
+\begin{itemize}
+    \item Borlang Graphics Interface (BGI)
+\end{itemize}
+
+\chapter{Desenvolvimento}
+
+\section{Tecnologias Empregadas}
+
+\subsection{Linguagem de programação C}
+A linguagem de programação \citeonline{C:About} é uma linguagem criada por Dennis MacAlistair Ritchie entre 1969 e 1973 na \citeonline{BellLabs:Site}. A linguagem de programação \citeonline{C:About} é uma linguagem de propósito geral que pode ser utilizada com os paradigmas imperativo, também conhecido como procedural, e o paradigma estruturado. Segundo o site \citeonline{GeneralPurposeLanguage:About}, uma linguagem de propósito geral é aquela que não é limitada apenas à algum tipo de hardware específico ou para uma aplicação especializada.
+
+\subsection{OpenGL}
+O \citeonline{OpenGL:About} é uma biblioteca gráfica para desenvolvimento altamente portável de aplicações interativas 2D e 3D. Desde sua introdução, no ano de 1992, a biblioteca OpenGL se tornou  a interface de de programação de aplicação (API) mais utilizada com suporte a 2D e 3D pela indústria. O OpenGL foi escolhido como biblioteca gráfica pela sua qualidade de ser altamente portável estando presente em várias plataformas, como Windows, Linux, Unix, MacOS, e mais. Outro motivo foi também por possuir um bom desempenho e poder ser utilizada em conjunto com várias linguagens de programação, dentre as quais foi escolhida a linguagem de programação \citeonline{C:About}.
+
+A biblioteca gráfica \citeonline{OpenGL:About} foi escolhida em detrimento de outras por ser mais simples, porém versátil, e suas já citadas qualidades: performance, largamente utilizada, interoperável entre plataformas e por ter fácil integração com a linguagem de programação C. Outros fatores que influenciaram a sua escolha foi a vasta documentação, como websites, livros e cursos online.
+
+\subsection{GLFW}
+Segundo o site da \citeonline{GLFW:About}, GLFW é uma biblioteca gráfica open-source, multi-plataforma para desenvolvimento desktop utilizando OpenGL, OpenGL ES e Vulkan. Ela é responsável por criar janelas de forma unificada entre diferentes sistemas operacionais, contextos OpenGL e receber entradas de dados e eventos.
+
+A biblioteca GLFW foi escrita em C e possui suporte nativo para Windows, macOS e vários sistemas Unix \cite{Unix:About} que utilizam o sistema de janelas X Window System \cite{X:About}, como por exemplo Linux \cite{Linux:About} e FreeBSD \cite{FreeBSD:About}.
+
+As motivações que levaram a escolha da biblioteca gráfica GLFW foram a criação de janelas de forma transparente entre diversos sistemas operacionais, suporte para OpenGL, suporta vários monitores e várias janelas simultâneas, suporte para mouse, teclado e joystick, além de ser a biblioteca mais atualizada, tendo vasta documentação e grande comunidade ativa.
+
+\subsection{TinyCThread}
+A biblioteca \citeonline{Tinycthread:About} é uma biblioteca de código aberto escrita em C multi-plataforma capaz de criar e gerenciar threads de forma unificada e transparente em diversos sistemas operacionais. Thread é um conceito computacional capaz de executar 2 trechos de código concorrentemente.
+
+A biblioteca TinyCThread foi escolhida pois, apesar do padrão C11 implementar suporte nativo para criação de threads da mesma forma entre diferentes sistemas operacionais, os compiladores mais antigos, e que ainda não implementam esse padrão, possuem formas distintas de criar e gerenciar as threads. Com o uso da biblioteca essa criação fica padronizada sendo possível compilar o mesmo código tanto para Linux quanto para Windows. A biblioteca também provê funcionalidades para gerenciamento de concorrência, como locks exclusivos, por exemplo o mutex, dentre outros.
+
+\section{Atividades Desenvolvidas}
+Os artefatos gerados como resultado deste trabalho são os 3 a seguir:
+
+\begin{itemize}
+    \item A criação de uma biblioteca gráfica simplifica utilizando OpenGL e o framework GLFW
+    \item A criação de uma aplicação de demonstração de utilização da biblioteca
+    \item A documentação e manual de utilização
+\end{itemize}
+
+\subsection{A biblioteca gráfica}
+\textbf{Falar sobre a biblioteca TBD}
+
+A intenção dessa biblioteca gráfica é ter uma janela que não deve ser manipulada diretamente pelo usuário final. Para tal, é iniciado uma thread de background apenas para gestão dessa janelas. Todos os itens gerados são automaticamente atachados a esta janelas por debaixo dos panos. \textbf{Escrever isso de forma formal}.
+
+A biblioteca gráfica dispõe da API abaixo:
+
+\begin{itemize}
+    \item void inicializarBiblioteca()
+    \item void limparTela()
+    
+    \item void desfazerUltimaForma()
+    \item void refazerUltimaForma()
+    
+    \item void definirCor(int vermelho, int verde, int azul)
+    \item int* obterCor()
+    
+    \item void definirTamanho(int tamanho)
+    \item int obterTamanho()
+
+    \item void poligono(int numeroDeVertices, GLfloat* posicoes)
+    \item void ponto(int posX, int posY)
+    \item void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3)
+    \item void retangulo(int posX, int posY, int width, int height)
+    \item void quadrado(int posX, int posY, int tamanhoLado)
+    \item void poligonoRegular(int posX, int posY, int raio, int faces)
+    \item void circulo(int posX, int posY, int raio)
+    \item void pentagono(int posX, int posY, int raio)
+    \item void hexagono(int posX, int posY, int raio)
+    \item void decagono(int posX, int posY, int raio)
+    \item void dodecagono(int posX, int posY, int raio)
+    \item void linha(int posX1, int posY1, int posX2, int posY2)
+    
+    \item void pausar(int time)
+\end{itemize}
+
+\subsubsection{Iniciando a biblioteca}
+Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário ter que inicializar a biblioteca.
+
+A função que inicializa a biblioteca tem a seguinte assinatura:
+
+\begin{lstlisting}
+void inicializarBiblioteca();
+\end{lstlisting}
+
+O exemplo abaixo mostra como inicializar a biblioteca em uma aplicação C:
+\begin{lstlisting}
+#include <stdio.h>
+#include <graphics.h>
+
+int main(void) {
+    inicializarBiblioteca();
+    
+    return 0;
+}
+\end{lstlisting}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[scale=0.7]{images/exemplo_initWindow.JPG}
+  % \includegraphics[width=0.5\textwidth]{gull}
+  \caption{Exemplo inicialização da biblioteca}
+  \label{fig:exemplo_initWindow}
+\end{figure}
+
+\subsubsection{Limpando a tela}
+A biblioteca descrita neste trabalho permite que a janela seja limpa, removendo assim todas as formas e reiniciando a janela para seu estado inicial.
+
+A função que limpa a janela tem a seguinte assinatura:
+
+\begin{lstlisting}
+void limparTela();
+\end{lstlisting}
+
+O exemplo abaixo mostra como limpar a janela em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    retangulo(0, 0, 200, 100);
+    limparTela();
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Desfazer último desenho}
+Em uma aplicação é comum se arrepender de sua última ação e portanto, desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um desenho é removido da tela.
+
+A função que desfaz o último desenho tem a seguinte assinatura:
+
+\begin{lstlisting}
+void desfazerUltimaForma();
+\end{lstlisting}
+
+O exemplo abaixo mostra como desfazer o último desenho em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    retangulo(0, 0, 200, 100);
+    
+    definirTamanho(20);
+    ponto(50, 50);
+    
+    desfazerUltimaForma();
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Refazer o último desenho}
+Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho, você pode se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto a última forma removida será a primeira forma restaurada. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja feito um desenho após as opções de desfazer o último desenho, a pilha de ações será descartada.
+
+A função que refaz o último desenho tem a seguinte assinatura:
+
+\begin{lstlisting}
+void refazerUltimaForma();
+\end{lstlisting}
+
+O exemplo abaixo mostra como refazer o último desenho em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    retangulo(0, 0, 200, 100);
+    
+    definirTamanho(20);
+    ponto(50, 50);
+
+    desfazerUltimaForma();
+    refazerUltimaForma();
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Alterado a cor de uma forma}
+A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a colorização das formas a serem desenhadas.
+
+A função que permite alterar a cor de uma forma tem a seguinte assinatura:
+
+\begin{lstlisting}
+void definirCor(int vermelho, int verde, int azul);
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int vermelho - Um inteiro de 0 a 255 representando a tonalidade de vermelho do padrão RGB.
+    \item int verde - Um inteiro de 0 a 255 representando a tonalidade de verde do padrão RGB.
+    \item int azul - Um inteiro de 0 a 255 representando a tonalidade de azul do padrão RGB.
+\end{itemize}
+
+O exemplo abaixo mostra como alterar a code de uma forma em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirCor(255, 0, 127);
+    retangulo(0, 0, 200, 100);
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Obter a cor da forma}
+Assim como podemos definir a cor de uma forma, também podemos obter sua cor atual. Esta função se faz útil quando, por exemplo, queremos criar uma forma de uma nova cor mas queremos manter a cor antiga porém não é conhecido a cor atual da forma. Como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3.
+
+A função que obtém a cor atual de uma forma tem a seguinte assinatura:
+
+\begin{lstlisting}
+int* obterCor();
+\end{lstlisting}
+
+O exemplo abaixo mostra como obter a cor atual de uma forma em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirCor(255, 0, 127);
+    retangulo(0, 0, 200, 100);
+
+    int* corAtual = obterCor();
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Definindo o tamanho de uma forma}
+Algumas formas podem ter seu tamanho alterado. Atualmente apenas a forma \textit{linha(int posX, int posY)} pode ter seu tamanho alterado. Para que surta efeito, \textit{definirTamanho(int tamanho)} deve ser invocada anteriormente a função de desenhar a forma. Após chamado o método de definir o tamanho de uma forma, todas as formas desenhadas após a chamada serão desenhadas com o tamanho definido.
+
+A função que define o tamanho de uma forma tem a seguinte assinatura:
+
+\begin{lstlisting}
+void definirTamanho(int tamanho);
+\end{lstlisting}
+
+O exemplo abaixo mostra como definir o tamanho de uma forma em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirTamanho(50);
+    ponto(100, 100);
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Obtendo o tamanho de uma forma}
+Da mesma forma que é possível definir o tamanho de uma forma, esta API permite que se obtenha o valor atual do tamanho de desenho de formas. Esta função é útil quando você quer desenhar uma forma em novo tamanho porém deseja retornar ao tamanho anterior porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
+
+A função que como obter o tamanho atual de uma forma tem a seguinte assinatura:
+
+\begin{lstlisting}
+int obterTamanho();
+\end{lstlisting}
+
+O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    definirTamanho(50);
+    ponto(100, 100);
+
+    int tamanhoAtual = obterTamanho();
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{Desenhando um polígono}
+Um polígono é uma figura composta por 3 ou mais vértices. A biblioteca permite desenhar polígonos de forma forma livre.
+
+A função que desenha um polígono tem a seguinte assinatura:
+
+\begin{lstlisting}
+void poligono(int numeroDeVertices, GLfloat* posicoes);
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int numeroDeVertices - Número de vértices que o seu polígono possui
+    \item GLfloat* posicoes - Um array contendo as posições de cada vértice.
+\end{itemize}
+
+O exemplo abaixo mostra como desenhas um polígono em uma aplicação C:
+
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h>
+#include "headers/graphics.h"
+
+int main() {
+    inicializarBiblioteca();
+
+    GLfloat vertices[] = {
+        320, 100,
+        400, 300,
+        800, 50,
+        520, 10,
+        340, 40
+    };
+    poligono(5, vertices);
+
+    getchar();
+    return 0;
+}
+\end{lstlisting}
+
+\subsubsection{void ponto(int posX, int posY)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void retangulo(int posX, int posY, int width, int height)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void quadrado(int posX, int posY, int tamanhoLado)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void poligonoRegular(int posX, int posY, int raio, int faces)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void circulo(int posX, int posY, int raio)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void pentagono(int posX, int posY, int raio)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void hexagono(int posX, int posY, int raio)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void decagono(int posX, int posY, int raio)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void dodecagono(int posX, int posY, int raio)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+\subsubsection{void linha(int posX1, int posY1, int posX2, int posY2)}
+[DESCRICAO]
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int p1 - Parâmetro 1
+    \item int p2 - Parâmetro 2
+    \item const char* p3 - Parâmetro 3
+\end{itemize}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+
+\subsubsection{void pausar(int time)}
+A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+
+\begin{lstlisting}
+[ASSINATURA_FUNCAO]
+\end{lstlisting}
+
+O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+
+\begin{lstlisting}
+[CODIGO_EXEMPLO_FUNCAO]
+\end{lstlisting}
+
+
+
+\subsection{Exemplos de Uso}
+
+\subsection{Documentação}
+
+\section{Estado Atual do Desenvolvimento}
+Estado Atual
+
+\section{Trabalhos Futuros}
+Trabalhos Futuros
+
+\chapter{Considerações Finais}
+
+\section{Dificuldades Encontradas}
+
+\begin{itemize}
+  
+  \item Compilar multi plataforma
+  \item Instalação da biblioteca GLFW
+  \item Corrupção da memória HEAP no Windows
+  \item Instalação da biblioteca no Code::Blocks
+  
+\end{itemize}
+
+\section{Conclusão}
+Conclusão
+
+%\chapter{Desenvolvimento}
+%Um ou mais capítulos (por exemplo um para testes)
+
+% ---
+% Conclusão
+% ---
+\iffalse
+\chapter*[Conclusão]{Conclusão}
+\addcontentsline{toc}{chapter}{Conclusão}
+%TCC:
+Descrever aqui as conclusões e/ou considerações finais.
+Destacar as contribuições originais do trabalho.
+Propor trabalhos futuros em continuidade ao trabalho realizado.
+\fi
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+%\nocite{babel}
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{referencias}
+
+
+%% ----------------------------------------------------------
+%% Apêndices TCC: só mantenha se for pertinente.
+%% ----------------------------------------------------------
+
+\iffalse
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+% ----------------------------------------------------------
+\chapter{Quisque libero justo}
+% ----------------------------------------------------------
+
+\lipsum[50]
+
+% ----------------------------------------------------------
+\chapter{Coisas que fiz e que achei interessante mas não tanto para entrar no corpo do texto}
+% ----------------------------------------------------------
+\lipsum[55-57]
+\end{apendicesenv}
+\fi
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos %TCC: so mantenha se pertinente.
+% ----------------------------------------------------------
+
+\iffalse
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+% ---
+\chapter{Eu sempre quis aprender latim}
+% ---
+\lipsum[30]
+
+% ---
+\chapter{Coisas que eu não fiz mas que achei interessante o suficiente para colocar aqui}
+% ---
+
+\lipsum[31]
+
+% ---
+\chapter{Fusce facilisis lacinia dui}
+% ---
+
+\lipsum[32]
+\end{anexosenv}
+\fi
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+
+\printindex
+
+
+
+\end{document}
