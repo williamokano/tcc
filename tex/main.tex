@@ -162,6 +162,7 @@ brazil]{facom-ufu-abntex2}
   \item[GLFW] \textit{OpenGL FrameWork}
   \item[API] \textit{Application Programming Interface}
   \item[RGB] \textit{Red, Green and Blue}
+  \item[FPS] \textit{Frame por segundo}
   %\item[456] Isto é um número
   %\item[123] Isto é outro número
   %\item[Zézão] este é o meu nome
@@ -242,6 +243,8 @@ O \citeonline{OpenGL:About} é uma biblioteca gráfica para desenvolvimento de a
 
 A biblioteca gráfica \citeonline{OpenGL:About} foi escolhida em detrimento de outras por ser mais simples, porém versátil, e suas já citadas qualidades: performance, largamente utilizada, interoperável entre plataformas e por ter fácil integração com a linguagem de programação C. Outros fatores que influenciaram a sua escolha foi a vasta documentação, como websites, livros e cursos online. Alguns sites que promovem a documentação de utilização do OpenGL são o próprio site do OpenGL \hyperref[https://opengl.org/]{https://opengl.org/}, o website \citeonline{LearnOpenGL:Site} e o livro OpenGL Programming Guide: The Official Guide to Learning OpenGL, Version 1.2, do autor \citeonline{Woo:1999:OPG:554539}.
 
+A forma que o OpenGL trabalha para renderizar as formas na tela é baseado em uma máquina de estados. Cada item renderizado pelo OpenGL fica num buffer secundário e só é renderizado quando explicitamente solicitado. Ao renderizar o buffer ele então realizar a troca do buffer primário pelo secundário, exibindo assim apenas o quadro renderizado por completo, evitando assim o \textit{tearing}. \textit{Tearing} é o efeito que ocorre quando parte do frame é renderizado utilizando informações antiga, exibindo assim parte do quadro com uma imagem e outra parte com os dados novos.
+
 \subsection{GLFW}
 Segundo o site da \citeonline{GLFW:About}, GLFW é uma biblioteca gráfica open-source, multi-plataforma para desenvolvimento desktop utilizando OpenGL, OpenGL ES e Vulkan. Ela é responsável por criar janelas de forma unificada entre diferentes sistemas operacionais, contextos OpenGL e receber entradas de dados e eventos.
 
@@ -255,23 +258,32 @@ A biblioteca \citeonline{Tinycthread:About} é uma biblioteca de código aberto 
 A biblioteca TinyCThread foi escolhida pois, apesar do padrão C11 implementar suporte nativo para criação de threads da mesma forma entre diferentes sistemas operacionais, os compiladores mais antigos, e que ainda não implementam esse padrão, possuem formas distintas de criar e gerenciar as threads. Com o uso da biblioteca essa criação fica padronizada sendo possível compilar o mesmo código tanto para Linux quanto para Windows. A biblioteca também provê funcionalidades para gerenciamento de concorrência, como locks exclusivos, por exemplo o mutex, dentre outros.
 
 \section{Atividades Desenvolvidas}
-Os artefatos gerados como resultado deste trabalho são os 3 a seguir:
+Os artefatos gerados como resultado deste trabalho são os seguintes:
 
 \begin{itemize}
-    \item A criação de uma biblioteca gráfica simplifica utilizando OpenGL e o framework GLFW
+    \item A criação de uma biblioteca gráfica simplificada utilizando OpenGL e o framework GLFW
     \item A criação de uma aplicação de demonstração de utilização da biblioteca
     \item A documentação e manual de utilização
 \end{itemize}
 
 \subsection{A biblioteca gráfica}
-\textbf{Falar sobre a biblioteca TBD}
+A biblioteca gráfica descrita neste trabalho tem por intenção simplificar o uso da biblioteca OpenGL. Um dos meios utilizados para isso é a simplificação do gerenciamento da janela. Em uma aplicação OpenGL o utilizador é responsável por gerenciar tanto a janela quanto o contexto, e decidir como será realizada a renderização das formas dentro da janela. Nesta biblioteca, apesar de ainda possuir uma janela, ela é oculta e gerenciada pela própria biblioteca. Tal abordagem reduz a flexibilização oferecida pela biblioteca OpenGL, entretanto, em troca disso, obtemos uma API muito mais enxuta e simples de ser utilizada.
 
-A intenção dessa biblioteca gráfica é ter uma janela que não deve ser manipulada diretamente pelo usuário final. Para tal, é iniciado uma thread de background apenas para gestão dessa janelas. Todos os itens gerados são automaticamente atachados a esta janelas por debaixo dos panos. \textbf{Escrever isso de forma formal}.
+A forma que a biblioteca gráfica lida com a janela é, ao inicializar a biblioteca, é iniciada a janela e uma thread que será responsável por desenhar no contexto OpenGL usando sempre regras pré-definidas. Esta thread então possui um laço de repetição no qual é lido todo o buffer de formas contido na memória e então, renderiza as formas de acordo com cada configuração de forma. A arquitetura proposta para a biblioteca pode ser vista na figura ~\ref{fig:arquitetura_proposta}.
+
+O buffer de formas em si também não pode ser gerenciado pelo usuário diretamente, entretanto as funções expostas pela biblioteca gerenciam diretamente o buffer, minimizando assim a possibilidade de erros na hora de renderizar as formas. Cada função que desenha uma forma adiciona no buffer de formas o código correspondente ao que deve ser desenhado via parâmetros e então a thread oculta realiza o lock exclusivo do buffer para que no ato do desenho ele não seja alterado e então, item a item, desenha todos as formas na tela e então libera o lock exclusivo, permitindo assim a manipulação das formas. Este loop roda em torno de 60 vezes por segundo, podendo ser menor dependendo do hardware gráfico da máquina. Por desenhas formas muito básicas, espera-se que a média mantenha-se perto dos 60 FPS.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.7]{images/basic_architecture.png}
+  \caption{Arquitetura proposta}
+  \label{fig:arquitetura_proposta}
+\end{figure}
 
 A biblioteca gráfica dispõe da API abaixo:
 
 \begin{itemize}
-    \item void inicializarBiblioteca()
+    \item void inicializarBiblioteca(int largura, int altura)
     \item void limparTela()
     
     \item void desfazerUltimaForma()
@@ -300,13 +312,20 @@ A biblioteca gráfica dispõe da API abaixo:
 \end{itemize}
 
 \subsubsection{Iniciando a biblioteca}
-Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário ter que inicializar a biblioteca.
+Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário inicializar a biblioteca manualmente, para disparar a thread secundária, responsável pela renderização das formas, e a criação da janela onde serão renderizadas as formas.
 
 A função que inicializa a biblioteca tem a seguinte assinatura:
 
 \begin{lstlisting}
-void inicializarBiblioteca();
+void inicializarBiblioteca(int largura, int altura);
 \end{lstlisting}
+
+Os parâmetros de entrada são:
+
+\begin{itemize}
+    \item int largura - A largura do tamanho da janela a ser criada.
+    \item int altura - A altura do tamanho da janela a ser criada.
+\end{itemize}
 
 O exemplo abaixo mostra como inicializar a biblioteca em uma aplicação C:
 \begin{lstlisting}
@@ -314,7 +333,7 @@ O exemplo abaixo mostra como inicializar a biblioteca em uma aplicação C:
 #include <graphics.h>
 
 int main(void) {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
     
     return 0;
 }
@@ -343,7 +362,7 @@ O exemplo abaixo mostra como limpar a janela em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     retangulo(0, 0, 200, 100);
     limparTela();
@@ -369,7 +388,7 @@ O exemplo abaixo mostra como desfazer o último desenho em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     retangulo(0, 0, 200, 100);
     
@@ -399,7 +418,7 @@ O exemplo abaixo mostra como refazer o último desenho em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     retangulo(0, 0, 200, 100);
     
@@ -438,7 +457,7 @@ O exemplo abaixo mostra como alterar a code de uma forma em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirCor(255, 0, 127);
     retangulo(0, 0, 200, 100);
@@ -464,7 +483,7 @@ O exemplo abaixo mostra como obter a cor atual de uma forma em uma aplicação C
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirCor(255, 0, 127);
     retangulo(0, 0, 200, 100);
@@ -492,7 +511,7 @@ O exemplo abaixo mostra como definir o tamanho de uma forma em uma aplicação C
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirTamanho(50);
     ponto(100, 100);
@@ -518,7 +537,7 @@ O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicaç�
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirTamanho(50);
     ponto(100, 100);
@@ -554,7 +573,7 @@ O exemplo abaixo mostra como desenhas um polígono em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     GLfloat vertices[] = {
         320, 100,
@@ -594,7 +613,7 @@ O exemplo abaixo mostra como desenhar um ponto com tamanho 20 em uma aplicação
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirTamanho(20);
     poligono(10, 10);
@@ -634,7 +653,7 @@ O exemplo abaixo mostra como desenhar um triângulo em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     triangulo(
         100, 100,
@@ -673,7 +692,7 @@ O exemplo abaixo mostra como criar um triângulo em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     retangulo(100, 100, 200, 300);
 
@@ -707,7 +726,7 @@ O exemplo abaixo mostra como desenhar um quadrado verde em uma aplicação C:
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirCor(0, 255, 0);
     quadrado(100, 100, 200);
@@ -743,7 +762,7 @@ O exemplo abaixo mostra como desenhar um polígono regular azul em uma aplicaç�
 #include "headers/graphics.h"
 
 int main() {
-    inicializarBiblioteca();
+    inicializarBiblioteca(800, 600);
 
     definirCor(0, 0, 255);
     poligonoRegular(300, 300, 100, 7);

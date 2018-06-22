@@ -6,7 +6,7 @@
 #include "shape.h"
 
 // Screen stuff
-void inicializarBiblioteca();
+void inicializarBiblioteca(int largura, int altura);
 int bibliotecaInicializada();
 void limparTela();
 void desfazerUltimaForma();

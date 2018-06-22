@@ -4,8 +4,6 @@
 #include "../headers/graphics.h"
 
 #define SHAPES_MAX_SIZE 100
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
 #define TIPO_FORMA_2D 2
 #define VERTICES(QTD) QTD
 
@@ -31,6 +29,8 @@ mtx_t shapesMutex;
 mtx_t globalsMutex;
 
 GLFWwindow* hiddenWindow = NULL;
+int larguraJanela = 800;
+int alturaJanela = 600;
 
 Shape* shapes = NULL;
 int numOfShapes = 0;
@@ -87,7 +87,10 @@ Shape createShapeHelper(
         colorHelper(numeroDeVertices));
 }
 
-void inicializarBiblioteca() {
+void inicializarBiblioteca(int largura, int altura) {
+    larguraJanela = largura;
+    alturaJanela = altura;
+
     if (thrd_create(&hiddenThread, hiddenMainLoop, (void*)0) != thrd_success) {
         fprintf(stderr, "Falha ao inicializar hiddenMainLoop\n");
         exit(-1);
@@ -97,8 +100,6 @@ void inicializarBiblioteca() {
         fprintf(stdout, "Window reported initalized\n");
     }
     #endif
-
-    definirCor(255, 255, 255); // RGB(255, 255, 255) = Branco
 
     if (mtx_init(&shapesMutex, mtx_plain) != thrd_success) {
         fprintf(stderr, "Falha ao criar mutex de formas\n");
@@ -330,7 +331,7 @@ int hiddenMainLoop(void* args) {
     fprintf(stdout, "Attempting to create window\n");
     #endif
 
-    hiddenWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Window", NULL, NULL);
+    hiddenWindow = glfwCreateWindow(larguraJanela, alturaJanela, "Window", NULL, NULL);
     if (!hiddenWindow) {
         fprintf(stderr, "Failed to create GLFW window\n");
         glfwTerminate();
@@ -346,10 +347,10 @@ int hiddenMainLoop(void* args) {
     glfwMakeContextCurrent(hiddenWindow);
     glfwSetKeyCallback(hiddenWindow, controls);
 
-    glViewport(0.0f, 0.0f, WINDOW_WIDTH, WINDOW_HEIGHT);
+    glViewport(0.0f, 0.0f, larguraJanela, alturaJanela);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, WINDOW_WIDTH, 0, WINDOW_HEIGHT, 0, 1);
+    glOrtho(0, larguraJanela, 0, alturaJanela, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glfwSwapInterval(1); // Lock FPS at 60
