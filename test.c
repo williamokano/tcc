@@ -10,7 +10,7 @@ void showMenu();
 
 int main() {
     srand(time(NULL));
-    inicializarBiblioteca();
+    inicializarBiblioteca(1366, 768);
 
     definirCor(255, 0, 255);
     retangulo(0, 0, 200, 100);
