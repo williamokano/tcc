@@ -295,8 +295,8 @@ A biblioteca gráfica dispõe da API abaixo:
     \item void definirCor(int vermelho, int verde, int azul);
     \item int* obterCor();
     
-    \item void definirTamanho(int tamanho);
-    \item int obterTamanho();
+    \item void definirEspessura(int espessura);
+    \item int obterEspessura();
 
     \item void poligono(int numeroDeVertices, GLfloat* posicoes);
     \item void ponto(int posX, int posY);
@@ -378,33 +378,12 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Desfazer último desenho}
-Em uma aplicação é comum se arrepender de sua última ação e portanto, desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um desenho é removido da tela.
+Em uma aplicação é comum se arrepender de sua última ação e portanto, querer desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um desenho é removido da tela.
 
 A função que desfaz o último desenho tem o seguinte protótipo:
 
 \begin{lstlisting}
 void desfazerUltimaForma();
-\end{lstlisting}
-
-O exemplo abaixo mostra como desfazer o último desenho em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    retangulo(0, 0, 200, 100);
-    
-    definirTamanho(20);
-    ponto(50, 50);
-    
-    desfazerUltimaForma();
-
-    getchar();
-    return 0;
-}
 \end{lstlisting}
 
 \subsubsection{Refazer o último desenho}
@@ -416,30 +395,8 @@ A função que refaz o último desenho tem o seguinte protótipo:
 void refazerUltimaForma();
 \end{lstlisting}
 
-O exemplo abaixo mostra como refazer o último desenho em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    retangulo(0, 0, 200, 100);
-    
-    definirTamanho(20);
-    ponto(50, 50);
-
-    desfazerUltimaForma();
-    refazerUltimaForma();
-
-    getchar();
-    return 0;
-}
-\end{lstlisting}
-
-\subsubsection{Alterado a cor de uma forma}
-A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a colorização das formas a serem desenhadas.
+\subsubsection{Alterado a cor de preenchimento de um objeto}
+A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a definição de uma cor de preenchimento para o objeto a ser desenhado.
 
 A função que permite alterar a cor de uma forma tem o seguinte protótipo:
 
@@ -450,30 +407,13 @@ void definirCor(int vermelho, int verde, int azul);
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int vermelho - Um inteiro de 0 a 255 representando a tonalidade de vermelho do padrão RGB.
-    \item int verde - Um inteiro de 0 a 255 representando a tonalidade de verde do padrão RGB.
-    \item int azul - Um inteiro de 0 a 255 representando a tonalidade de azul do padrão RGB.
+    \item int vermelho - um inteiro de 0 a 255 representando a tonalidade de vermelho do padrão RGB.
+    \item int verde - um inteiro de 0 a 255 representando a tonalidade de verde do padrão RGB.
+    \item int azul - um inteiro de 0 a 255 representando a tonalidade de azul do padrão RGB.
 \end{itemize}
 
-O exemplo abaixo mostra como alterar a code de uma forma em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    definirCor(255, 0, 127);
-    retangulo(0, 0, 200, 100);
-
-    getchar();
-    return 0;
-}
-\end{lstlisting}
-
-\subsubsection{Obter a cor da forma}
-Assim como podemos definir a cor de uma forma, também podemos obter sua cor atual. Esta função se faz útil quando, por exemplo, queremos criar uma forma de uma nova cor mas queremos manter a cor antiga porém não é conhecido a cor atual da forma. Como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3.
+\subsubsection{Obter a cor de preenchimento do objeto}
+Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar uma forma de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor atual da forma. Como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3.
 
 A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 
@@ -500,13 +440,13 @@ int main() {
 }
 \end{lstlisting}
 
-\subsubsection{Definindo o tamanho de uma forma}
-Algumas formas podem ter seu tamanho alterado. Atualmente apenas a forma \textit{linha(int posX, int posY)} pode ter seu tamanho alterado. Para que surta efeito, \textit{definirTamanho(int tamanho)} deve ser invocada anteriormente a função de desenhar a forma. Após chamado o método de definir o tamanho de uma forma, todas as formas desenhadas após a chamada serão desenhadas com o tamanho definido.
+\subsubsection{Definindo a espessura de um objeto}
+Algumas formas podem ter seu tamanho alterado. Para que tenha efeito, \textit{definirTamanho(int tamanho)} deve ser invocada anteriormente a uma função de desenho de forma. Após chamado o método de definir o tamanho de uma forma, todas as formas desenhadas após a chamada serão desenhadas com o tamanho definido. Atualmente apenas a forma \textit{linha(int posX, int posY)} pode ter sua espessura alterada.
 
 A função que define o tamanho de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
-void definirTamanho(int tamanho);
+void definirEspessura(int espessura);
 \end{lstlisting}
 
 O exemplo abaixo mostra como definir o tamanho de uma forma em uma aplicação C:
