@@ -533,8 +533,6 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Desenhando um ponto}
-A biblioteca permite que seja desenhado um ponto. O ponto pode ter seu tamanho alterado mediante da função \textit{void definirTamanho(int tamanho);} e por padrão possui o tamanho de 1 pixel.
-
 A função que desenha um pixel tem o seguinte protótipo:
 
 \begin{lstlisting}
@@ -544,27 +542,9 @@ void ponto(int posX, int posY);
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int posX - A posição X onde o ponto será desenhado.
-    \item int posY - A posição Y onde o ponto será desenhado.
+    \item int posX - a posição X do ponto.
+    \item int posY - a posição Y do ponto.
 \end{itemize}
-
-O exemplo abaixo mostra como desenhar um ponto com tamanho 20 em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <stdlib.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    definirTamanho(20);
-    poligono(10, 10);
-
-    getchar();
-    return 0;
-}
-\end{lstlisting}
 
 \subsubsection{Desenhando um triângulo}
 Em uma biblioteca gráfica, triângulos são uma das formas mais básicas e utilizadas, pois todos os polígonos convexo pode ser decomposto em vários triângulos.
