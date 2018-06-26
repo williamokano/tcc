@@ -466,13 +466,13 @@ int main() {
 }
 \end{lstlisting}
 
-\subsubsection{Obtendo o tamanho de uma forma}
-Da mesma forma que é possível definir o tamanho de uma forma, esta API permite que se obtenha o valor atual do tamanho de desenho de formas. Esta função é útil quando você quer desenhar uma forma em novo tamanho porém deseja retornar ao tamanho anterior porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
+\subsubsection{Obtendo a espessura de um objeto}
+Da mesma forma que é possível definir a espessura de um objeto, esta API permite que se obtenha o valor atual do tamanho de desenho de formas. Esta função é útil quando você quer desenhar uma forma em novo tamanho, porém deseja retornar ao tamanho anterior porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
 
 A função que como obter o tamanho atual de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
-int obterTamanho();
+int obterEspessura();
 \end{lstlisting}
 
 O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicação C:
@@ -484,10 +484,10 @@ O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicaç�
 int main() {
     inicializarBiblioteca(800, 600);
 
-    definirTamanho(50);
+    definirEspessura(50);
     ponto(100, 100);
 
-    int tamanhoAtual = obterTamanho();
+    int espessuraAtual = obterEspessura();
 
     getchar();
     return 0;
@@ -495,9 +495,7 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Desenhando um polígono}
-Um polígono é uma figura composta por 3 ou mais vértices. A biblioteca permite desenhar polígonos de forma forma livre.
-
-A função que desenha um polígono tem o seguinte protótipo:
+Um polígono é uma figura composta por 3 ou mais vértices. Um polígono pode ser desenhado de forma livre e a função que desenha um polígono tem o seguinte protótipo:
 
 \begin{lstlisting}
 void poligono(int numeroDeVertices, GLfloat* posicoes);
@@ -506,8 +504,8 @@ void poligono(int numeroDeVertices, GLfloat* posicoes);
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int numeroDeVertices - Número de vértices que o seu polígono possui
-    \item GLfloat* posicoes - Um array contendo as posições de cada vértice.
+    \item int numeroDeVertices - número de vértices que o seu polígono possui
+    \item GLfloat* posicoes - um array contendo as posições de cada vértice. O array deve possuir um tamanho par definido pela fórmula \(tamanho = 2 \times numeroDeVertices \), pois as posições pares representam as posições X dos vértices e as posíções ímpares representam as posições Y, par a par. Os pares devem ser definidos sequencialmente. Para desenhar um triângulo, seria então necessário um array de 6 posições. Utilizando um triângulo como exemplo, vamos utilizar os pontos (0, 0), (200, 0) e (100, 200). O array de posições então seria \textit{GLfloat posicoes = {0, 0, 200, 0, 100, 200};}.
 \end{itemize}
 
 O exemplo abaixo mostra como desenhas um polígono em uma aplicação C:
@@ -520,14 +518,14 @@ O exemplo abaixo mostra como desenhas um polígono em uma aplicação C:
 int main() {
     inicializarBiblioteca(800, 600);
 
-    GLfloat vertices[] = {
+    GLfloat posicoes[] = {
         320, 100,
         400, 300,
         800, 50,
         520, 10,
         340, 40
     };
-    poligono(5, vertices);
+    poligono(5, posicoes);
 
     getchar();
     return 0;
