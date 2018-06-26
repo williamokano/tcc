@@ -207,6 +207,8 @@ brazil]{facom-ufu-abntex2}
 
 Introdução
 
+TODO ***\textbf{Citar o por que da lib enxuta e simples. Foco em cursos introdutórios}***
+
 \section{Objetivos}
 Objetivos
 
@@ -268,48 +270,48 @@ Os artefatos gerados como resultado deste trabalho são os seguintes:
 \end{itemize}
 
 \subsection{A biblioteca gráfica}
-A biblioteca gráfica descrita neste trabalho tem por intenção simplificar o uso da biblioteca OpenGL. Um dos meios utilizados para isso é a simplificação do gerenciamento da janela. Em uma aplicação OpenGL o utilizador é responsável por gerenciar tanto a janela quanto o contexto, e decidir como será realizada a renderização das formas dentro da janela. Nesta biblioteca, apesar de ainda possuir uma janela, ela é oculta e gerenciada pela própria biblioteca. Tal abordagem reduz a flexibilização oferecida pela biblioteca OpenGL, entretanto, em troca disso, obtemos uma API muito mais enxuta e simples de ser utilizada.
+A biblioteca gráfica descrita neste trabalho tem por intenção simplificar o uso da biblioteca OpenGL. Um dos meios utilizados para isso é a simplificação do gerenciamento da janela. Em uma aplicação OpenGL o utilizador é responsável por gerenciar tanto a janela quanto o contexto, e decidir como será realizada a renderização das formas dentro da janela. Nesta biblioteca, apesar de ainda possuir uma janela, ela é oculta e gerenciada pela própria biblioteca. Tal abordagem reduz a flexibilização oferecida pela biblioteca OpenGL, entretanto, em troca disso, obtemos uma API bastante simplificada.
 
-A forma que a biblioteca gráfica lida com a janela é, ao inicializar a biblioteca, é iniciada a janela e uma thread que será responsável por desenhar no contexto OpenGL usando sempre regras pré-definidas. Esta thread então possui um laço de repetição no qual é lido todo o buffer de formas contido na memória e então, renderiza as formas de acordo com cada configuração de forma. A arquitetura proposta para a biblioteca pode ser vista na figura ~\ref{fig:arquitetura_proposta}.
+Para o correto funcionamento da biblioteca é necessário criar uma janela para realizar a renderização das formas; este é o padrão de funcionamento do OpenGL. Visando a simplicidade, todo o código de criação de janelas é abstraído em uma única função. Esta função realiza várias ações, como criar a janela do OpenGL, inicializar o buffer de objetos a serem renderizados, inicializar os \textit{locks} de exclusão mútua mutex para gerenciamento de concorrência no buffer de objetos e a inicialização da \textit{thread} que será responsável por toda a abstração de renderização do buffer de objetos na janela. Esta thread então possui um laço de repetição no qual é lido todo o buffer de objetos contido na memória e então, renderiza as formas de acordo com cada configuração de objeto. A arquitetura proposta para a biblioteca pode ser vista na Figura ~\ref{fig:arquitetura_proposta}.
 
-O buffer de formas em si também não pode ser gerenciado pelo usuário diretamente, entretanto as funções expostas pela biblioteca gerenciam diretamente o buffer, minimizando assim a possibilidade de erros na hora de renderizar as formas. Cada função que desenha uma forma adiciona no buffer de formas o código correspondente ao que deve ser desenhado via parâmetros e então a thread oculta realiza o lock exclusivo do buffer para que no ato do desenho ele não seja alterado e então, item a item, desenha todos as formas na tela e então libera o lock exclusivo, permitindo assim a manipulação das formas. Este loop roda em torno de 60 vezes por segundo, podendo ser menor dependendo do hardware gráfico da máquina. Por desenhas formas muito básicas, espera-se que a média mantenha-se perto dos 60 FPS.
+O buffer de objetos em si também não pode ser gerenciado pelo usuário diretamente. As funções expostas pela biblioteca são responsáveis por gerenciar diretamente o buffer, minimizando assim a possibilidade de erros na hora de renderizar os objetos. Cada função que desenha uma forma adiciona no buffer de objetos o código correspondente ao que deve ser desenhado. Na sequência, a thread oculta faz o lock exclusivo do buffer para que no ato do desenho ele não seja alterado e então, item a item, desenha todos os objetos na tela para somente então liberar o lock exclusivo, permitindo assim a manipulação das objetos. Este loop roda em torno de 60 vezes por segundo, podendo o número de execuções ser menor dependendo do hardware gráfico da máquina. Por desenhar objetos muito básicos, espera-se que a média mantenha-se perto dos 60 FPS.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[scale=0.7]{images/basic_architecture.png}
-  \caption{Arquitetura proposta}
+  \caption{Arquitetura proposta para a biblioteca}
   \label{fig:arquitetura_proposta}
 \end{figure}
 
 A biblioteca gráfica dispõe da API abaixo:
 
 \begin{itemize}
-    \item void inicializarBiblioteca(int largura, int altura)
-    \item void limparTela()
+    \item void inicializarBiblioteca(int largura, int altura);
+    \item void limparTela();
     
-    \item void desfazerUltimaForma()
-    \item void refazerUltimaForma()
+    \item void desfazerUltimaForma();
+    \item void refazerUltimaForma();
     
-    \item void definirCor(int vermelho, int verde, int azul)
-    \item int* obterCor()
+    \item void definirCor(int vermelho, int verde, int azul);
+    \item int* obterCor();
     
-    \item void definirTamanho(int tamanho)
-    \item int obterTamanho()
+    \item void definirTamanho(int tamanho);
+    \item int obterTamanho();
 
-    \item void poligono(int numeroDeVertices, GLfloat* posicoes)
-    \item void ponto(int posX, int posY)
-    \item void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3)
-    \item void retangulo(int posX, int posY, int largura, int altura)
-    \item void quadrado(int posX, int posY, int tamanhoLado)
-    \item void poligonoRegular(int posX, int posY, int raio, int faces)
-    \item void circulo(int posX, int posY, int raio)
-    \item void pentagono(int posX, int posY, int raio)
-    \item void hexagono(int posX, int posY, int raio)
-    \item void decagono(int posX, int posY, int raio)
-    \item void dodecagono(int posX, int posY, int raio)
-    \item void linha(int posX1, int posY1, int posX2, int posY2)
+    \item void poligono(int numeroDeVertices, GLfloat* posicoes);
+    \item void ponto(int posX, int posY);
+    \item void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3);
+    \item void retangulo(int posX, int posY, int largura, int altura);
+    \item void quadrado(int posX, int posY, int tamanhoLado);
+    \item void poligonoRegular(int posX, int posY, int raio, int faces);
+    \item void circulo(int posX, int posY, int raio);
+    \item void pentagono(int posX, int posY, int raio);
+    \item void hexagono(int posX, int posY, int raio);
+    \item void decagono(int posX, int posY, int raio);
+    \item void dodecagono(int posX, int posY, int raio);
+    \item void linha(int posX1, int posY1, int posX2, int posY2);
     
-    \item void pausar(int time)
+    \item void pausar(int time);
 \end{itemize}
 
 \subsubsection{Iniciando a biblioteca}
