@@ -314,10 +314,12 @@ A biblioteca gráfica dispõe da API abaixo:
     \item void pausar(int time);
 \end{itemize}
 
+As seções seguintes descrevem cada item da API bem como seus protótipos e o significado de cada parâmetro de entrada.
+
 \subsubsection{Iniciando a biblioteca}
 Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário inicializar a biblioteca manualmente, para disparar a thread secundária, responsável pela renderização das formas, e a criação da janela onde serão renderizadas as formas.
 
-A função que inicializa a biblioteca tem a seguinte assinatura:
+A função que inicializa a biblioteca tem o seguinte protótipo:
 
 \begin{lstlisting}
 void inicializarBiblioteca(int largura, int altura);
@@ -352,7 +354,7 @@ int main(void) {
 \subsubsection{Limpando a tela}
 A biblioteca descrita neste trabalho permite que a janela seja limpa, removendo assim todas as formas e reiniciando a janela para seu estado inicial.
 
-A função que limpa a janela tem a seguinte assinatura:
+A função que limpa a janela tem o seguinte protótipo:
 
 \begin{lstlisting}
 void limparTela();
@@ -378,7 +380,7 @@ int main() {
 \subsubsection{Desfazer último desenho}
 Em uma aplicação é comum se arrepender de sua última ação e portanto, desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um desenho é removido da tela.
 
-A função que desfaz o último desenho tem a seguinte assinatura:
+A função que desfaz o último desenho tem o seguinte protótipo:
 
 \begin{lstlisting}
 void desfazerUltimaForma();
@@ -408,7 +410,7 @@ int main() {
 \subsubsection{Refazer o último desenho}
 Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho, você pode se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto a última forma removida será a primeira forma restaurada. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja feito um desenho após as opções de desfazer o último desenho, a pilha de ações será descartada.
 
-A função que refaz o último desenho tem a seguinte assinatura:
+A função que refaz o último desenho tem o seguinte protótipo:
 
 \begin{lstlisting}
 void refazerUltimaForma();
@@ -439,7 +441,7 @@ int main() {
 \subsubsection{Alterado a cor de uma forma}
 A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a colorização das formas a serem desenhadas.
 
-A função que permite alterar a cor de uma forma tem a seguinte assinatura:
+A função que permite alterar a cor de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
 void definirCor(int vermelho, int verde, int azul);
@@ -473,7 +475,7 @@ int main() {
 \subsubsection{Obter a cor da forma}
 Assim como podemos definir a cor de uma forma, também podemos obter sua cor atual. Esta função se faz útil quando, por exemplo, queremos criar uma forma de uma nova cor mas queremos manter a cor antiga porém não é conhecido a cor atual da forma. Como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3.
 
-A função que obtém a cor atual de uma forma tem a seguinte assinatura:
+A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
 int* obterCor();
@@ -501,7 +503,7 @@ int main() {
 \subsubsection{Definindo o tamanho de uma forma}
 Algumas formas podem ter seu tamanho alterado. Atualmente apenas a forma \textit{linha(int posX, int posY)} pode ter seu tamanho alterado. Para que surta efeito, \textit{definirTamanho(int tamanho)} deve ser invocada anteriormente a função de desenhar a forma. Após chamado o método de definir o tamanho de uma forma, todas as formas desenhadas após a chamada serão desenhadas com o tamanho definido.
 
-A função que define o tamanho de uma forma tem a seguinte assinatura:
+A função que define o tamanho de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
 void definirTamanho(int tamanho);
@@ -527,7 +529,7 @@ int main() {
 \subsubsection{Obtendo o tamanho de uma forma}
 Da mesma forma que é possível definir o tamanho de uma forma, esta API permite que se obtenha o valor atual do tamanho de desenho de formas. Esta função é útil quando você quer desenhar uma forma em novo tamanho porém deseja retornar ao tamanho anterior porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
 
-A função que como obter o tamanho atual de uma forma tem a seguinte assinatura:
+A função que como obter o tamanho atual de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
 int obterTamanho();
@@ -555,7 +557,7 @@ int main() {
 \subsubsection{Desenhando um polígono}
 Um polígono é uma figura composta por 3 ou mais vértices. A biblioteca permite desenhar polígonos de forma forma livre.
 
-A função que desenha um polígono tem a seguinte assinatura:
+A função que desenha um polígono tem o seguinte protótipo:
 
 \begin{lstlisting}
 void poligono(int numeroDeVertices, GLfloat* posicoes);
@@ -595,7 +597,7 @@ int main() {
 \subsubsection{Desenhando um ponto}
 A biblioteca permite que seja desenhado um ponto. O ponto pode ter seu tamanho alterado mediante da função \textit{void definirTamanho(int tamanho);} e por padrão possui o tamanho de 1 pixel.
 
-A função que desenha um pixel tem a seguinte assinatura:
+A função que desenha um pixel tem o seguinte protótipo:
 
 \begin{lstlisting}
 void ponto(int posX, int posY);
@@ -629,7 +631,7 @@ int main() {
 \subsubsection{Desenhando um triângulo}
 Em uma biblioteca gráfica, triângulos são uma das formas mais básicas e utilizadas, pois todos os polígonos convexo pode ser decomposto em vários triângulos.
 
-A função que desenha um triângulo tem a seguinte assinatura:
+A função que desenha um triângulo tem o seguinte protótipo:
 
 \begin{lstlisting}
 void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3);
@@ -672,7 +674,7 @@ int main() {
 \subsubsection{Desenhando um retângulo}
 Retângulos são formas que possuem 4 ângulos retos e também são bastante utilizados para desenhos além de ser uma das formas mais básicas.
 
-A função que desenha um retângulo tem a seguinte assinatura:
+A função que desenha um retângulo tem o seguinte protótipo:
 
 \begin{lstlisting}
 void retangulo(int posX, int posY, int largura, int altura);
@@ -707,7 +709,7 @@ int main() {
 \subsubsection{Desenhando um quadrado}
 Um quadrado é um polígono considerado especial, pois ele é um retângulo onde tanto a altura quanto a largura são iguais.
 
-A função que desenha um quadrado tem a seguinte assinatura:
+A função que desenha um quadrado tem o seguinte protótipo:
 
 \begin{lstlisting}
 void quadrado(int posX, int posY, int tamanhoLado);
@@ -742,7 +744,7 @@ int main() {
 \subsubsection{Desenhando um polígono regular}
 Um polígono regular é um polígono convexo com \textit{n} faces onde cada face possui o mesmo tamanho e todos os ângulos internos são iguais.
 
-A função que desenha um polígono regular tem a seguinte assinatura:
+A função que desenha um polígono regular tem o seguinte protótipo:
 
 \begin{lstlisting}
 void poligonoRegular(int posX, int posY, int raio, int faces);
@@ -777,7 +779,7 @@ int main() {
 
 \subsubsection{Desenhando um círculo}
 O círculo é uma forma geométrica que possui virtualmente infinitos vértices.
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
@@ -799,7 +801,7 @@ O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
 
 \subsubsection{void pentagono(int posX, int posY, int raio)}
 [DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
@@ -821,7 +823,7 @@ O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
 
 \subsubsection{void hexagono(int posX, int posY, int raio)}
 [DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
@@ -843,7 +845,7 @@ O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
 
 \subsubsection{void decagono(int posX, int posY, int raio)}
 [DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
@@ -865,7 +867,7 @@ O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
 
 \subsubsection{void dodecagono(int posX, int posY, int raio)}
 [DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
@@ -887,7 +889,7 @@ O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
 
 \subsubsection{void linha(int posX1, int posY1, int posX2, int posY2)}
 [DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
@@ -909,7 +911,7 @@ O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
 
 
 \subsubsection{void pausar(int time)}
-A função que [DESCREVER_FUNCAO] tem a seguinte assinatura:
+A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
 
 \begin{lstlisting}
 [ASSINATURA_FUNCAO]
