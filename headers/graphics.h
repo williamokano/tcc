@@ -17,8 +17,8 @@ void definirCor(int vermelho, int verde, int azul);
 int* obterCor();
 
 // Size stuff
-void definirEspessura(int espessura);
-int obterEspessura();
+void definirTamanho(int tamanho);
+int obterTamanho();
 
 /* NO TCC AINDA SEM SEM DEFINIR LARGURA. DOCUMENTAR. APÓS CORRIGIR A LINHA */
 void definirLargura(int largura);

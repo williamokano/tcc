@@ -156,13 +156,13 @@ int* obterCor() {
 }
 
 // Size stuff
-void definirEspessura(int espessura) {
+void definirTamanho(int tamanho) {
     mtx_lock(&globalsMutex);
-    tamanhoGlobal = espessura;
+    tamanhoGlobal = tamanho;
     mtx_unlock(&globalsMutex);
 }
 
-int obterEspessura() {
+int obterTamanho() {
     int tamanhoNoMomentoDaLeitura;
     mtx_lock(&globalsMutex);
     tamanhoNoMomentoDaLeitura = tamanhoGlobal;

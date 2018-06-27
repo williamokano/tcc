@@ -317,7 +317,7 @@ A biblioteca gráfica dispõe da API abaixo:
 As seções seguintes descrevem cada item da API bem como seus protótipos e o significado de cada parâmetro de entrada.
 
 \subsubsection{Iniciando a biblioteca}
-Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário inicializar a biblioteca manualmente, para disparar a thread secundária, responsável pela renderização das formas, e a criação da janela onde serão renderizadas as formas.
+Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário inicializar a biblioteca manualmente, para disparar a thread secundária, responsável pela renderização dos objetos, e a criação da janela onde serão renderizadas os objetos.
 
 A função que inicializa a biblioteca tem o seguinte protótipo:
 
@@ -352,7 +352,7 @@ int main(void) {
 \end{figure}
 
 \subsubsection{Limpando a tela}
-A biblioteca descrita neste trabalho permite que a janela seja limpa, removendo assim todas as formas e reiniciando a janela para seu estado inicial.
+A biblioteca descrita neste trabalho permite que a janela seja limpa, removendo assim todas os objetos renderizados e reiniciando a janela para seu estado inicial.
 
 A função que limpa a janela tem o seguinte protótipo:
 
@@ -378,7 +378,7 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Desfazer último desenho}
-Em uma aplicação é comum se arrepender de sua última ação e portanto, querer desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um desenho é removido da tela.
+Em uma aplicação é comum se arrepender de sua última ação e portanto, querer desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um objeto é removido da tela.
 
 A função que desfaz o último desenho tem o seguinte protótipo:
 
@@ -387,7 +387,7 @@ void desfazerUltimaForma();
 \end{lstlisting}
 
 \subsubsection{Refazer o último desenho}
-Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho, você pode se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto a última forma removida será a primeira forma restaurada. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja feito um desenho após as opções de desfazer o último desenho, a pilha de ações será descartada.
+Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho, você pode se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto o último objeto removido será o primeiro objeto restaurado. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja inserida um novo objeto após ter desfeito o último desenho, a pilha de ações será descartada.
 
 A função que refaz o último desenho tem o seguinte protótipo:
 
@@ -395,10 +395,10 @@ A função que refaz o último desenho tem o seguinte protótipo:
 void refazerUltimaForma();
 \end{lstlisting}
 
-\subsubsection{Alterado a cor de preenchimento de um objeto}
+\subsubsection{Alterado a cor de preenchimento de um objeto} \label{api_definirCor}
 A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a definição de uma cor de preenchimento para o objeto a ser desenhado.
 
-A função que permite alterar a cor de uma forma tem o seguinte protótipo:
+A função que permite alterar a cor de um objeto tem o seguinte protótipo:
 
 \begin{lstlisting}
 void definirCor(int vermelho, int verde, int azul);
@@ -413,13 +413,21 @@ Os parâmetros de entrada são:
 \end{itemize}
 
 \subsubsection{Obter a cor de preenchimento do objeto}
-Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar uma forma de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor atual da forma. Como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3.
+Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar um objeto de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor de preenchimento atual. Assim como visto no \ref{api_definirCor}, como a função \textif{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3, representando as cores RGB.
 
 A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
 int* obterCor();
 \end{lstlisting}
+
+A saída do método é um array contendo 3 posições e seus valores é descrito conforme a lista abaixo:
+
+\begin{itemize}
+    \item int cor[0] - um inteiro de 0 a 255 representando a tonalidade de vermelho do padrão RGB.
+    \item int cor[1] - um inteiro de 0 a 255 representando a tonalidade de verde do padrão RGB.
+    \item int cor[2] - um inteiro de 0 a 255 representando a tonalidade de azul do padrão RGB.
+\end{itemize}
 
 O exemplo abaixo mostra como obter a cor atual de uma forma em uma aplicação C:
 
@@ -440,13 +448,13 @@ int main() {
 }
 \end{lstlisting}
 
-\subsubsection{Definindo a espessura de um objeto}
-Algumas formas podem ter seu tamanho alterado. Para que tenha efeito, \textit{definirTamanho(int tamanho)} deve ser invocada anteriormente a uma função de desenho de forma. Após chamado o método de definir o tamanho de uma forma, todas as formas desenhadas após a chamada serão desenhadas com o tamanho definido. Atualmente apenas a forma \textit{linha(int posX, int posY)} pode ter sua espessura alterada.
+\subsubsection{Definindo o tamanho de um objeto}
+Alguns objetos podem ter seu tamanho alterado. Para que tenha efeito, a função \textit{definirTamanho} deve ser invocada anteriormente a uma função de desenho de forma. Após chamado o método de definir o tamanho de uma forma, todas os objetos desenhadas após a chamada serão desenhadas com o novo tamanho definido. Atualmente apenas o objeto \textit{ponto(int posX, int posY)} pode ter seu tamanho alterado.
 
 A função que define o tamanho de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
-void definirEspessura(int espessura);
+void definirTamanho(int espessura);
 \end{lstlisting}
 
 O exemplo abaixo mostra como definir o tamanho de uma forma em uma aplicação C:
@@ -466,13 +474,13 @@ int main() {
 }
 \end{lstlisting}
 
-\subsubsection{Obtendo a espessura de um objeto}
-Da mesma forma que é possível definir a espessura de um objeto, esta API permite que se obtenha o valor atual do tamanho de desenho de formas. Esta função é útil quando você quer desenhar uma forma em novo tamanho, porém deseja retornar ao tamanho anterior porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
+\subsubsection{Obtendo o tamanho de um objeto}
+Da mesma forma que é possível definir o tamanho de um objeto, esta função permite obter o valor atual do tamanho de desenho de objetos. Esta função é útil quando você quer desenhar um objeto em novo tamanho e deseja retornar o tamanho anterior para os próximos objetos, porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
 
 A função que como obter o tamanho atual de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
-int obterEspessura();
+int obterTamanho();
 \end{lstlisting}
 
 O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicação C:
@@ -484,10 +492,10 @@ O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicaç�
 int main() {
     inicializarBiblioteca(800, 600);
 
-    definirEspessura(50);
+    definirTamanho(50);
     ponto(100, 100);
 
-    int espessuraAtual = obterEspessura();
+    int tamanhoAtual = obterTamanho();
 
     getchar();
     return 0;
@@ -495,7 +503,7 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Desenhando um polígono}
-Um polígono é uma figura composta por 3 ou mais vértices. Um polígono pode ser desenhado de forma livre e a função que desenha um polígono tem o seguinte protótipo:
+Um polígono é uma figura geométrica composta por 3 ou mais vértices. Um polígono pode ser desenhado de forma livre e a função que desenha um polígono tem o seguinte protótipo:
 
 \begin{lstlisting}
 void poligono(int numeroDeVertices, GLfloat* posicoes);
@@ -547,52 +555,31 @@ Os parâmetros de entrada são:
 \end{itemize}
 
 \subsubsection{Desenhando um triângulo}
-Em uma biblioteca gráfica, triângulos são uma das formas mais básicas e utilizadas, pois todos os polígonos convexo pode ser decomposto em vários triângulos.
-
-A função que desenha um triângulo tem o seguinte protótipo:
+Triângulos são uma das formas mais básicas e utilizadas, pois todos os polígonos convexos pode ser decompostos em vários triângulos. A função que desenha um triângulo tem o seguinte protótipo:
 
 \begin{lstlisting}
-void triangulo(int posX1, int posY1, int posX2, int posY2, int posX3, int posY3);
+void triangulo(
+    int posX1, int posY1,
+    int posX2, int posY2,
+    int posX3, int posY3
+);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int posX1 - Posição X da vértice 1 de onde o triângulo será desenhado.
-    \item int posY1 - Posição Y da vértice 1 de onde o triângulo será desenhado.
+    \item int posX1 - a posição X da vértice 1 do triângulo.
+    \item int posY1 - a posição Y da vértice 1 do triângulo.
 
-    \item int posX2 - Posição X da vértice 2 de onde o triângulo será desenhado.
-    \item int posY2 - Posição Y da vértice 2 de onde o triângulo será desenhado.
+    \item int posX2 - a posição X da vértice 2 do triângulo.
+    \item int posY2 - a posição Y da vértice 2 do triângulo.
 
-    \item int posX3 - Posição X da vértice 3 de onde o triângulo será desenhado.
-    \item int posY3 - Posição Y da vértice 3 de onde o triângulo será desenhado.
+    \item int posX3 - a posição X da vértice 3 do triângulo.
+    \item int posY3 - a posição Y da vértice 3 do triângulo.
 \end{itemize}
 
-O exemplo abaixo mostra como desenhar um triângulo em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <stdlib.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    triangulo(
-        100, 100,
-        300, 100,
-        200, 300
-    );
-
-    getchar();
-    return 0;
-}
-\end{lstlisting}
-
 \subsubsection{Desenhando um retângulo}
-Retângulos são formas que possuem 4 ângulos retos e também são bastante utilizados para desenhos além de ser uma das formas mais básicas.
-
-A função que desenha um retângulo tem o seguinte protótipo:
+Retângulos são formas geométricas que possuem 4 ângulos retos e também são bastante utilizados para desenhos além de ser uma das formas mais básicas. A função que desenha um retângulo tem o seguinte protótipo:
 
 \begin{lstlisting}
 void retangulo(int posX, int posY, int largura, int altura);
@@ -601,31 +588,14 @@ void retangulo(int posX, int posY, int largura, int altura);
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int posX - Posição X onde o retângulo será desenhado. Representa o vértice inferior esquerdo do retângulo.
-    \item int posY - Posição y onde o retângulo será desenhado. Representa o vértice inferior esquerdo do retângulo.
-    \item int altura - Altura do triângulo.
-    \item int largura - Largura do triângulo.
+    \item int posX - posição X do retângulo. Representa o vértice inferior esquerdo do retângulo.
+    \item int posY - posição y do retângulo. Representa o vértice inferior esquerdo do retângulo.
+    \item int altura - altura do triângulo.
+    \item int largura - largura do triângulo.
 \end{itemize}
 
-O exemplo abaixo mostra como criar um triângulo em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <stdlib.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    retangulo(100, 100, 200, 300);
-
-    getchar();
-    return 0;
-}
-\end{lstlisting}
-
 \subsubsection{Desenhando um quadrado}
-Um quadrado é um polígono considerado especial, pois ele é um retângulo onde tanto a altura quanto a largura são iguais.
+Um quadrado é um polígono considerado especial, pois trata-se de um retângulo que possui largura e altura de mesmo tamanho.
 
 A função que desenha um quadrado tem o seguinte protótipo:
 
@@ -636,31 +606,15 @@ void quadrado(int posX, int posY, int tamanhoLado);
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int posX - Posição X onde o quadrado será desenhado. Representa o vértice inferior esquerdo do quadrado.
-    \item int posY - Posição Y onde o quadrado será desenhado. Representa o vértice inferior esquerdo do quadrado.
-    \item int tamanhoLado - Representa o valor do lado do quadrado. Será tanto a altura quanto a largura desta forma.
+    \item int posX - posição X do quadrado. Representa o vértice inferior esquerdo do quadrado.
+    \item int posY - posição Y do quadrado. Representa o vértice inferior esquerdo do quadrado.
+    \item int tamanhoLado - tamanho do lado do quadrado.
 \end{itemize}
 
-O exemplo abaixo mostra como desenhar um quadrado verde em uma aplicação C:
-
-\begin{lstlisting}
-#include <stdio.h>
-#include <stdlib.h>
-#include <graphics.h>
-
-int main() {
-    inicializarBiblioteca(800, 600);
-
-    definirCor(0, 255, 0);
-    quadrado(100, 100, 200);
-
-    getchar();
-    return 0;
-}
-\end{lstlisting}
-
 \subsubsection{Desenhando um polígono regular}
-Um polígono regular é um polígono convexo com \textit{n} faces onde cada face possui o mesmo tamanho e todos os ângulos internos são iguais.
+Um polígono regular é um polígono convexo com \textit{n} faces onde cada face possui o mesmo tamanho e todos os ângulos internos são iguais. Alguns exemplos de polígonos regulares são triângulos retângulos, quadrados, pentagonos, dodecagonos, etc.
+
+Um polígono convexo é qualquer polígono que, dados 2 pontos A e B quaisquer interiores a este polígono, o segmento de reta determinado por esses 2 pontos A e B deverá inteiramente estar contido no interior do polígono. Alguns exemplos de polígonos convexos são quadrados, retângulos, triângulos, etc.
 
 A função que desenha um polígono regular tem o seguinte protótipo:
 
