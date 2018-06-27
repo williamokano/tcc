@@ -625,10 +625,10 @@ void poligonoRegular(int posX, int posY, int raio, int faces);
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int posX - Posição X onde o polígono será desenhado. Representa o centro de onde será desenhado o polígono regular.
-    \item int posY - Posição Y onde o polígono será desenhado. Representa o centro de onde será desenhado o polígono regular.
-    \item int raio - Tamanho do raio que o polígono regular possuirá.
-    \item int faces - O número de faces que o polígono regular possuirá.
+    \item int posX - posição X onde do polígono regular. Representa o centro de onde será desenhado o objeto.
+    \item int posY - posição Y onde do polígono regular. Representa o centro de onde será desenhado o objeto.
+    \item int raio - tamanho do raio que do polígono regular.
+    \item int faces - o número de faces que do polígono regular.
 \end{itemize}
 
 O exemplo abaixo mostra como desenhar um polígono regular azul em uma aplicação C:
@@ -651,151 +651,76 @@ int main() {
 
 \subsubsection{Desenhando um círculo}
 O círculo é uma forma geométrica que possui virtualmente infinitos vértices.
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
+
+A função que desenha um círculo tem o seguinte protótipo:
 
 \begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void circulo(int posX, int posY, int raio);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX - posição X do centro do círculo.
+    \item int posY - posição Y do centro do círculo.
+    \item int raio - raio do círculo.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+\subsubsection{Desenhando um pentágono}
+Um pentágono é um polígono regular composto por 5 vértices.
+
+A função que desenha um pentágono tem o seguinte protótipo:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
-\end{lstlisting}
-
-\subsubsection{void pentagono(int posX, int posY, int raio)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
-
-\begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void pentagono(int posX, int posY, int raio);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX - posição X do centro do pentágono.
+    \item int posY - posição Y do centro do pentágono.
+    \item int raio - raio do pentágono.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+\subsubsection{Desenhando uma linha}
+Dado 2 pontos A e B, uma linha é um segmento de reta que liga os pontos A e B.
+
+A função que desenha uma linha tem o seguinte protótipo:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
-\end{lstlisting}
-
-\subsubsection{void hexagono(int posX, int posY, int raio)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
-
-\begin{lstlisting}
-[ASSINATURA_FUNCAO]
+void linha(int posX1, int posY1, int posX2, int posY2);
 \end{lstlisting}
 
 Os parâmetros de entrada são:
 
 \begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
+    \item int posX1 - posição do X1 da linha.
+    \item int posY1 - posição do Y1 da linha.
+    \item int posX2 - posição do X2 da linha.
+    \item int posY2 - posição do Y2 da linha.
 \end{itemize}
 
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
+O exemplo abaixo mostra como desenhar uma linha que corta a janela de desenho verticalmente em uma aplicação C:
 
 \begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
+#include <stdio.h>
+#include <graphics.h>
+
+void showMenu();
+
+int main() {
+    inicializarBiblioteca(1366, 768);
+
+    linha(
+        0, 0,
+        1366, 768
+    );
+
+    getchar();
+    return 0;
+}
 \end{lstlisting}
-
-\subsubsection{void decagono(int posX, int posY, int raio)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
-
-\begin{lstlisting}
-[ASSINATURA_FUNCAO]
-\end{lstlisting}
-
-Os parâmetros de entrada são:
-
-\begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
-\end{itemize}
-
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
-
-\begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
-\end{lstlisting}
-
-\subsubsection{void dodecagono(int posX, int posY, int raio)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
-
-\begin{lstlisting}
-[ASSINATURA_FUNCAO]
-\end{lstlisting}
-
-Os parâmetros de entrada são:
-
-\begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
-\end{itemize}
-
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
-
-\begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
-\end{lstlisting}
-
-\subsubsection{void linha(int posX1, int posY1, int posX2, int posY2)}
-[DESCRICAO]
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
-
-\begin{lstlisting}
-[ASSINATURA_FUNCAO]
-\end{lstlisting}
-
-Os parâmetros de entrada são:
-
-\begin{itemize}
-    \item int p1 - Parâmetro 1
-    \item int p2 - Parâmetro 2
-    \item const char* p3 - Parâmetro 3
-\end{itemize}
-
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
-
-\begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
-\end{lstlisting}
-
-
-\subsubsection{void pausar(int time)}
-A função que [DESCREVER_FUNCAO] tem o seguinte protótipo:
-
-\begin{lstlisting}
-[ASSINATURA_FUNCAO]
-\end{lstlisting}
-
-O exemplo abaixo mostra como [DESCREVER_FUNCAO] em uma aplicação C:
-
-\begin{lstlisting}
-[CODIGO_EXEMPLO_FUNCAO]
-\end{lstlisting}
-
-
 
 \subsection{Exemplos de Uso}
 
