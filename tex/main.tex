@@ -396,7 +396,7 @@ Os parâmetros de entrada são:
 \end{itemize}
 
 \subsubsection{Obter a cor de preenchimento do objeto}
-Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar um objeto de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor de preenchimento atual. Assim como visto no \ref{api_definirCor}, como a função \textif{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3, representando as cores RGB.
+Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar um objeto de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor de preenchimento atual. Assim como visto em \ref{api_definirCor}, como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3, representando as cores RGB.
 
 A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 
@@ -404,7 +404,7 @@ A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 int* obterCor();
 \end{lstlisting}
 
-A saída do método é um array contendo 3 posições e seus valores é descrito conforme a lista abaixo:
+A saída do método é um ponteiro para um array contendo 3 posições e seus valores são descritos conforme a lista abaixo:
 
 \begin{itemize}
     \item int cor[0] - um inteiro de 0 a 255 representando a tonalidade de vermelho do padrão RGB.
@@ -432,12 +432,12 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Definindo o tamanho de um objeto}
-Alguns objetos podem ter seu tamanho alterado. Para que tenha efeito, a função \textit{definirTamanho} deve ser invocada anteriormente a uma função de desenho de forma. Após chamado o método de definir o tamanho de uma forma, todas os objetos desenhadas após a chamada serão desenhadas com o novo tamanho definido. Atualmente apenas o objeto \textit{ponto(int posX, int posY)} pode ter seu tamanho alterado.
+Alguns objetos podem ter seu tamanho alterado. Para que tenha efeito, a função \textit{definirTamanho} deve ser invocada anteriormente a uma função de desenho de forma. Após chamado o método, todos os objetos desenhados após a chamada serão desenhados com o novo tamanho definido. Atualmente apenas o objeto \textit{ponto} pode ter seu tamanho alterado.
 
 A função que define o tamanho de uma forma tem o seguinte protótipo:
 
 \begin{lstlisting}
-void definirTamanho(int espessura);
+void definirTamanho(int tamanho);
 \end{lstlisting}
 
 O exemplo abaixo mostra como definir o tamanho de uma forma em uma aplicação C:
@@ -496,7 +496,7 @@ Os parâmetros de entrada são:
 
 \begin{itemize}
     \item int numeroDeVertices - número de vértices que o seu polígono possui
-    \item GLfloat* posicoes - um array contendo as posições de cada vértice. O array deve possuir um tamanho par definido pela fórmula \(tamanho = 2 \times numeroDeVertices \), pois as posições pares representam as posições X dos vértices e as posíções ímpares representam as posições Y, par a par. Os pares devem ser definidos sequencialmente. Para desenhar um triângulo, seria então necessário um array de 6 posições. Utilizando um triângulo como exemplo, vamos utilizar os pontos (0, 0), (200, 0) e (100, 200). O array de posições então seria \textit{GLfloat posicoes = {0, 0, 200, 0, 100, 200};}.
+    \item GLfloat* posicoes - um array contendo as posições de cada vértice. O array deve possuir um tamanho par definido pela fórmula \(tamanho = 2 \times numeroDeVertices \), pois as posições pares representam as posições X dos vértices e as posíções ímpares representam as posições Y, par a par. Os pares devem ser definidos sequencialmente. Para desenhar um triângulo, seria então necessário um array de 6 posições. Utilizando um triângulo como exemplo, vamos utilizar os pontos (0, 0), (200, 0) e (100, 200). O array de posições então seria \textit{GLfloat posicoes[6] = \{0, 0, 200, 0, 100, 200\};}.
 \end{itemize}
 
 O exemplo abaixo mostra como desenhas um polígono em uma aplicação C:
@@ -524,7 +524,7 @@ int main() {
 \end{lstlisting}
 
 \subsubsection{Desenhando um ponto}
-A função que desenha um pixel tem o seguinte protótipo:
+A função que desenha um ponto tem o seguinte protótipo:
 
 \begin{lstlisting}
 void ponto(int posX, int posY);
