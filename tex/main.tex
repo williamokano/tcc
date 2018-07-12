@@ -13,6 +13,7 @@ brazil]{facom-ufu-abntex2}
 \usepackage{multirow}
 \usepackage{listings}
 \usepackage{hyperref}
+\usepackage{minted} % https://www.sharelatex.com/learn/Code_Highlighting_with_minted
 
 \autor{William Johnson dos Santos Okano} %TCC
 \data{2018}
@@ -367,9 +368,9 @@ Apesar de não ter que gerenciar diretamente a janela e o laço de repetição d
 
 A função que inicializa a biblioteca tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void inicializarBiblioteca(int largura, int altura);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -379,7 +380,8 @@ Os parâmetros de entrada são:
 \end{itemize}
 
 O exemplo abaixo mostra como inicializar a biblioteca em uma aplicação C:
-\begin{lstlisting}[caption={Inicializando a biblioteca},label={lst:inicializando_biblioteca},language=C]
+\begin{listing}[ht]
+\begin{minted}{c}
 #include <stdio.h>
 #include <graphics.h>
 
@@ -392,7 +394,10 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
+\caption{Inicializando a biblioteca}
+\label{lst:inicializando_biblioteca}
+\end{listing}
 
 \begin{figure}[!htbp]
   \centering
@@ -411,27 +416,27 @@ Em uma aplicação é comum se arrepender de sua última ação e portanto, quer
 
 A função que desfaz o último desenho tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void desfazerUltimaForma();
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Refazer o último desenho}
 Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho, você pode se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto o último objeto removido será o primeiro objeto restaurado. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja inserida um novo objeto após ter desfeito o último desenho, a pilha de ações será descartada.
 
 A função que refaz o último desenho tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void refazerUltimaForma();
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Alterado a cor de preenchimento de um objeto} \label{api_definirCor}
 A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a definição de uma cor de preenchimento para o objeto a ser desenhado.
 
 A função que permite alterar a cor de um objeto tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void definirCor(int vermelho, int verde, int azul);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -446,9 +451,9 @@ Assim como podemos definir a cor de preenchimento de um objeto, também é poss�
 
 A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 int* obterCor();
-\end{lstlisting}
+\end{minted}
 
 A saída do método é um ponteiro para um array contendo 3 posições e seus valores são descritos conforme a lista abaixo:
 
@@ -460,7 +465,7 @@ A saída do método é um ponteiro para um array contendo 3 posições e seus va
 
 O exemplo abaixo mostra como obter a cor atual de uma forma em uma aplicação C:
 
-\begin{lstlisting}
+\begin{minted}{c}
 #include <stdio.h>
 #include <graphics.h>
 
@@ -475,20 +480,20 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Definindo o tamanho de um objeto}
 Alguns objetos podem ter seu tamanho alterado. Para que tenha efeito, a função \textit{definirTamanho} deve ser invocada anteriormente a uma função de desenho de forma. Após chamado o método, todos os objetos desenhados após a chamada serão desenhados com o novo tamanho definido. Atualmente apenas o objeto \textit{ponto} pode ter seu tamanho alterado.
 
 A função que define o tamanho de uma forma tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void definirTamanho(int tamanho);
-\end{lstlisting}
+\end{minted}
 
 O exemplo abaixo mostra como definir o tamanho de uma forma em uma aplicação C:
 
-\begin{lstlisting}
+\begin{minted}{c}
 #include <stdio.h>
 #include <graphics.h>
 
@@ -501,20 +506,20 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Obtendo o tamanho de um objeto}
 Da mesma forma que é possível definir o tamanho de um objeto, esta função permite obter o valor atual do tamanho de desenho de objetos. Esta função é útil quando você quer desenhar um objeto em novo tamanho e deseja retornar o tamanho anterior para os próximos objetos, porém você não possui o conhecimento de qual o valor atual do tamanho da forma.
 
 A função que como obter o tamanho atual de uma forma tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 int obterTamanho();
-\end{lstlisting}
+\end{minted}
 
 O exemplo abaixo mostra como obter o tamanho atual de uma forma em uma aplicação C:
 
-\begin{lstlisting}
+\begin{minted}{c}
 #include <stdio.h>
 #include <graphics.h>
 
@@ -529,14 +534,14 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Desenhando um polígono}
 Um polígono é uma figura geométrica composta por 3 ou mais vértices. Um polígono pode ser desenhado de forma livre e a função que desenha um polígono tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void poligono(int numeroDeVertices, GLfloat* posicoes);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -547,7 +552,7 @@ Os parâmetros de entrada são:
 
 O exemplo abaixo mostra como desenhas um polígono em uma aplicação C:
 
-\begin{lstlisting}
+\begin{minted}{c}
 #include <stdio.h>
 #include <stdlib.h>
 #include <graphics.h>
@@ -567,14 +572,14 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Desenhando um ponto}
 A função que desenha um ponto tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void ponto(int posX, int posY);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -586,13 +591,13 @@ Os parâmetros de entrada são:
 \subsubsection{Desenhando um triângulo}
 Triângulos são uma das formas mais básicas e utilizadas, pois todos os polígonos convexos pode ser decompostos em vários triângulos. A função que desenha um triângulo tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void triangulo(
     int posX1, int posY1,
     int posX2, int posY2,
     int posX3, int posY3
 );
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -610,9 +615,9 @@ Os parâmetros de entrada são:
 \subsubsection{Desenhando um retângulo}
 Retângulos são formas geométricas que possuem 4 ângulos retos e também são bastante utilizados para desenhos além de ser uma das formas mais básicas. A função que desenha um retângulo tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void retangulo(int posX, int posY, int largura, int altura);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -628,9 +633,9 @@ Um quadrado é um polígono considerado especial, pois trata-se de um retângulo
 
 A função que desenha um quadrado tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void quadrado(int posX, int posY, int tamanhoLado);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -647,9 +652,9 @@ Segundo \citeonline{PoligonoConvexos:BrasilEscola}, ``um polígono é convexo qu
 
 A função que desenha um polígono regular tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void poligonoRegular(int posX, int posY, int raio, int faces);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -662,7 +667,7 @@ Os parâmetros de entrada são:
 
 O exemplo abaixo mostra como desenhar um polígono regular azul em uma aplicação C:
 
-\begin{lstlisting}
+\begin{minted}{c}
 #include <stdio.h>
 #include <stdlib.h>
 #include <graphics.h>
@@ -676,16 +681,16 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
 
 \subsubsection{Desenhando um círculo}
 O círculo é uma forma geométrica que possui virtualmente infinitos vértices.
 
 A função que desenha um círculo tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void circulo(int posX, int posY, int raio);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -700,9 +705,9 @@ Um pentágono é um polígono regular composto por 5 vértices.
 
 A função que desenha um pentágono tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void pentagono(int posX, int posY, int raio);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -717,9 +722,9 @@ Dado 2 pontos A e B, uma linha é um segmento de reta que liga os pontos A e B.
 
 A função que desenha uma linha tem o seguinte protótipo:
 
-\begin{lstlisting}
+\begin{minted}{c}
 void linha(int posX1, int posY1, int posX2, int posY2);
-\end{lstlisting}
+\end{minted}
 
 Os parâmetros de entrada são:
 
@@ -732,7 +737,7 @@ Os parâmetros de entrada são:
 
 O exemplo abaixo mostra como desenhar uma linha que corta a janela de desenho verticalmente em uma aplicação C:
 
-\begin{lstlisting}
+\begin{minted}{c}
 #include <stdio.h>
 #include <graphics.h>
 
@@ -747,7 +752,7 @@ int main() {
     getchar();
     return 0;
 }
-\end{lstlisting}
+\end{minted}
 
 \subsection{Exemplos de Uso}
 
