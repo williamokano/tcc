@@ -264,10 +264,11 @@ As funções da biblioteca são divididas da seguinte forma:
 
 \chapter{Trabalhos Correlatos}
 
-\textbf{Falar sobre a lista abaixo. Não definitivo. Falta construir}
-\begin{itemize}
-    \item Borlang Graphics Interface (BGI)
-\end{itemize}
+\section{BGI}
+
+\section{GLUT e Free GLUT}
+
+\section{SDL}
 
 \chapter{Desenvolvimento}
 
@@ -276,7 +277,7 @@ As funções da biblioteca são divididas da seguinte forma:
 \subsection{Linguagem de programação C}
 A linguagem de programação \citeonline{C:About} foi criada por Dennis MacAlistair Ritchie entre 1969 e 1973 na \citeonline{BellLabs:Site} e trata-se de uma linguagem de propósito geral que pode ser utilizada com os paradigmas imperativo, também conhecido como procedural, e o paradigma estruturado. Segundo o site \citeonline{GeneralPurposeLanguage:About}, uma linguagem de propósito geral é aquela que não é limitada apenas à algum tipo de hardware específico ou para uma aplicação especializada.
 
-A linguagem de programação C foi escolhida por ser uma das linguagens mais utilizadas para o ensino de programação nas universidades brasileiras. Uma pesquisa conduzida online em um grupo de programação chamado A.P.D.A. Associação dos Programadores Depressivos Anônimos, um fórum que concentra mais de 71.000 programadores e entusiastas brasileiros, foi obtido um resultado de que aproximadamente 55\% das universidades brasileiras escolhem C como a primeira, ou uma das primeiras, linguagens para o ensino de introdução à programação, como pode-se observar na Figura ~\ref{fig:pesquisa_linguagem_tcc}. Isso representa 570 votos em uma pesquisa com 1036 respostas. A linguagem de programação Java, que se sagrou em segundo lugar como mais utilizada, teve apenas 169 votos, representando 16,31\% do total de votos. Esse resultado pode ser encontrada no link \hyperref[https://www.facebook.com/groups/osadpa/permalink/1508699765902212/]{https://www.facebook.com/groups/osadpa/permalink/1508699765902212/}.
+A linguagem de programação C foi escolhida por ser uma das linguagens mais utilizadas para o ensino de programação nas universidades brasileiras. Uma pesquisa conduzida online em um grupo de programação chamado A.P.D.A. Associação dos Programadores Depressivos Anônimos, um fórum que concentra mais de 71.000 programadores e entusiastas brasileiros, foi obtido um resultado de que aproximadamente 55\% das universidades brasileiras escolhem C como a primeira, ou uma das primeiras, linguagens para o ensino de introdução à programação, como pode-se observar na Figura ~\ref{fig:pesquisa_linguagem_tcc}. Isso representa 570 votos em uma pesquisa com 1036 respostas. A linguagem de programação Java, que se sagrou em segundo lugar como mais utilizada, teve apenas 169 votos, representando 16,31\% do total de votos. Esse resultado pode ser encontrada no link \url{https://www.facebook.com/groups/osadpa/permalink/1508699765902212/}.
 
 Apesar do nome caricato do grupo onde foi conduzida a pesquisa, trata-se de um grupo sério sobre programação em geral, sendo utilizado por uma vasta gama de profissionais de TI.
 
@@ -291,7 +292,7 @@ Apesar do nome caricato do grupo onde foi conduzida a pesquisa, trata-se de um g
 \subsection{OpenGL}
 O \citeonline{OpenGL:About} é uma biblioteca gráfica para desenvolvimento de aplicações interativas. Desde sua introdução, no ano de 1992, a biblioteca OpenGL se tornou  a interface de de programação de aplicação (API) mais utilizada com suporte a 2D e 3D pela indústria. O OpenGL foi escolhido como biblioteca gráfica pela sua qualidade de ser altamente portável estando presente em várias plataformas, como Windows, Linux, Unix, MacOS, e mais. Outro motivo foi também por possuir um bom desempenho e poder ser utilizada em conjunto com várias linguagens de programação, dentre as quais foi escolhida a linguagem de programação \citeonline{C:About}.
 
-A biblioteca gráfica \citeonline{OpenGL:About} foi escolhida em detrimento de outras por ser mais simples, porém versátil, e suas já citadas qualidades: performance, largamente utilizada, interoperável entre plataformas e por ter fácil integração com a linguagem de programação C. Outros fatores que influenciaram a sua escolha foi a vasta documentação, como websites, livros e cursos online. Alguns sites que promovem a documentação de utilização do OpenGL são o próprio site do OpenGL \hyperref[https://opengl.org/]{https://opengl.org/}, o website \citeonline{LearnOpenGL:Site} e o livro OpenGL Programming Guide: The Official Guide to Learning OpenGL, Version 1.2, do autor \citeonline{Woo:1999:OPG:554539}.
+A biblioteca gráfica \citeonline{OpenGL:About} foi escolhida em detrimento de outras por ser mais simples, porém versátil, e suas já citadas qualidades: performance, largamente utilizada, interoperável entre plataformas e por ter fácil integração com a linguagem de programação C. Outros fatores que influenciaram a sua escolha foi a vasta documentação, como websites, livros e cursos online. Alguns sites que promovem a documentação de utilização do OpenGL são o próprio site do OpenGL \url{https://opengl.org/}, o website \citeonline{LearnOpenGL:Site} e o livro OpenGL Programming Guide: The Official Guide to Learning OpenGL, Version 1.2, do autor \citeonline{Woo:1999:OPG:554539}.
 
 A forma que o OpenGL trabalha para renderizar os objetos na tela é baseado em uma máquina de estados. Cada item renderizado pelo OpenGL fica num buffer secundário e só é renderizado quando explicitamente solicitado. Ao renderizar o buffer ele então faz a troca do buffer primário pelo secundário, exibindo assim apenas o quadro renderizado por completo, evitando assim o \textit{tearing}. \textit{Tearing} é o efeito que ocorre quando parte do frame é renderizado utilizando informações antiga, exibindo assim parte do quadro com uma imagem e outra parte com os dados novos.
 
@@ -300,7 +301,7 @@ Segundo o site da \citeonline{GLFW:About}, GLFW é uma biblioteca gráfica open-
 
 A biblioteca GLFW foi escrita em C e possui suporte nativo para Windows, macOS e vários sistemas Unix \cite{Unix:About} que utilizam o sistema de janelas X Window System \cite{X:About}, como por exemplo Linux \cite{Linux:About} e FreeBSD \cite{FreeBSD:About}.
 
-As motivações que levaram a escolha da biblioteca gráfica GLFW foram a criação de janelas de forma transparente entre diversos sistemas operacionais, suporte para OpenGL, suporte a vários monitores e várias janelas simultâneas, suporte para mouse, teclado e joystick, além de ser a biblioteca mais atualizada, tendo vasta documentação e grande comunidade ativa. A documentação completa da biblioteca GLFW pode ser encontrada no website da biblioteca pelo endereço \hyperref[http://www.glfw.org/documentation.html]{http://www.glfw.org/documentation.html}.
+As motivações que levaram a escolha da biblioteca gráfica GLFW foram a criação de janelas de forma transparente entre diversos sistemas operacionais, suporte para OpenGL, suporte a vários monitores e várias janelas simultâneas, suporte para mouse, teclado e joystick, além de ser a biblioteca mais atualizada, tendo vasta documentação e grande comunidade ativa. A documentação completa da biblioteca GLFW pode ser encontrada no website da biblioteca pelo endereço \url{http://www.glfw.org/documentation.html}.
 
 \subsection{TinyCThread}
 A biblioteca \citeonline{Tinycthread:About} é uma biblioteca de código aberto escrita em C multi-plataforma capaz de criar e gerenciar threads de forma unificada e transparente em diversos sistemas operacionais. Segundo \citeonline{Tanenbaum:2007:MOS:1410217}, thread é uma forma de um processo dividir as tarefas a serem executadas de uma forma que possam ser executadas concorrentemente. Um processo que possui apenas uma thread para execução é chamado de \textit{single threading} e aplicações que possuem múltiplas threads são chamados de \textit{multi threading}. Threads podem ser executadas em paralelo, desde que o processador possua mais um núcleo, onde cada thread seria executada em um núcleo distinto.
