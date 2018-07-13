@@ -66,8 +66,8 @@ brazil]{facom-ufu-abntex2}
    Trabalho aprovado. \imprimirlocal, 22 de Junho de 2018: %TCC:
 
    \assinatura{\textbf{\imprimirorientador} \\ Orientador}
-   \assinatura{\textbf{Prof. Mauricio Cunha Escarpinati}}% \\ Convidado 1} %TCC:
-   \assinatura{\textbf{Prof. William Chaves de Souza Carvalho}}% \\ Convidado 2} %TCC:
+   \assinatura{\textbf{Prof. Dr. Mauricio Cunha Escarpinati}}% \\ Convidado 1} %TCC:
+   \assinatura{\textbf{Prof. Dr. William Chaves de Souza Carvalho}}% \\ Convidado 2} %TCC:
    %\assinatura{\textbf{Professor} \\ Convidado 3}
    %\assinatura{\textbf{Professor} \\ Convidado 4}
 
@@ -130,10 +130,12 @@ brazil]{facom-ufu-abntex2}
  resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
  ponto e finalizadas também por ponto.
 
+ % [@Rafael] Escrever o resumo
+
  \vspace{\onelineskip}
 
  \noindent
- \textbf{Palavras-chave}:Biblioteca de funções, elementos gráficos, OpenGL. %TCC:
+ \textbf{Palavras-chave}: Biblioteca de funções, elementos gráficos, OpenGL. %TCC:
 \end{resumo}
 %\fi
 
@@ -160,10 +162,10 @@ brazil]{facom-ufu-abntex2}
 % inserir lista de abreviaturas e siglas
 % ---
 \begin{siglas} %TCC:
-  \item[GLFW] \textit{OpenGL FrameWork}
+  \item[GLFW] \textit{Graphics Library Framework}
   \item[API] \textit{Application Programming Interface}
   \item[RGB] \textit{Red, Green and Blue}
-  \item[FPS] \textit{Frame por segundo}
+  \item[FPS] \textit{Frames per second (Quadros por segundo)}
   \item[TI] \textit{Tecnologia da Informação}
   \item[GLUT] \textit{OpenGL Utility Toolkit}
   \item[SDL] \textit{Simple DirectMedia Layer}
@@ -207,23 +209,43 @@ brazil]{facom-ufu-abntex2}
 % ----------------------------------------------------------
 
 \chapter[Introdução]{Introdução}
-``O baixo índice de assimilação dos estudantes nas disciplinas cujos requisitos exigem o conhecimento de programação tem sido um grande problema enfrentado em muitas instituições'' \cite{de2004ferramenta}. Uma das razões para a dificuldade do aprendizado é que o código possui entidades muito abstrats, sendo de difícil visualização de como ocorre o fluxo das informações dentro laços de repetição, ponteiros, \textif{arrays}, condicionais lógicas, etc.
+O baixo índice de assimilação dos estudantes nas disciplinas cujos requisitos exigem o conhecimento de programação tem sido um grande problema enfrentado
+em muitas instituições \cite{de2004ferramenta}.
+Uma das razões para a dificuldade do aprendizado é que o código-fonte possui entidades muito abstratas, sendo difícil para um iniciante visualizar como ocorre o fluxo
+das informações dentro laços de repetição, ponteiros, \textit{arrays}, condicionais lógicas, etc.
 
-Muitos alunos de cursos introdutórios utilizam-se das mais diversas técnicas de aprendizado para tentar assimilar o funcionamento de um programa ou algoritmo. Algumas das técnicas são utilização de fluxogramas, onde são desenhados caixas, setas e direções de como o programa deve ser comportar e execução passo à passo, anotando o valor de cada variável a cada linha, laço de repetição ou condicional lógica executada. Alguns optam por utilizar de ferramentas de auxílio visual, como o \citeonline{Scratch:About} ou \citeonline{RubyWarrior:About}. Apesar de serem excelentes ferramentas de ensino, o ponto fraco dessas ferramentas é que Scratch é uma linguagem própria e \ref{RubyWarrior:About} é utilizado a linguagem de programação Ruby e cursos de introdução à programação, geralmente, utilizam-se da linguagem de programação C.
+Muitos alunos de cursos introdutórios utilizam das mais diversas técnicas de aprendizado para tentar assimilar o funcionamento de um programa ou algoritmo.
+Algumas dessas técnicas incluem a utilização de fluxogramas, nos quais são desenhados caixas, setas e direções que indicam como o programa deve ser comportar em cada
+passo,
+anotando o valor de cada variável a cada linha, laço de repetição ou condicional lógica executada. Alguns optam por utilizar de ferramentas de auxílio visual,
+como o \citeonline{Scratch:About} ou \citeonline{RubyWarrior:About}. Apesar de serem excelentes ferramentas de ensino, um dos pontos fracos delas é
+que o Scratch utiliza uma linguagem própria de programação, enquanto que o \citeonline{RubyWarrior:About} utiliza a linguagem de programação Ruby,
+sendo que em cursos de introdução à programação geralmente é utilizada a linguagem C.
 
-Segundo \citeonline{mayer1981psychology}, uma das formas de aquisição de novo conhecimento é a mistura feita do relacionamento de nova informação com a préviamente adquirida, utilizando a informação mais antiga como reforço de memória além da assimilação de nova informação. Segundo \citeonline{souza2000sistema}, ``a utilização de uma ferramenta computacional para os alunos confeccionarem seus algoritmos, permitindo aos mesmos testarem suas soluções visualizando o resultado gerado por elas, é antes de tudo, um grande motivador do processo de ensino aprendizagem''.
+Segundo \citeonline{mayer1981psychology}, uma das
+formas % [@Rafael] "melhores formas" ?
+de aquisição de novos conhecimentos é a mistura resultante do relacionamento
+de uma nova informação com alguma préviamente adquirida, utilizando a informação mais antiga
+como reforço de memória além da assimilação de nova informação.
+Segundo \citeonline{souza2000sistema},
+``a utilização de uma ferramenta computacional para os alunos confeccionarem seus algoritmos, permitindo
+aos mesmos testarem suas soluções visualizando o resultado gerado por elas, é antes de tudo, um grande motivador do processo de ensino aprendizagem''.
 
 \section{Objetivos}
-O objetivo geral deste trabalho é a implementação de uma biblioteca gráfica baseada em OpenGL, que dê a possibilidade aos alunos de cursos introdutórios à compreender visualmente os efeitos dos códigos ensinados em sala de aula. Os objetivos específicos do trabalho propostão são:
+O objetivo geral deste trabalho é a implementação de uma biblioteca gráfica baseada em OpenGL, que dê a possibilidade aos alunos de cursos introdutórios
+de compreender
+visualmente os efeitos dos códigos ensinados em sala de aula. Os objetivos específicos do trabalho proposto são:
 
 \begin{enumerate}
 \item Criação de uma biblioteca gráfica que seja de fácil instalação;
 \item Criação de uma biblioteca que possua uma API simples e objetiva;
-\item Criação do manual de utilização e exemplos da biblioteca.
+\item Criação de um manual de utilização e exemplos de uso da biblioteca.
 \end{enumerate}
 
 \section{Funcionalidades previstas}
-As funcionalidades previstas para este trabalho podem ser divididas em 3 categorias, funções de gerenciamento da biblioteca, funções de configurações dos objetos e as funções de desenho. Apesar de ser uma abstração da biblioteca OpenGL, este trabalho não possui funções para a manipulação de janelas diretamente, com exceção da função que inicializa a biblioteca, no qual é automaticamente criada uma janela e um contexto OpenGL.
+As funcionalidades previstas para este trabalho podem ser divididas em 3 categorias: funções de gerenciamento da biblioteca, funções de configurações dos objetos e as funções de desenho.
+Apesar de ser uma abstração da biblioteca OpenGL, este trabalho não possui funções para a manipulação de janelas diretamente, com exceção da função que inicializa a biblioteca, na qual
+é automaticamente criada uma janela e um contexto OpenGL.
 
 As funções da biblioteca são divididas da seguinte forma:
 \begin{itemize}
@@ -241,9 +263,9 @@ As funções da biblioteca são divididas da seguinte forma:
     \item Definir cor de preenchimento do objeto;
     \item Obter cor de preenchimento do objeto;
     \item Definir tamanho de um ponto;
-    \item Obter o tamanho desenho do ponto;
-    \item Definir largura de uma linha;
-    \item Obter o tamanho da largura de uma linha.
+    \item Obter o tamanho de um ponto;
+    \item Definir largura de uma linha; % [@Rafael] Não deveria ser comprimento?
+    \item Obter a largura de uma linha. % [@Rafael] Não deveria ser comprimento?
     \end{itemize}
 
     \item Funções de desenho
@@ -260,36 +282,57 @@ As funções da biblioteca são divididas da seguinte forma:
     \item Hexágono;
     \item Decágono;
     \item Dodecágono;
-    \item Linha;
+    \item Linha.
 
     \end{itemize}
 \end{itemize}
 
 \chapter{Trabalhos Correlatos}
 
-\section{Borland Graphics Interface}
+\section{Borland Graphics Interface} % [@Rafael] Precisa adicionar referências
 A biblioteca \textit{Borland Graphics Interface}, ou também conhecida como BGI, é uma biblioteca gráfica para as linguagens C e C++ que é distribuída junto a vários compiladores da Borland para o sistema operacional DOS, e eventualmente com suporte a Windows, desde 1987. A biblioteca BGI é menos poderosa que outras bibliotecas como SDL ou OpenGL pois ela foi desenvolvida para a apresentação de gráficos e não aplicações 3D baseadas em eventos. Entretanto, ela possui uma API muito simples de ser utilizada.
 
-\section{GLUT e FreeGLUT}
-GLUT é o Kit de ferramentas utilitárias para OpenGL, um kit de desenvolvimento para escrever programas OpenGL com as linguagens C e C++, com um sistema de gerenciamento de janelas. GLUT faz com que seja consideravelmente mais fácil aprender e explorar a programação utilizando OpenGL. Ele provê uma API portável sendo possível que seja aproveitado o mesmo código OpenGL com GLUT entre vários sistemas operacionais.
+\section{GLUT e FreeGLUT} % [@Rafael] Precisa adicionar referências
+GLUT é um \texit{kit} de ferramentas utilitárias para OpenGL, voltado para o desenvolvimento de programas nas linguagens C e C++,
+com um sistema de gerenciamento de janelas. GLUT faz com que seja consideravelmente mais fácil aprender e explorar a programação utilizando OpenGL.
+Ele provê uma API portável, sendo possível aproveitar o mesmo código OpenGL com GLUT entre vários sistemas operacionais.
 
-GLUT é designado para construir aplicações de pequeno e médio porte já que, apesar de bem adequado para tanto para o aprendizado quanto para o desenvolvimento de aplicações simples usando OpenGL, ele não é um kit com todos os recursos necessários para se escrever grandes aplicações.
+GLUT é bem adequado para aprendizagem e para
+o desenvolvimento de aplicações simples usando OpenGL. Como a biblioteca foi designada para construção apenas de aplicações de pequeno e médio porte,
+ela não possui todos os recursos necessários para escrita de aplicações grandes. Além disso, é uma biblioteca proprietária e não recebe atualizações desde 1998.
 
-GLUT é uma biblioteca proprietária de autoria de Mark Kilgard. Uma versão \textit{open source} foi feita e liberada sob a licença \textit{X-Consortium}. A biblioteca FreeGLUT possui todas as funcionalidades da biblioteca GLUT mais funcionalidades próprias. Apesar de ser uma alternativa \textit{open source} e mais atualizada em relação ao GLUT, ambas as bibliotecas já estão defasadas. A biblioteca FreeGLUT pode ser encontrada em~\url{http://freeglut.sourceforge.net/}.
+Uma alternativa equivalente de
+código-aberto % [@Rafael] open-source -> código-aberto (opinião)
+desenvolvida por Paweł Olszta denominada FreeGLUT
+foi lançada em 1999 sob a licença \textit{X-Consortium}.
+A biblioteca FreeGLUT possui todas as funcionalidades da biblioteca GLUT, além de funcionalidades próprias.
 
-\section{SDL}
-Simple DirectMedia Layer, também conhecido como SDL, é uma biblioteca de desenvolvimento multi plataforma desenvolvida para prover acesso de baixo nível nos \textit{hardwares} de audio, teclado, mouse e \textit{joystick} através da OpenGL e Direct3D. SDL é uma biblioteca \textit{open source} sob a licença zlib. Possui suporte nativo oficial a Windows, Mac OS X, Linux, iOS e Android. Escrita totalmente na linguagem C e possui compatibilidade com C++, além de possuir versões para outras linguagens de programação, como Java, C\# e Python.
+Apesar de ser mais atualizada em relação ao GLUT, ambas são consideradas defasadas. A biblioteca FreeGLUT pode ser encontrada em~\url{http://freeglut.sourceforge.net/}.
+
+\section{SDL} % [@Rafael] Precisa adicionar referências
+Simple DirectMedia Layer, também conhecido como SDL, é uma biblioteca de desenvolvimento multiplataforma desenvolvida para prover acesso de baixo nível
+aos \textit{hardwares} de áudio, teclado, mouse e \textit{joystick} por meio da OpenGL e Direct3D. SDL é uma biblioteca de código-aberto
+sob a licença zlib. Possui suporte nativo oficial a Windows, Mac OS X, Linux, iOS e Android. Escrita totalmente na linguagem C e possui compatibilidade com C++,
+além de possuir versões para outras linguagens de programação, como Java, C\# e Python.
+% [@Rafael] Nos outros de cima você falou de desvantagem / porque não resolve o problema proposto, talvez colocar alguma desvantagem do SDL aqui também
+
 
 \section{Ferramentas de técnica de visualização}
+% [@Rafael] Ficou confuso essa linha \/
 Algumas ferramentas que se utilizam de técnicas de visualização como método de aprendizado. Abaixo são apresentados algumas ferramentas que fazem uso dessa técnica:
 
 \begin{itemize}
 
-    \item \citeonline{Scratch:About}, uma linguagem de programação visual onde você pode programar sua próprias histórias, jogos e animações interativas. Scratch ajuda os jovens a pensar de forma criativa e raciocionar sistematicamente. Por ser uma linguagem de programação visual, ao invés de escrever linhas de códigos o usuário arrasta blocos e os conecta, desenvolvendo assim todo o fluxo da aplicação. Foi projetada com foco no público de pessoas entre 8 e 16 anos, mas é utilizado por pessoas de todas as idades.
+    % [@Rafael] Eu vi que você utilizou apenas o \citeonline. Eu não gosto do estilo dele, mas acho que não tem problema
+    \item \citeonline{Scratch:About}, uma linguagem de programação visual na qual é possível programar sua próprias histórias, jogos e animações interativas.
+    O Scratch ajuda os jovens a pensar de forma criativa e raciocionar sistematicamente. Por ser uma linguagem de programação visual, ao invés de escrever
+    linhas de código o usuário arrasta blocos e os conecta, desenvolvendo assim todo o fluxo da aplicação. Foi projetada com foco no público de pessoas entre 8 e 16 anos, mas é utilizado por pessoas de todas as idades.
 
-    \item \citeonline{RubyWarrior:About}, um jogo onde o usuário, no controle de um guerreiro, deve completas as missões usando a linguagem de programação Ruby como método para controle do personagem;
+    \item \citeonline{RubyWarrior:About}, um jogo no qual o usuário, no controle de um guerreiro, deve completar missões usando a linguagem de programação Ruby
+    para controlar o personagem;
 
-    \item \citeonline{RaftOnline:About}, é um website onde é possui uma simulação interativa do funcionamento do algoritmo de consensus Raft. Ele permite várias configurações e ações, sendo possível derrubar um nó para observar o comportamento de eleição de novo líder.
+    \item \citeonline{RaftOnline:About}, é um website que possui uma simulação interativa do funcionamento do algoritmo de consenso Raft.
+    Ele permite várias configurações e ações, sendo possível derrubar um nó para observar o comportamento de eleição de novo líder.
 
 \end{itemize}
 
@@ -299,11 +342,22 @@ Algumas ferramentas que se utilizam de técnicas de visualização como método 
 \section{Tecnologias Empregadas}
 
 \subsection{Linguagem de programação C}
-A linguagem de programação \citeonline{C:About} foi criada por Dennis MacAlistair Ritchie entre 1969 e 1973 na \citeonline{BellLabs:Site} e trata-se de uma linguagem de propósito geral que pode ser utilizada com os paradigmas imperativo, também conhecido como procedural, e o paradigma estruturado. Segundo o site \citeonline{GeneralPurposeLanguage:About}, uma linguagem de propósito geral é aquela que não é limitada apenas à algum tipo de hardware específico ou para uma aplicação especializada.
+A linguagem de programação \citeonline{C:About} foi criada por Dennis Ritchie entre 1969 e 1973 na \citeonline{BellLabs:Site} e
+trata-se de uma linguagem de propósito geral que pode ser utilizada com os paradigmas imperativo, também conhecido como procedural, e o paradigma estruturado.
+Segundo o site \citeonline{GeneralPurposeLanguage:About}, % [@Rafael] Só arruma na bib para ficar The Free Dictionary, e não The free dictionary
+uma linguagem de propósito geral é aquela que não é limitada apenas à algum tipo de \textit{hardware} específico ou para uma aplicação especializada.
 
-A linguagem de programação C foi escolhida por ser uma das linguagens mais utilizadas para o ensino de programação nas universidades brasileiras. Uma pesquisa conduzida online em um grupo de programação chamado A.P.D.A. Associação dos Programadores Depressivos Anônimos, um fórum que concentra mais de 71.000 programadores e entusiastas brasileiros, foi obtido um resultado de que aproximadamente 55\% das universidades brasileiras escolhem C como a primeira, ou uma das primeiras, linguagens para o ensino de introdução à programação, como pode-se observar na Figura ~\ref{fig:pesquisa_linguagem_tcc}. Isso representa 570 votos em uma pesquisa com 1036 respostas. A linguagem de programação Java, que se sagrou em segundo lugar como mais utilizada, teve apenas 169 votos, representando 16,31\% do total de votos. Esse resultado pode ser encontrada no link \url{https://www.facebook.com/groups/osadpa/permalink/1508699765902212/}.
-
+A linguagem de programação C foi escolhida por ser uma das linguagens mais utilizadas para o ensino de programação nas universidades brasileiras.
+Em uma pesquisa online conduzida em um grupo de programação chamado A.P.D.A. (Associação dos Programadores Depressivos Anônimos),
+um fórum de discussão que concentra mais de 71.000 programadores e entusiastas brasileiros, foi obtido um resultado de que aproximadamente 55\% das
+universidades brasileiras escolhem C como a primeira, ou uma das primeiras, linguagens para o ensino de introdução à programação.
 Apesar do nome caricato do grupo onde foi conduzida a pesquisa, trata-se de um grupo sério sobre programação em geral, sendo utilizado por uma vasta gama de profissionais de TI.
+
+Como pode ser observado Figura ~\ref{fig:pesquisa_linguagem_tcc}, a linguagem C obteve 570 dos 1036 votos no total.
+A linguagem de programação Java, que se
+sagrou % [@Rafael] https://www.dicio.com.br/sagrar/ :laugh:
+em segundo lugar como mais utilizada, teve apenas 169 votos, representando 16,31\% do total de votos.
+Esse resultado pode ser encontrada no link \url{https://www.facebook.com/groups/osadpa/permalink/1508699765902212/}. % [@Rafael] Acho que pode colocar como referência mesmo ao invés de colocar o link aqui
 
 \pagebreak
 \begin{figure}[htbp]
@@ -314,7 +368,9 @@ Apesar do nome caricato do grupo onde foi conduzida a pesquisa, trata-se de um g
 \end{figure}
 
 \subsection{OpenGL}
-O \citeonline{OpenGL:About} é uma biblioteca gráfica para desenvolvimento de aplicações interativas. Desde sua introdução, no ano de 1992, a biblioteca OpenGL se tornou  a interface de de programação de aplicação (API) mais utilizada com suporte a 2D e 3D pela indústria. O OpenGL foi escolhido como biblioteca gráfica pela sua qualidade de ser altamente portável estando presente em várias plataformas, como Windows, Linux, Unix, MacOS, e mais. Outro motivo foi também por possuir um bom desempenho e poder ser utilizada em conjunto com várias linguagens de programação, dentre as quais foi escolhida a linguagem de programação \citeonline{C:About}.
+O \citeonline{OpenGL:About} é uma biblioteca gráfica para desenvolvimento de aplicações interativas.
+Desde sua introdução no ano de 1992, a biblioteca OpenGL se tornou a interface de programação de aplicação (API) com suporte a 2D e 3D mais utilizada pela indústria.
+O OpenGL foi escolhido como biblioteca gráfica pela sua qualidade de ser altamente portável estando presente em várias plataformas, como Windows, Linux, Unix, MacOS, e outros. Outro motivo foi também por possuir um bom desempenho e poder ser utilizada em conjunto com várias linguagens de programação, dentre as quais foi escolhida a linguagem de programação \citeonline{C:About}.
 
 A biblioteca gráfica \citeonline{OpenGL:About} foi escolhida em detrimento de outras por ser mais simples, porém versátil, e suas já citadas qualidades: performance, largamente utilizada, interoperável entre plataformas e por ter fácil integração com a linguagem de programação C. Outros fatores que influenciaram a sua escolha foi a vasta documentação, como websites, livros e cursos online. Alguns sites que promovem a documentação de utilização do OpenGL são o próprio site do OpenGL \url{https://opengl.org/}, o website \citeonline{LearnOpenGL:Site} e o livro OpenGL Programming Guide: The Official Guide to Learning OpenGL, Version 1.2, do autor \citeonline{Woo:1999:OPG:554539}.
 
@@ -360,13 +416,13 @@ A biblioteca gráfica dispõe da API abaixo:
 \begin{itemize}
     \item void inicializarBiblioteca(int largura, int altura);
     \item void limparTela();
-    
+
     \item void desfazerUltimaForma();
     \item void refazerUltimaForma();
-    
+
     \item void definirCor(int vermelho, int verde, int azul);
     \item int* obterCor();
-    
+
     \item void definirEspessura(int espessura);
     \item int obterEspessura();
 
@@ -382,7 +438,7 @@ A biblioteca gráfica dispõe da API abaixo:
     \item void decagono(int posX, int posY, int raio);
     \item void dodecagono(int posX, int posY, int raio);
     \item void linha(int posX1, int posY1, int posX2, int posY2);
-    
+
     \item void pausar(int time);
 \end{itemize}
 
@@ -804,12 +860,12 @@ int main() {
 \section{Dificuldades Encontradas}
 
 \begin{itemize}
-  
+
   \item Compilar multi plataforma
   \item Instalação da biblioteca GLFW
   \item Corrupção da memória HEAP no Windows
   \item Instalação da biblioteca no Code::Blocks
-  
+
 \end{itemize}
 
 \section{Conclusão}
