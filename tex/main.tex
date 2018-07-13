@@ -393,7 +393,7 @@ A biblioteca gráfica dispõe da API abaixo:
 As seções seguintes descrevem cada item da API bem como seus protótipos e o significado de cada parâmetro de entrada.
 
 \subsubsection{Iniciando a biblioteca}
-Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda se faz necessário inicializar a biblioteca manualmente, para disparar a thread secundária, responsável pela renderização dos objetos, e a criação da janela onde serão renderizadas os objetos.
+Apesar de não ter que gerenciar diretamente a janela e o laço de repetição de renderização do OpenGL manualmente, ainda é necessário inicializar a biblioteca manualmente, para disparar a \textit{thread} secundária, responsável pela renderização dos objetos, e a criação da janela onde serão renderizadas os objetos.
 
 A função que inicializa a biblioteca tem o seguinte protótipo:
 
@@ -436,12 +436,12 @@ int main() {
 \end{figure}
 
 \subsubsection{Limpando a tela}
-A biblioteca descrita neste trabalho permite que a janela seja limpa, removendo assim todas os objetos renderizados e reiniciando a janela para seu estado inicial.
+Uma das funcionalidades propostas é que a janela seja limpa, removendo assim todos os objetos renderizados e reiniciando a janela para seu estado inicial.
 
 A função que limpa a janela já foi utilizada anteriormente e pode ser encontrada no exemplo ~\ref{lst:inicializando_biblioteca}
 
 \subsubsection{Desfazer último desenho}
-Em uma aplicação, é comum se arrepender de sua última ação e portanto, querer desfazê-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um objeto é removido da tela.
+Em uma aplicação, é comum se arrepender de sua última ação e portanto, querer desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um objeto é removido da tela.
 
 A função que desfaz o último desenho tem o seguinte protótipo:
 
@@ -450,7 +450,7 @@ void desfazerUltimaForma();
 \end{minted}
 
 \subsubsection{Refazer o último desenho}
-Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho, você pode se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto o último objeto removido será o primeiro objeto restaurado. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja inserida um novo objeto após ter desfeito o último desenho, a pilha de ações será descartada.
+Refazer o último desenho é uma opção da mesma forma que desfazer o último desenho. Sendo assim, é possível se arrepender e desfazer a opção de desfazer. A cada vez que a função for chamada, um desenho será restaurado. A ordem de restauração é baseada na estrutura de dados pilha, portanto o último objeto removido será o primeiro objeto restaurado. Essa função só pode ser executa caso invocada imediatamente após a função de desfazer, pois caso seja inserida um novo objeto após ter desfeito o último desenho, a pilha de ações será descartada.
 
 A função que refaz o último desenho tem o seguinte protótipo:
 
@@ -458,7 +458,7 @@ A função que refaz o último desenho tem o seguinte protótipo:
 void refazerUltimaForma();
 \end{minted}
 
-\subsubsection{Alterado a cor de preenchimento de um objeto} \label{api_definirCor}
+\subsubsection{Alterar a cor de preenchimento de um objeto} \label{api_definirCor}
 A grande maioria, senão todas, as biblioteca citadas nos trabalhos correlatos permitem a definição de uma cor de preenchimento para o objeto a ser desenhado.
 
 A função que permite alterar a cor de um objeto tem o seguinte protótipo:
@@ -476,7 +476,7 @@ Os parâmetros de entrada são:
 \end{itemize}
 
 \subsubsection{Obter a cor de preenchimento do objeto}
-Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar um objeto de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor de preenchimento atual. Assim como visto em \ref{api_definirCor}, como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3, representando as cores RGB.
+Assim como podemos definir a cor de preenchimento de um objeto, também é possível obtermos a cor de preenchimento atual. Esta função se faz útil quando, por exemplo, queremos criar um objeto de uma nova cor mas queremos manter a cor antiga, porém não é conhecido a cor de preenchimento atual. Assim como visto no item~\ref{api_definirCor}, como a função \textit{definirCor} recebe 3 argumentos de entrada, a saída é um ponteiro representando um array de inteiros de tamanho 3, representando as cores RGB.
 
 A função que obtém a cor atual de uma forma tem o seguinte protótipo:
 
