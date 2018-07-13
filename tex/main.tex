@@ -25,9 +25,9 @@ brazil]{facom-ufu-abntex2}
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
 
-\titulo{Implementação de uma biblioteca gráfica cross-platform utilizando OpenGL e GLFW} %TCC
+\titulo{Implementação de uma biblioteca gráfica multiplataforma utilizando OpenGL e GLFW} %TCC
 
-\hypersetup{pdfkeywords={biblioteca}{opengl}{cross-plaftorm}{glfw}} %TCC
+\hypersetup{pdfkeywords={biblioteca}{opengl}{multiplataforma}{glfw}} %TCC
 
 \begin{document}
 \frenchspacing
@@ -122,7 +122,7 @@ brazil]{facom-ufu-abntex2}
 %\iffalse % Descomentar Resumo no final
 \begin{resumo} %TCC:
  A dificuldade de aprendizagem de programação pode ser causada por várias razões, como a incapacidade de compreensão de algoritmos por ser um conceito muito abstrato.
- Várias são as formas de tentar aprender algoritmos e estruturas de controle. Este trabalho apresenta uma proposta de biblioteca gráfica para auxiliar no ensino de introdução à programação, utilizando conceitos de ensino por visualização. A solução proposta tem como foco desenvolver uma biblioteca multi-plataforma, com um conjunto de funções simples para gerenciamento de elementos gráficos, bem como a elaboração de um guia de utilização e sua respectiva documentação.
+ Várias são as formas de tentar aprender algoritmos e estruturas de controle. Este trabalho apresenta uma proposta de biblioteca gráfica para auxiliar no ensino de introdução à programação, utilizando conceitos de ensino por visualização. A solução proposta tem como foco desenvolver uma biblioteca multiplataforma, com um conjunto de funções simples para gerenciamento de elementos gráficos, bem como a elaboração de um guia de utilização e sua respectiva documentação.
 
  \vspace{\onelineskip}
 
@@ -274,7 +274,7 @@ Além disso, o GLUT é designado para construir aplicações de pequeno e médio
 Já o \citeonline{FreeGLUT:About} é uma versão alternativa de código-aberto à biblioteca GLUT, pois esta possui licença proprietária de autoria de Mark Kilgard. Foi desenvolvida em 1999 e liberada sob a licença \textit{X-Consortium}. A biblioteca FreeGLUT possui todas as funcionalidades da biblioteca GLUT, além de possuir funcionalidades adicionais. Apesar de ser uma alternativa de código-aberto e mais atualizada em relação ao GLUT, ambas as bibliotecas estão defasadas. A biblioteca FreeGLUT pode ser encontrada em \url{http://freeglut.sourceforge.net/}.
 
 \section{SDL}
-\citeonline{SDL:About} (SDL), é uma biblioteca de desenvolvimento multi-plataforma desenvolvida para prover acesso de baixo nível nos \textit{hardwares} de áudio, teclado, mouse e \textit{joystick} por meio da OpenGL e Direct3D.
+\citeonline{SDL:About} (SDL), é uma biblioteca de desenvolvimento multiplataforma desenvolvida para prover acesso de baixo nível nos \textit{hardwares} de áudio, teclado, mouse e \textit{joystick} por meio da OpenGL e Direct3D.
 
 SDL possui código-aberto, sob a licença \citeonline{zliblicence}. Além disso, possui suporte nativo oficial a Windows, Mac OS X, Linux, iOS e Android. Ela é escrita totalmente na linguagem C e possui compatibilidade com C++, além de possuir versões para outras linguagens de programação, como \citeonline{Java:About}, \citeonline{CSharp:About} e \citeonline{Python:About}.
 
@@ -319,14 +319,14 @@ A biblioteca gráfica \citeonline{OpenGL:About} foi escolhida em detrimento de o
 A forma que o OpenGL trabalha para renderizar os objetos na tela é baseada em uma máquina de estados. Cada item renderizado pelo OpenGL fica num buffer secundário e só é renderizado quando explicitamente solicitado. Ao renderizar o buffer ele então faz a troca do buffer primário pelo secundário, exibindo assim apenas o quadro renderizado por completo, evitando assim o \textit{tearing}. \textit{Tearing} é o efeito que ocorre quando parte do frame é renderizado utilizando informações antiga, exibindo assim parte do quadro com uma imagem e outra parte com os dados novos.
 
 \subsection{GLFW}
-De acordo com o site da \citeonline{GLFW:About}, GLFW é uma biblioteca gráfica de código-aberto, multi-plataforma para desenvolvimento desktop, que utiliza OpenGL, OpenGL ES e Vulkan. Ela é responsável por criar janelas de forma unificada entre diferentes sistemas operacionais, contextos OpenGL e receber entradas de dados e eventos.
+De acordo com o site da \citeonline{GLFW:About}, GLFW é uma biblioteca gráfica de código-aberto, multiplataforma para desenvolvimento desktop, que utiliza OpenGL, OpenGL ES e Vulkan. Ela é responsável por criar janelas de forma unificada entre diferentes sistemas operacionais, contextos OpenGL e receber entradas de dados e eventos.
 
 A biblioteca GLFW foi escrita em C e possui suporte nativo para Windows, macOS e vários sistemas Unix \cite{Unix:About} que utilizam o sistema de janelas X Window System \cite{X:About}, como por exemplo Linux \cite{Linux:About} e FreeBSD \cite{FreeBSD:About}.
 
 As motivações que levaram à escolha desta biblioteca foram a criação de janelas de forma transparente entre diversos sistemas operacionais, suporte para OpenGL, suporte à vários monitores e várias janelas simultâneas, suporte para mouse, teclado e joystick, além de ser a biblioteca mais atualizada, tendo vasta documentação e grande comunidade ativa. A documentação completa da biblioteca GLFW pode ser encontrada no website da biblioteca pelo endereço \url{http://www.glfw.org/documentation.html}.
 
 \subsection{TinyCThread}
-A \citeonline{Tinycthread:About} é uma biblioteca de código aberto escrita em C, multi-plataforma capaz de criar e gerenciar \textit{threads} de forma unificada e transparente, em diversos sistemas operacionais. Segundo \citeonline{Tanenbaum:2007:MOS:1410217}, \textit{thread} é uma forma de um processo dividir as tarefas a serem executadas de modo que possam ser executadas concorrentemente. Um processo que possui apenas uma \textit{thread} para execução é chamado de \textit{single threading}. Aplicações que possuem múltiplas \textit{threads} são chamados de \textit{multi threading}. \textit{Threads} podem ser executadas em paralelo, desde que o processador possua mais de um núcleo, onde cada thread seria executada em um núcleo distinto.
+A \citeonline{Tinycthread:About} é uma biblioteca de código aberto escrita em C, multiplataforma capaz de criar e gerenciar \textit{threads} de forma unificada e transparente, em diversos sistemas operacionais. Segundo \citeonline{Tanenbaum:2007:MOS:1410217}, \textit{thread} é uma forma de um processo dividir as tarefas a serem executadas de modo que possam ser executadas concorrentemente. Um processo que possui apenas uma \textit{thread} para execução é chamado de \textit{single threading}. Aplicações que possuem múltiplas \textit{threads} são chamados de \textit{multi threading}. \textit{Threads} podem ser executadas em paralelo, desde que o processador possua mais de um núcleo, onde cada thread seria executada em um núcleo distinto.
 
 O motivo da escolha da TinyCThread foi pois, apesar do padrão C11 implementar suporte nativo para criação de \textit{threads} da mesma forma entre diferentes sistemas operacionais, os compiladores mais antigos, que ainda não implementam esse padrão, possuem formas distintas de criar e gerenciar as \textit{threads}. Com o uso da biblioteca essa criação fica padronizada, sendo possível compilar o mesmo código tanto para Linux quanto para Windows. A biblioteca também provê funcionalidades para gerenciamento de concorrência, como \textit{locks} exclusivos, por exemplo, o \textit{mutex}, e outros.
 
@@ -799,7 +799,7 @@ int main() {
 
 \begin{itemize}
   
-  \item Compilar multi-plataforma
+  \item Compilar multiplataforma
   \item Instalação da biblioteca GLFW
   \item Corrupção da memória HEAP no Windows
   \item Instalação da biblioteca no Code::Blocks
