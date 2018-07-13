@@ -14,6 +14,7 @@ brazil]{facom-ufu-abntex2}
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{minted} % https://www.sharelatex.com/learn/Code_Highlighting_with_minted
+\renewcommand\listingscaption{Exemplo}
 
 \autor{William Johnson dos Santos Okano} %TCC
 \data{2018}
@@ -406,7 +407,7 @@ Os parâmetros de entrada são:
     \item int altura -  altura do tamanho da janela a ser criada.
 \end{itemize}
 
-O exemplo abaixo mostra como inicializar a biblioteca em uma aplicação C:
+O exemplo abaixo mostra como inicializar a biblioteca em uma aplicação C e o resultado pode ser observado na Figura~\ref{fig:exemplo_initWindow}:
 \begin{listing}[ht]
 \begin{minted}{c}
 #include <stdio.h>
@@ -436,7 +437,7 @@ int main() {
 \subsubsection{Limpando a tela}
 Uma das funcionalidades propostas é que a janela seja limpa, removendo assim todos os objetos renderizados e reiniciando a janela para seu estado inicial.
 
-A função que limpa a janela já foi utilizada anteriormente e pode ser encontrada no exemplo ~\ref{lst:inicializando_biblioteca}
+A função que limpa a janela já foi utilizada anteriormente e pode ser encontrada no Exemplo~\ref{lst:inicializando_biblioteca}.
 
 \subsubsection{Desfazer último desenho}
 Em uma aplicação, é comum se arrepender de sua última ação e portanto, querer desfaze-la. A biblioteca aqui implementada possui uma função específica para esta ação. Ela pode ser utilizada múltiplas vezes e a cada vez um objeto é removido da tela.
