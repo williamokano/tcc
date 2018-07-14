@@ -677,7 +677,14 @@ Os parâmetros de entrada são:
 \end{itemize}
 
 \subsubsection{Desenhando um polígono regular}
-Um polígono regular é um polígono convexo com \textit{n} faces onde cada face possui o mesmo tamanho e todos os ângulos internos são iguais. Alguns exemplos de polígonos regulares são triângulos retângulos, quadrados, pentagonos, dodecagonos, dentre outros.
+Um polígono regular é um polígono convexo com \textit{n} faces onde cada face possui o mesmo tamanho e todos os ângulos internos são iguais. Alguns exemplos de polígonos regulares são triângulos retângulos, quadrados, pentágonos, hexágonos, dentre outros. Algumas dessas formas você pode ver na Figura~\ref{fig:poligonos_regulares}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.51]{images/poligonos_regulares.png}
+  \caption{Exemplos de polígonos regulares: Triângulo, quadrado, pentágono e hexágono}
+  \label{fig:poligonos_regulares}
+\end{figure}
 
 Segundo \citeonline{PoligonoConvexos:BrasilEscola}, ``um polígono é convexo quando todos os pontos de um segmento de reta que possui as extremidades no interior do polígono também estão dentro dele. Sendo assim, se for possível encontrar pelo menos um segmento de reta que possui as extremidades dentro do polígono e, ao mesmo tempo, um ponto fora dele, esse polígono não será convexo''.
 
@@ -814,16 +821,13 @@ Com o intuito de deixar a biblioteca mais segura, o desenvolvimento de testes au
 Evoluir a biblioteca de forma que deixe ser apenas para formas geométricas e possa começar a importar recursos externos, como por exemplo imagens e sons. Com essa evolução, a biblioteca ficaria mais dinâmica e possibilitaria um novo leque de possibilidades ao usuário, como o desenvolvimento de jogos simples.
 
 \section{Dificuldades Encontradas}
-Inicialmente uma das dificuldades encontradas foi conseguir compilar a biblioteca de uma forma que fosse simples de utilizar tanto no sistema operacional Linux quanto no Windows. A primeira abordagem foi utilizar o \citeonline{CMake:About}, pois ele possui o mesmo suporte de macros que a linguagem C, portanto deveria ser fácil a compilação multiplataforma. Entretanto, algumas macros, como a \textit{\#__WIN32}, que indica se o sistema operacional é Windows, nem sempre é adicionada no momento da compilação. Com isso, a possibilidade de utilizar CMake como ferramenta de compilação foi excluída.
+Inicialmente uma das dificuldades encontradas foi conseguir compilar a biblioteca de uma forma que fosse simples de utilizar tanto no sistema operacional Linux quanto no Windows. A primeira abordagem foi utilizar o \citeonline{CMake:About}, pois ele possui o mesmo suporte de macros que a linguagem C, portanto deveria ser fácil a compilação multiplataforma. Entretanto, algumas macros, como a \#\_\_WIN32, que indica se o sistema operacional é Windows, nem sempre é adicionada no momento da compilação. Com isso, a possibilidade de utilizar CMake como ferramenta de compilação foi excluída.
 
 A ideia inicial deste projeto era criar uma biblioteca que, além de ser simples, não necessita-se de outras bibliotecas complementares para o gerenciamento de janelas e contextos do OpenGL. Entretanto, mostrou-se muito difícil realizar essas implementações, pois o sistema de janelas dos sistemas operacionais Windows e Linux são completamente diferentes. No sistema operacional Windows, para o gerenciamento de janelas, é utilizado a API do Windows, através da biblioteca win32.dll. Já no sistema operacional Linux, todo o sistema de gerencimanto de janelas é realizado através da biblioteca X11. Essa gestão de janelas é muito complexa, mesmo quando estamos desenvolvendo exclusivamente para um sistema operacional, portanto foi utilizado a biblioteca GLFW para gerenciar as janelas de forma portável e multiplataforma.
 
 Mesmo utilizando a biblioteca GLFW, a compilação multiplataforma não foi direta. No sistema operacional Windows a biblioteca GLFW é compilada antes da biblioteca descrita neste trabalho, e logo após é realizado o link estático entre as duas bibliotecas. A estratégia utilizada no sistema operacional Linux foi instalar a biblioteca GLFW através de um gerenciador de pacotes e então realizar o link compartilhado no ato da compilação da biblioteca deste projeto.
 
-Outra dificuldade encontrada foi a compilação da biblioteca TinyCThread no sistema operacional Windows. Inicialmente o compilador utilizado era o mingw, um kit de ferramentas para Windows contento o compilador GCC e algumas bibliotecas previamente instalas. Este compilador foi instalado automaticamente junto com a IDE \textbf{[TODO]}
-
-  \item Instalação da biblioteca no Code::Blocks
-  
+Outra dificuldade encontrada foi a compilação da biblioteca TinyCThread no sistema operacional Windows. Inicialmente o compilador utilizado era o mingw, um kit de ferramentas para Windows contento o compilador GCC e algumas bibliotecas previamente instalas. Este compilador foi instalado automaticamente junto com a IDE \citeonline{CodeBlocks:About}, entretanto a versão instalada com essa IDE não é suportada pela TinyCThread. A versão recomendada do mingw para compilar a biblioteca TinyCThread no sistema operacional Windows é a versão mingw64. Após instalar essa versão, o problema foi sanado.
 
 %\chapter{Desenvolvimento}
 %Um ou mais capítulos (por exemplo um para testes)
