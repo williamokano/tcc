@@ -63,7 +63,7 @@ int main() {
     decagono(420, 500, 25);
     dodecagono(480, 500, 25);
 
-    definirCor(100, 255, 80);
+    definirCor(100, 255, 0);
     linha(200, 350, 700, 550);
 
     getchar();

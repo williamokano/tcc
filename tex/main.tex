@@ -103,20 +103,22 @@ brazil]{facom-ufu-abntex2}
 % ---
 % Agradecimentos
 % ---
-%\begin{agradecimentos}
-%Agradeço a \lipsum[30]. %TCC:
-%\end{agradecimentos}
+\begin{agradecimentos}
+Gostaria de agradecer ao meu orientador, Prof. Dr. André Ricardo Backes pela paciência em todos esses semestres. %TCC:
+\end{agradecimentos}
 % ---
 
 % ---
 % Epígrafe
 % ---
-%\begin{epigrafe}
-%    \vspace*{\fill}
-%	\begin{flushright}
-%		\textit{``Alguma citação que ache conveniente? \lipsum[10]''} %TCC:
-%	\end{flushright}
-%\end{epigrafe}
+\begin{epigrafe}
+    \vspace*{\fill}
+	\begin{flushright}
+        \textit{``NO sucesso é a soma de pequenos }\\
+        \textit{esforços repetidos dia após dia.''}\\
+        (Robert Collier)
+	\end{flushright}
+\end{epigrafe}
 % ---
 
 
@@ -793,7 +795,14 @@ int main() {
 \end{minted}
 
 \section{Estado Atual do Desenvolvimento}
-No estado atual do desenvolvimento todas as funcionalidades previstas foram implementadas e funcionam de forma portável e multiplataforma.
+No estado atual do desenvolvimento todas as funcionalidades previstas foram implementadas e funcionam de forma portável e multiplataforma. Todas as formas implementadas podem ser observadas na Figura~\ref{fig:todas_formas}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[scale=0.51]{images/objetos_disponiveis.png}
+  \caption{Exemplo: Todas as formas implementadas}
+  \label{fig:todas_formas}
+\end{figure}
 
 Como todas as funcionalidades foram implementadas, os usuário são capazes de desenhar objetos e cenas que sejam baseados nas formas implementadas. Um exemplo de uso mostrando como desenhar um relógio funcional utilizando a biblioteca desenvolvida neste projeto, utilizando linguagem de programação C, pode ser visto na Figura~\ref{fig:exemplo_relogio}.
 
