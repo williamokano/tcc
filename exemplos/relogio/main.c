@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
-#include "headers/graphics.h"
+#include <graphics.h>
 
 // Por questões de compabilidade interoperacional defino meu próprio PI com precisão de 64 bits
 #define CUSTOM_PI 3.1415926535897932384626433832795028841971693993751058209749445

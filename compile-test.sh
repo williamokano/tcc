@@ -1,3 +1,28 @@
 #!/bin/bash
 
-gcc -o bin/test test.c src/graphics.c src/point.c src/tinycthread.c -lGL -lX11 -lpthread -lglfw
+ENTRYPOINT=${1:-main}
+OUTPUT_FILE="bin/$ENTRYPOINT"
+
+# Create bin folder if not found
+if [ ! -d "./bin" ];then
+    mkdir -p ./bin
+fi
+
+# Clean bin folder if present
+if [ -f "./$OUTPUT_FILE" ];then
+    rm "./$OUTPUT_FILE"
+fi
+
+gcc -o "$OUTPUT_FILE" "$ENTRYPOINT.c" \
+    src/graphics.c \
+    src/tinycthread.c \
+    src/shape.c \
+    -lGL -lX11 -lpthread -lglfw -lm
+
+if [ $? -gt 0 ];then
+    echo "Failed to compile"
+    exit $?;
+else
+    echo "compiled."
+    echo "To execute just type: ./$OUTPUT_FILE"
+fi

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-ENTRYPOINT=${1:-main}
 OUTPUT_FILE="bin/$ENTRYPOINT"
 
 # Create bin folder if not found
@@ -9,20 +8,31 @@ if [ ! -d "./bin" ];then
 fi
 
 # Clean bin folder if present
-if [ -f "./$OUTPUT_FILE" ];then
-    rm "./$OUTPUT_FILE"
+if [ -f "./graphics.o" ];then
+    rm "./graphics.o"
 fi
 
-gcc -o "$OUTPUT_FILE" "$ENTRYPOINT.c" \
-    src/graphics.c \
-    src/tinycthread.c \
-    src/shape.c \
-    -lGL -lX11 -lpthread -lglfw -lm
+# Clean bin folder if present
+if [ -f "./tinycthread.o" ];then
+    rm "./tinycthread.o"
+fi
+
+# Clean bin folder if present
+if [ -f "./shape.o" ];then
+    rm "./shape.o"
+fi
+
+gcc -c -o "./bin/graphics.o" src/graphics.c
+gcc -c -o "./bin/tinycthread.o" src/tinycthread.c
+gcc -c -o "./bin/shape.o" src/shape.c
+
+#    src/tinycthread.c \
+#    src/shape.c \
+#    -lGL -lX11 -lpthread -lglfw -lm
 
 if [ $? -gt 0 ];then
     echo "Failed to compile"
     exit $?;
 else
     echo "compiled."
-    echo "To execute just type: ./$OUTPUT_FILE"
 fi
